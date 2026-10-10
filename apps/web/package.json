@@ -5,14 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "pnpm sync-docs && next build",
     "start": "next start",
     "typecheck": "tsc -p . --noEmit",
     "lint": "eslint .",
     "test": "vitest run --passWithNoTests",
-    "build:cf": "opennextjs-cloudflare build",
+    "build:cf": "pnpm sync-docs && opennextjs-cloudflare build",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "sync-docs": "mkdir -p public/docs && cp ../../docs/*.md public/docs/"
   },
   "dependencies": {
     "@holdout/bitget": "workspace:*",
