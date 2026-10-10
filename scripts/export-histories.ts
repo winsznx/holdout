@@ -24,7 +24,7 @@ const BOTS = [
   { id: 'C', symbol: 'DOGEUSDT', leak: 'none (disciplined control)', rules: [] },
 ] as const;
 
-const STATED_RULES = ['cooldown 5 minutes after a loss', 'never add to a loser', 'max 10x leverage', 'no new stock-perp risk overnight or weekend'];
+const STATED_RULES = ['cooldown 3 minutes after a loss', 'never add to a loser', 'max 10x leverage', 'no new stock-perp risk overnight or weekend'];
 const START = Date.parse(process.env.HISTORY_START ?? '2026-10-10T22:05:00Z');
 const OUT_DIRS = ['evidence/raw/histories', 'apps/web/public/data/samples'];
 

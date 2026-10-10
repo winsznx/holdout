@@ -17,7 +17,7 @@ export const HISTORY_DIR = 'evidence/raw/histories';
 export const MARKET_DIR = 'evidence/raw/market';
 
 export const STATED_RULES: Rule[] = [
-  { t: 'cooldown_after_loss', minutes: 5 },
+  { t: 'cooldown_after_loss', minutes: 3 },
   { t: 'no_add_to_loser' },
   { t: 'max_leverage', x: 10 },
   { t: 'session_filter', block: ['overnight', 'weekend'], products: ['stock_perp'] },

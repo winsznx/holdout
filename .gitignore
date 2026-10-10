@@ -18,3 +18,7 @@ harness/state/
 .open-next/
 .dev.vars
 apps/web/AGENTS.md
+internal/*.png
+internal/*.csv
+internal/*.txt
+internal/brand-design-SKILL*

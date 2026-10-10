@@ -99,7 +99,7 @@ function p4(histories: History[], market: Record<string, Candle[]>) {
   });
   const plantedNet = num(sum(planted.map((t) => t.netPnl)));
   const combined = [...real, ...planted].sort((a, b) => a.closeTs - b.closeTs);
-  const rule: Rule = { t: 'cooldown_after_loss', minutes: 5 };
+  const rule: Rule = { t: 'cooldown_after_loss', minutes: 3 };
   const audit = auditRule('planted-C', combined, rule, base.ctx);
   const plantedIds = new Set(planted.map((t) => t.id));
   const caughtIds = audit.brokenTripIds.filter((id) => plantedIds.has(id));
