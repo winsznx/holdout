@@ -37,3 +37,7 @@ Concrete observations from building against sponsor surfaces. Dates are UTC, 202
 - S6 `crypto_derivatives` expects the symbol as `ETH/USDT`, not `ETHUSDT`. The Bollinger block in `technical_analysis` comes back inverted, so the Skill leaves it out.
 - Bitget Demo allows one demo deposit per 72 hours, which caps a Demo test fleet at the first deposit.
 - Bitget v3 fills carry no leverage. The harness encodes leverage in the client order id (`L<leverage>x`) so it survives a read-back from the API. A live trader's history has no such label, so the max-leverage rule is untestable on a plain Bitget export.
+
+## Bitget API from Cloudflare Workers (2026-10-11)
+- `api.bitget.com` answers requests that come from Cloudflare Workers with HTTP 403 and the body `{"cloudflare":"block"}`. The same request from a laptop or a VPS succeeds. S5 (`agent.bitget.com/mcp`) and the OpenAI and Supabase APIs work from Workers.
+- Public GETs work directly from a browser (CORS allows any origin), so the desk loads candles from the browser. Signed GETs with `ACCESS-*` headers fail in a browser (CORS preflight is rejected), and they fail through a Worker (the block above). A hosted review tool that sits on Cloudflare therefore cannot sync a read-only key through its own edge. It needs a relay on a non-Cloudflare host, or the trader uses the CSV path.

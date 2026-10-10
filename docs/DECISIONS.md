@@ -30,3 +30,6 @@ Bots run until 2026-10-11 07:00 UTC (08:00 Lagos).
 
 ## 2026-10-10 23:20 UTC Second time compression
 At 7 to 8 round trips per hour per bot, the 45 trade minimum would only just be reached. Hold is now 1 to 2 minutes (was 1 to 3) and the stated cooldown is 3 minutes (was 5). The evaluation's stated rule is cooldown 3 minutes. Trades made under the 5 minute cooldown also satisfy the 3 minute rule, so no earlier trade changes status for bot C. Bot R still breaks it by re-entering within 2 minutes.
+
+## 2026-10-11 Live key sync from the hosted app
+PRD 6.3 has the browser sign a request and `/api/sync` forward it. Bitget blocks Cloudflare Workers (403 `{"cloudflare":"block"}`), so the forwarder cannot reach `api.bitget.com` from the deployed app. Public candles are now fetched from the browser directly, with the Worker proxy as fallback. Key sync works only where the forwarder runs outside Cloudflare (local `next dev` or `next start`). The hosted desk shows the named error and points to the CSV path. A relay on a non-Cloudflare host would fix it and has not been set up.

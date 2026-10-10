@@ -19,7 +19,14 @@ export function marketProxyUrl(bitgetUrl: string): string {
 export function proxiedPublicClient(): PublicClient {
   return new PublicClient({
     baseUrl: 'https://api.bitget.com',
-    fetchImpl: (input, init) => fetch(marketProxyUrl(input), { ...init, headers: { accept: 'application/json' } }),
+    fetchImpl: async (input, init) => {
+      const base = { ...init, headers: { accept: 'application/json' } };
+      try {
+        return await fetch(input, base);
+      } catch {
+        return fetch(marketProxyUrl(input), base);
+      }
+    },
   });
 }
 

@@ -129,6 +129,7 @@ Cohorts are never merged: Bitget Demo bots, strategy samples and any human histo
 - Bitget fill history has no leverage. For the bots it is read from the client order id they set. For a real export the max-leverage rule is untestable.
 - Bitget Demo allows one demo deposit per 72 hours, so the bot fleet runs on about 414 USDT with 20 USDT lots. The bots' timing was compressed to collect enough trades (see [docs/DECISIONS.md](docs/DECISIONS.md)).
 - Chainbase AgentKey (S8) is not connected.
+- Bitget blocks requests from Cloudflare Workers, so the hosted app cannot forward a signed read-only key sync. Public candles load from the browser instead, and the hosted import path is CSV. Key sync works when the app runs locally. Details in [docs/SPONSOR_FINDINGS.md](docs/SPONSOR_FINDINGS.md).
 
 Every deviation from the original plan is dated in [docs/DECISIONS.md](docs/DECISIONS.md).
 
