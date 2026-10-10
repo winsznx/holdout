@@ -1,0 +1,209 @@
+@import 'tailwindcss';
+
+:root {
+  --paper: #f3f0e8;
+  --surface: #fbfaf6;
+  --ink: #101010;
+  --line: #d9d4c7;
+  --muted: #6b675c;
+  --signal: #d9480f;
+  --gain: #1f7a4d;
+  --loss: #b3261e;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #121110;
+    --surface: #1a1916;
+    --ink: #f3f0e8;
+    --line: #322f28;
+    --muted: #a39e90;
+    --signal: #f2672b;
+    --gain: #4cc38a;
+    --loss: #f07167;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --paper: #121110;
+  --surface: #1a1916;
+  --ink: #f3f0e8;
+  --line: #322f28;
+  --muted: #a39e90;
+  --signal: #f2672b;
+  --gain: #4cc38a;
+  --loss: #f07167;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-line: var(--line);
+  --color-muted: var(--muted);
+  --color-signal: var(--signal);
+  --color-gain: var(--gain);
+  --color-loss: var(--loss);
+  --font-sans: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jbmono), ui-monospace, SFMono-Regular, monospace;
+  --radius-card: 6px;
+  --radius-control: 4px;
+  --radius-tag: 3px;
+}
+
+html {
+  background: var(--paper);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+::selection {
+  background: var(--signal);
+  color: var(--paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.skeleton {
+  background: var(--line);
+  border-radius: var(--radius-control);
+  animation: skeleton-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}
+
+.prose-holdout h1 {
+  font-size: 2rem;
+  line-height: 1.1;
+  margin: 0 0 1rem;
+}
+.prose-holdout h2 {
+  font-size: 1.4rem;
+  line-height: 1.2;
+  margin: 2.2rem 0 0.75rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+}
+.prose-holdout h3 {
+  font-size: 1.1rem;
+  margin: 1.6rem 0 0.5rem;
+}
+.prose-holdout p,
+.prose-holdout li {
+  max-width: 68ch;
+}
+.prose-holdout p {
+  margin: 0.75rem 0;
+}
+.prose-holdout ul,
+.prose-holdout ol {
+  margin: 0.75rem 0;
+  padding-left: 1.25rem;
+}
+.prose-holdout ul {
+  list-style: square;
+}
+.prose-holdout ol {
+  list-style: decimal;
+}
+.prose-holdout li {
+  margin: 0.25rem 0;
+}
+.prose-holdout code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-tag);
+  padding: 0.05em 0.35em;
+}
+.prose-holdout pre {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+.prose-holdout pre code {
+  border: 0;
+  background: none;
+  padding: 0;
+}
+.prose-holdout a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-holdout table {
+  width: 100%;
+  border-collapse: collapse;
+  display: block;
+  overflow-x: auto;
+  margin: 1rem 0;
+  font-size: 13px;
+}
+.prose-holdout th,
+.prose-holdout td {
+  border: 1px solid var(--line);
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+}
+.prose-holdout th {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.prose-holdout blockquote {
+  border-left: 2px solid var(--signal);
+  padding-left: 1rem;
+  color: var(--muted);
+  margin: 1rem 0;
+}

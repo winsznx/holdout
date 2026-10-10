@@ -1,1 +1,1 @@
-{ "name": "@holdout/scripts", "private": true, "type": "module" }
+{"name":"@holdout/scripts","private":true,"type":"module","dependencies":{"pg":"^8.23.1"},"devDependencies":{"@types/pg":"^8.23.1"}}

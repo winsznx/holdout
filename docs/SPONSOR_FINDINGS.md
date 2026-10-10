@@ -30,3 +30,10 @@ Concrete observations from building against sponsor surfaces. Dates are UTC, 202
 
 ## Chainbase AgentKey (S8)
 - Server-usable MCP and SDK exist, but credentials need a console sign-up and a paid subscription. The public docs omit the MCP URL and header format. Install is a browser device-auth flow through an npx CLI.
+
+## Holdout Skill build notes (2026-10-11)
+- S5 earnings calendar returns the period end date in `time`, not the report date. The Skill uses the report-date fields and assumes 08:00 ET for pre-market and 16:00 ET otherwise, because the clock time is not in the data.
+- S5 date filters return empty results. The Skill fetches the full per-symbol calendar and filters locally.
+- S6 `crypto_derivatives` expects the symbol as `ETH/USDT`, not `ETHUSDT`. The Bollinger block in `technical_analysis` comes back inverted, so the Skill leaves it out.
+- Bitget Demo allows one demo deposit per 72 hours, which caps a Demo test fleet at the first deposit.
+- Bitget v3 fills carry no leverage. The harness encodes leverage in the client order id (`L<leverage>x`) so it survives a read-back from the API. A live trader's history has no such label, so the max-leverage rule is untestable on a plain Bitget export.

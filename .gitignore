@@ -15,3 +15,6 @@ harness/logs/
 # demo video (hyperframes)
 videos/
 harness/state/
+.open-next/
+.dev.vars
+apps/web/AGENTS.md

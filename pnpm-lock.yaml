@@ -35,6 +35,9 @@ importers:
       '@holdout/llm':
         specifier: workspace:*
         version: link:../../packages/llm
+      '@holdout/skill':
+        specifier: workspace:*
+        version: link:../../packages/skill
       '@opennextjs/cloudflare':
         specifier: ^1.20.10
         version: 1.20.10(next@16.4.0(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@22.20.5)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(supports-color@10.2.2)(wrangler@4.149.0(@types/node@22.20.5))
@@ -127,7 +130,20 @@ importers:
         specifier: ^4.6.5
         version: 4.6.5
 
-  packages/skill: {}
+  packages/skill:
+    dependencies:
+      '@holdout/bitget':
+        specifier: workspace:*
+        version: link:../bitget
+      '@holdout/engine':
+        specifier: workspace:*
+        version: link:../engine
+      '@modelcontextprotocol/sdk':
+        specifier: ^1.32.1
+        version: 1.32.1(supports-color@10.2.2)(zod@4.6.5)
+      zod:
+        specifier: ^4.6.5
+        version: 4.6.5
 
 packages:
 

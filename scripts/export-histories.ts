@@ -14,7 +14,7 @@ import {
   normalizeHistoryPosition,
 } from '../packages/bitget/src/index.ts';
 import { parseMoneyBoysBacktest, parseMoneyBoysPaper, referenceFromTrips } from '../packages/engine/src/index.ts';
-import type { History } from './lib/history.ts';
+import { ledgerOf, type History } from './lib/history.ts';
 
 const BOTS = [
   { id: 'R', symbol: 'BTCUSDT', leak: 'revenge re-entry after a loss', rules: ['cooldown after a loss', 'no add to a loser', 'max 10x leverage', 'no new stock-perp risk overnight or weekend'] },
@@ -130,3 +130,18 @@ const list: History[] = [];
 if (target === 'all' || target === 'samples') list.push(...exportStrategySamples());
 if (target === 'all' || target === 'bots') list.push(...(await exportBots()));
 for (const h of list) write(h);
+
+if (target === 'all') {
+  const botR = list.find((h) => h.meta.id === 'bot-R');
+  const botRTrips = botR ? ledgerOf(botR).roundTrips.length : 0;
+  const defaultId = botR && botRTrips >= 30 ? 'bot-R' : 'strategy-backtest';
+  const index = {
+    default: defaultId,
+    samples: list.map((h) => ({ id: h.meta.id, label: h.meta.label, kind: h.meta.kind, fills: h.fills.length, roundTrips: ledgerOf(h).roundTrips.length })),
+  };
+  mkdirSync('apps/web/public/data/samples', { recursive: true });
+  writeFileSync('apps/web/public/data/samples/index.json', JSON.stringify(index));
+  const chosen = list.find((h) => h.meta.id === defaultId);
+  if (chosen) writeFileSync('apps/web/public/data/samples/default.json', JSON.stringify(chosen));
+  console.log(`default sample: ${defaultId} (bot-R closed round trips: ${botRTrips})`);
+}

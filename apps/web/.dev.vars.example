@@ -1,0 +1,14 @@
+LLM_API_KEY=
+LLM_BASE_URL=
+LLM_MODEL=
+SUPABASE_URL=
+SUPABASE_ANON_KEY=
+
+# Optional second provider, used only when LLM_* is not set
+QWEN_API_KEY=
+QWEN_BASE_URL=
+QWEN_MODEL=
+
+# Optional rulebook for the hosted MCP endpoint at /api/mcp
+HOLDOUT_RULEBOOK_URL=
+HOLDOUT_RULEBOOK_JSON=

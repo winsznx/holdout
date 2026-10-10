@@ -14,3 +14,4 @@ export * from './rules/counterfactual.ts';
 export * from './rules/audit.ts';
 export * from './rules/holdout.ts';
 export * from './checks.ts';
+export * from './rulebook.ts';

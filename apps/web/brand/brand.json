@@ -1,0 +1,104 @@
+{
+  "name": "Holdout",
+  "version": "1.0.0",
+  "lock": {
+    "status": "locked",
+    "lockedOn": "2026-10-10",
+    "masterAsset": "public/brand/symbol.svg",
+    "masterVersion": "1.0.0",
+    "viewBox": "0 0 60 60"
+  },
+  "idea": "The third of the history that was held out and never seen.",
+  "mark": {
+    "construction": "Rounded square split 2:1. Left two thirds solid ink. Right third an outlined segment separated by a 3 unit gap.",
+    "unit": 60,
+    "solidWidth": 38,
+    "gap": 3,
+    "heldWidth": 19,
+    "heldStroke": 4,
+    "outerRadius": 10,
+    "innerRadius": 3,
+    "clearSpace": "Half the height of the mark on every side",
+    "minSize": { "symbol": 16, "lockup": 96 },
+    "forbidden": [
+      "Filling the held segment",
+      "Rotating, skewing or adding effects to the mark",
+      "Changing the 2:1 ratio",
+      "Placing the mark on a busy photo or gradient",
+      "Recoloring the solid segment with the signal color"
+    ]
+  },
+  "color": {
+    "light": {
+      "paper": "#F3F0E8",
+      "ink": "#101010",
+      "surface": "#FBFAF6",
+      "line": "#D9D4C7",
+      "muted": "#6B675C",
+      "signal": "#D9480F",
+      "gain": "#1F7A4D",
+      "loss": "#B3261E"
+    },
+    "dark": {
+      "paper": "#121110",
+      "ink": "#F3F0E8",
+      "surface": "#1A1916",
+      "line": "#322F28",
+      "muted": "#A39E90",
+      "signal": "#F2672B",
+      "gain": "#4CC38A",
+      "loss": "#F07167"
+    },
+    "roles": {
+      "paper": "Page background",
+      "ink": "Text, solid mark, primary buttons",
+      "surface": "Cards and table bodies",
+      "line": "All 1px borders and dividers",
+      "muted": "Secondary text and labels",
+      "signal": "The single accent: held-out test data, focus ring, one primary marker per view",
+      "gain": "Positive P&L only",
+      "loss": "Negative P&L only"
+    },
+    "contrast": {
+      "note": "Signal on paper is 4.2:1. Use it for marks, rules, focus rings and text at 18px or larger, never for small body text."
+    }
+  },
+  "type": {
+    "display": { "family": "Space Grotesk", "weights": [500, 700], "tracking": "-0.02em on headings", "source": "next/font/google" },
+    "mono": { "family": "JetBrains Mono", "weights": [400, 500], "features": ["tabular-nums"], "use": "Numbers, labels, hashes, ids" },
+    "scale": {
+      "label": "11px mono, uppercase, 0.08em tracking",
+      "small": "13px",
+      "body": "15px / 1.55",
+      "lead": "18px / 1.5",
+      "h3": "20px / 1.25",
+      "h2": "32px / 1.1",
+      "h1": "56px / 1.02 desktop, 38px / 1.05 at 375px"
+    }
+  },
+  "shape": {
+    "radius": { "card": "6px", "control": "4px", "tag": "3px" },
+    "border": "1px solid line",
+    "shadow": "none",
+    "gradients": "none",
+    "glow": "none"
+  },
+  "assets": {
+    "symbol": "public/brand/symbol.svg",
+    "symbolReversed": "public/brand/symbol-reversed.svg",
+    "symbolSignal": "public/brand/symbol-signal.svg",
+    "lockup": "public/brand/lockup-horizontal.svg",
+    "lockupReversed": "public/brand/lockup-horizontal-reversed.svg",
+    "favicon": "src/app/icon.tsx",
+    "appleIcon": "src/app/apple-icon.tsx",
+    "og": "src/app/opengraph-image.tsx"
+  },
+  "avoid": [
+    "Glassmorphism, gradients, glow, blur",
+    "Fake terminal panels",
+    "Generic SaaS bento grids",
+    "Stock finance symbols: arrows, bull, bear, candlesticks, shields",
+    "Invented numbers, avatars or company logos",
+    "Reference brand names, logos, colors or copy"
+  ]
+}

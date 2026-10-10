@@ -1,0 +1,38 @@
+Holdout web foundation (apps/web, package @holdout/web). Alias "@/" = apps/web/src/.
+
+Barrel: import { ... } from '@/components/ui'
+
+Primitives (src/components/ui/)
+  Header, Footer, ThemeToggle ........ header.tsx, footer.tsx, theme-toggle.tsx (marketing chrome, data-theme toggle)
+  Mark, Wordmark ..................... logo.tsx
+  Button, ButtonLink, buttonClass .... button.tsx (variant primary|secondary|ghost, size sm|md)
+  Card, CardHeader, CardBody ......... card.tsx (flat, 1px line)
+  Tag, TagRow, tagPropsForKind ....... tag.tsx (kind: observed|target|estimated|bot|human{venue:'demo'|'live'}|strategy-sample)
+                                       STRATEGY_SAMPLE_NOTICE is the exact required sentence
+  ProvenanceBadge .................... provenance.tsx ({kind, source, n?})
+  Stat ............................... stat.tsx (label, value, provenance REQUIRED)
+  StateBlock ......................... state-block.tsx (variant empty|loading|error|partial|success; error REQUIRES surface: Surface)
+                                       BITGET_SURFACES lists the allowed surface names, including 'Holdout data file'
+  Skeleton ........................... skeleton.tsx
+  DataTable<Row> ..................... data-table.tsx (columns, rows, rowKey, caption, emptyState)
+  Sparkline, Bar, Timeline ........... charts.tsx (plain SVG; Timeline renders train solid and test outlined in signal)
+  RuleCard ........................... rule-card.tsx (rendered English, breaks, effect + interval, drilldown slot)
+  Container, Section, PageHeading .... section.tsx
+
+Desk shell (src/components/desk/)
+  app/desk/layout.tsx ................ sidebar (md+) / scrolling top nav (mobile), ChatDrawer mounted
+  ChatDrawer ......................... components/desk/chat-drawer.tsx (children = drawer content; default is an empty StateBlock)
+  DESK_NAV ........................... components/desk/nav.ts
+  DeskEmpty .......................... components/desk/desk-empty.tsx (used by the placeholder pages)
+  Placeholder pages to replace: app/desk/{page,import,ledger,rules,proposals,sessions,check,chat,rulebook}/page.tsx, app/sample/page.tsx
+
+Lib (src/lib/)
+  cn.ts, format.ts (formatUsdt, formatSignedUsdt, formatCount, formatPercent, pnlTone, shortHash)
+  data-result.ts ..................... DataResult<T> = ok | absent | error, loadPublicJson(path, parse) for client fetch of /data/*.json
+  data.ts ............................ server only (node fs at build): readPublicJson, readRepoDoc
+  samples.ts ......................... SampleFile schema, loadSampleIndex, loadSample(id), loadDefaultSample, auditSample
+
+Tokens: brand/design.md, brand/brand.json, src/app/globals.css (CSS vars + Tailwind colors paper surface ink line muted signal gain loss; utility classes .num .label)
+Assets: public/brand/*.svg, src/app/icon.tsx, apple-icon.tsx, opengraph-image.tsx
+
+Commands: pnpm --filter @holdout/web typecheck | lint | test | build ; build:cf, preview, deploy (deploy not run)

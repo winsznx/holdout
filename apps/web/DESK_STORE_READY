@@ -1,0 +1,47 @@
+Desk store (apps/web). Alias "@/" = src/. Written by the desk-core agent.
+
+Import
+  import { DeskProvider, useDesk } from '@/lib/desk/store';      // DeskProvider is already mounted in app/desk/layout.tsx and app/sample/layout.tsx
+  import type { ... } from '@/lib/desk/types';
+
+useDesk() returns DeskApi (src/lib/desk/store.tsx)
+  source        DeskSource | null          { id, label, kind: 'bot'|'strategy-sample'|'human-demo'|'human-live', origin: 'sample'|'csv'|'sync', detail, notes, statedRules?, untestedAgainstLiveExport, report? }
+  history       DeskHistory | null         { fills, funding, reference, fundingSettlements?, dayLevel?, trips? }  (money are decimal strings)
+  status        { phase: 'hydrating'|'empty'|'loading'|'ready', stage, error: {surface: Surface, message} | null, persistenceNote, candles: {running, done, total, error} }
+  analysis      Analysis | null            BaseAnalysis + audits
+      analysis.ledger            engine Ledger (fills, funding, roundTrips, flags)
+      analysis.ingest            { fillsIn, fillsOut, duplicatesDropped, weakIdCount, products }
+      analysis.reconciliation    engine Reconciliation (pass, totalDelta, perSymbol, reason)
+      analysis.tags              Record<tripId, TripTags>   (empty when analysis.dayLevel)
+      analysis.holdout           HoldoutOutcome | null      (null when reconciliation failed, see holdoutBlockedReason)
+      analysis.buckets           BucketStats[]              similar-trade index (empty when dayLevel)
+      analysis.sessionLens       SessionLens
+      analysis.candles           { coverage: 'none'|'partial'|'loaded', tripsCovered, tripsTotal, detail }
+      analysis.audits            Record<ruleId, RuleAudit>  one per entry in `rules` (fills in a moment after rules change)
+  rules         DeskRule[]                 { id: ruleId(rule), rule: Rule, origin: 'sample'|'intake', sourceText? }  the trader's stated rules
+  unmappedRules { text, reason }[]         stated sentences from the sample that match no template
+  setRules(next) / addRule(rule, sourceText?) / removeRule(id)
+  rulebook      Rulebook | null            current draft (engine makeRulebook, sha256 set). stated rules = status 'stated'; the holdout pick = 'proposed' | 'adopted' | 'rejected'
+  versions      Rulebook[]                 saved versions for this source
+  decisions     Record<ruleId, 'adopted'|'rejected'>
+  saveRulebookVersion(): Promise<Rulebook | null>            appends the draft as a new version (no-op when nothing changed)
+  decideProposal(ruleId, 'adopted'|'rejected'): Promise<Rulebook | null>   writes a version
+  loadSample(id) / loadFromFile(file) / loadFromSync(credentials, {paper, onStep?}): Promise<boolean>
+  loadMarketCandles()                         fetches Bitget mark candles (S3) through /api/market/*, re-runs analysis
+  clearAll()                                  deletes everything (IndexedDB + memory)
+  getDeviceId(): Promise<string>              anonymous random id for the x-device-id header
+
+Other modules
+  src/lib/desk/pipeline.ts        pure engine pipeline (analyzeHistory, auditAll, parseCsvText, sessionLensOf); runs inside the worker
+  src/lib/desk/engine.worker.ts   Web Worker, client in worker-client.ts (callEngine), inline fallback when Workers are unavailable
+  src/lib/desk/rulebook-build.ts  buildDraftRulebook, diffRulebooks
+  src/lib/desk/display.ts         money/time display helpers
+  src/components/desk/gate.tsx    <DeskGate>{(desk) => ...}</DeskGate> renders empty/loading/error states and hands a ready desk to children
+
+Contracts the store assumes from other agents
+  POST /api/sync    JSON body {method:'GET', path, query, timestamp, headers:{'ACCESS-KEY','ACCESS-SIGN','ACCESS-TIMESTAMP','ACCESS-PASSPHRASE', 'paptrading'?}}
+                    forwards the signed GET to https://api.bitget.com and returns Bitget's response body and status unchanged.
+  GET /api/market/<name>?<same query>      name is the last segment of /api/v3/market/<name>, e.g. /api/market/candles?... and /api/market/instruments?... (matches validateMarketRequest)
+                    returns Bitget's envelope unchanged. Used for mark candles (type=mark) and the stock futures list.
+  POST /api/llm/compile  body {text} -> {refuse:false, rule, rendered} | {refuse:true, reason}
+  POST /api/rulebooks    header x-device-id, body {rulebook}
