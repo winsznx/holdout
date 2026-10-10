@@ -1,0 +1,19 @@
+{
+  "name": "holdout",
+  "private": true,
+  "license": "MIT",
+  "packageManager": "pnpm@11.23.0",
+  "scripts": {
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "verify": "tsx scripts/verify.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0",
+    "fast-check": "^3.22.0",
+    "@types/node": "^22.0.0"
+  }
+}

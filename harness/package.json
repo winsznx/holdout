@@ -1,0 +1,12 @@
+{
+  "name": "@holdout/harness",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p .",
+    "lint": "tsc -p . --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "start": "node --env-file=.env --import tsx src/run.ts"
+  }
+}

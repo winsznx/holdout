@@ -1,0 +1,109 @@
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1791670696055,
+  "data": {
+    "resultList": [
+      {
+        "symbol": "BTCUSDT",
+        "fundingRate": "0.000055",
+        "fundingRateTimestamp": "1791648000000"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingRate": "0.0001",
+        "fundingRateTimestamp": "1791619200000"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingRate": "-0.000004",
+        "fundingRateTimestamp": "1791590400000"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingRate": "0.00004",
+        "fundingRateTimestamp": "1791561600000"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingRate": "0.000038",
+        "fundingRateTimestamp": "1791532800000"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingRate": "0.0001",
+        "fundingRateTimestamp": "1791504000000"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingRate": "0.0001",
+        "fundingRateTimestamp": "1791475200000"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingRate": "0.0001",
+        "fundingRateTimestamp": "1791446400000"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingRate": "0.0001",
+        "fundingRateTimestamp": "1791417600000"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingRate": "0.0001",
+        "fundingRateTimestamp": "1791388800000"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingRate": "0.000088",
+        "fundingRateTimestamp": "1791360000000"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingRate": "0.000095",
+        "fundingRateTimestamp": "1791331200000"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingRate": "0.000014",
+        "fundingRateTimestamp": "1791302400000"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingRate": "0.000062",
+        "fundingRateTimestamp": "1791273600000"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingRate": "0.000003",
+        "fundingRateTimestamp": "1791244800000"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingRate": "0.000036",
+        "fundingRateTimestamp": "1791216000000"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingRate": "0.000053",
+        "fundingRateTimestamp": "1791187200000"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingRate": "0.000032",
+        "fundingRateTimestamp": "1791158400000"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingRate": "-0.000008",
+        "fundingRateTimestamp": "1791129600000"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "fundingRate": "0.0001",
+        "fundingRateTimestamp": "1791100800000"
+      }
+    ]
+  }
+}

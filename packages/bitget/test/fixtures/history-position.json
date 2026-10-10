@@ -1,0 +1,52 @@
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1791670693414,
+  "data": {
+    "list": [
+      {
+        "positionId": "1492937804428496897",
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "marginCoin": "USDT",
+        "holdMode": "hedge_mode",
+        "posSide": "long",
+        "marginMode": "crossed",
+        "openPriceAvg": "83015.2",
+        "closePriceAvg": "82986.1",
+        "openTotalPos": "0.0002",
+        "closeTotalPos": "0.0002",
+        "cumRealisedPnl": "-0.00582",
+        "netProfit": "-0.02574016",
+        "totalFunding": "0",
+        "openFeeTotal": "-0.00996182",
+        "closeFeeTotal": "-0.00995833",
+        "createdTime": "1791670030695",
+        "updatedTime": "1791670506367",
+        "cashDividend": "0"
+      },
+      {
+        "positionId": "1492937016222306306",
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "marginCoin": "USDT",
+        "holdMode": "hedge_mode",
+        "posSide": "long",
+        "marginMode": "crossed",
+        "openPriceAvg": "82991.9",
+        "closePriceAvg": "82986.6",
+        "openTotalPos": "0.0002",
+        "closeTotalPos": "0.0002",
+        "cumRealisedPnl": "-0.00106",
+        "netProfit": "-0.02097742",
+        "totalFunding": "0",
+        "openFeeTotal": "-0.00995902",
+        "closeFeeTotal": "-0.00995839",
+        "createdTime": "1791669842772",
+        "updatedTime": "1791669844695",
+        "cashDividend": "0"
+      }
+    ],
+    "cursor": "1492937024280252418"
+  }
+}

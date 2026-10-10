@@ -1,0 +1,17 @@
+node_modules/
+.next/
+.vercel/
+dist/
+coverage/
+*.tsbuildinfo
+.DS_Store
+.env
+.env.*
+!.env.example
+!harness/.env.example
+harness/.env
+harness/logs/
+
+# demo video (hyperframes)
+videos/
+harness/state/

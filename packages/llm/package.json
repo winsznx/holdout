@@ -1,0 +1,17 @@
+{
+  "name": "@holdout/llm",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc -p .",
+    "lint": "tsc -p . --noEmit",
+    "test": "vitest run --passWithNoTests --exclude '**/*.live.test.ts'",
+    "test:live": "node --env-file=../../.env ../../node_modules/vitest/vitest.mjs run --config vitest.live.config.ts"
+  },
+  "dependencies": {
+    "@holdout/engine": "workspace:*",
+    "zod": "^4.6.5"
+  }
+}

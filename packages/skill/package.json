@@ -1,0 +1,12 @@
+{
+  "name": "@holdout/skill",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc -p .",
+    "lint": "tsc -p . --noEmit",
+    "test": "vitest run --passWithNoTests"
+  }
+}

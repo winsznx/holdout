@@ -1,0 +1,15 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"success\":true,\"status_code\":204,\"data\":\"\",\"error\":null}"
+    }
+  ],
+  "structuredContent": {
+    "success": true,
+    "status_code": 204,
+    "data": "",
+    "error": null
+  },
+  "isError": false
+}

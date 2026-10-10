@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"symbol\": \"BTC/USDT\", \"timeframe\": \"4h\", \"rsi\": {\"rsi\": 47.09, \"period\": 14, \"signal\": \"neutral\"}, \"macd\": {\"macd\": -332.686055, \"signal\": 152.982272, \"histogram\": -485.668328, \"cross\": \"death_cross\"}, \"bollinger\": {\"upper\": 81490.698, \"middle\": 82659.929, \"lower\": 83829.16, \"bandwidth\": -0.0283, \"pct_b\": 0.355, \"position\": \"above_upper\"}, \"ma\": {\"price\": 82999.05, \"ma7\": 82864.6843, \"ma25\": 82969.5384, \"ma99\": 84140.7932, \"trend\": \"mixed\"}, \"atr\": {\"atr\": 603.0353, \"atr_pct\": 0.73, \"suggested_stop\": 82094.4971, \"period\": 14}, \"support_resistance\": {\"supports\": [81037.99, 85269.78], \"resistances\": [83246.82, 86242.01, 86530.0], \"current_price\": 82999.05}, \"verdict\": \"BEARISH\", \"bull_signals\": 0, \"bear_signals\": 1}"
+    }
+  ],
+  "isError": false
+}

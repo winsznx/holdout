@@ -1,0 +1,89 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"success\":true,\"status_code\":200,\"data\":{\"id\":\"06acaba5-4791-7b4c-8000-3553dad26f0b\",\"results\":[{\"symbol\":\"NVDA\",\"period_ending\":\"2026-10-10\",\"pe\":75.8184,\"pe_ttm_ed\":28.6483,\"pe_lyr\":46.0214,\"pb\":69.6566,\"pb_mrq\":24.1312,\"ps\":42.3431,\"ps_ttm_ed\":18.2383,\"pcf\":86.2184,\"pcf_ttm_ed\":41.1254,\"peg_his\":null,\"ev1\":37427866974800.0,\"ev2\":37275885223100.0,\"ent_multi\":65.9034,\"tmv_usd\":5525648000000.0,\"tmv_hkd\":43362535238584.0,\"tmv_rmb\":37204187984000.0,\"cir_tmv_usd\":5525648000000.0,\"div_yield_12m\":0.2268,\"seq\":38454920,\"thscode\":\"NVDA.O\",\"sec_id\":\"S000009611\",\"pb_latest_ed\":24.1312,\"pb_latest_pd\":24.1312,\"pcf_net\":4221.2743,\"pcf_net_ttm_ed\":511.4447,\"pcf_net_ttm_pd\":511.4447,\"pcf_ttm_pd\":41.1254,\"equ_value\":null,\"pe_ttm_pd\":28.6483,\"ps_lyr\":25.589,\"ps_ttm_pd\":18.2383,\"cir_tmv_hkd\":43362535238584.0,\"cir_tmv_rmb\":37204187984000.0,\"time\":1791590400000}],\"provider\":\"bitget_data\",\"warnings\":[{\"category\":\"PydanticDeprecatedSince20\",\"message\":\"The `__fields__` attribute is deprecated, use the `model_fields` class property instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/\"},{\"category\":\"OpenBBWarning\",\"message\":\"The returned size does not match the expected one. Expected ~2184 candles for interval '1h' over the requested range but received 78 (row limit 78 reached); results are truncated. Narrow the date range or use a coarser interval to retrieve the full series.\"}],\"chart\":null,\"extra\":{\"metadata\":{\"arguments\":{\"provider_choices\":{\"provider\":\"bitget_data\"},\"standard_params\":{\"symbol\":\"NVDA\",\"limit\":1},\"extra_params\":{\"page\":1,\"period\":\"annual\"}},\"duration\":50783429,\"route\":\"/equity/fundamental/ratios\",\"timestamp\":\"2026-10-11T06:21:08.422598\"}}},\"error\":null}"
+    }
+  ],
+  "structuredContent": {
+    "success": true,
+    "status_code": 200,
+    "data": {
+      "id": "06acaba5-4791-7b4c-8000-3553dad26f0b",
+      "results": [
+        {
+          "symbol": "NVDA",
+          "period_ending": "2026-10-10",
+          "pe": 75.8184,
+          "pe_ttm_ed": 28.6483,
+          "pe_lyr": 46.0214,
+          "pb": 69.6566,
+          "pb_mrq": 24.1312,
+          "ps": 42.3431,
+          "ps_ttm_ed": 18.2383,
+          "pcf": 86.2184,
+          "pcf_ttm_ed": 41.1254,
+          "peg_his": null,
+          "ev1": 37427866974800,
+          "ev2": 37275885223100,
+          "ent_multi": 65.9034,
+          "tmv_usd": 5525648000000,
+          "tmv_hkd": 43362535238584,
+          "tmv_rmb": 37204187984000,
+          "cir_tmv_usd": 5525648000000,
+          "div_yield_12m": 0.2268,
+          "seq": 38454920,
+          "thscode": "NVDA.O",
+          "sec_id": "S000009611",
+          "pb_latest_ed": 24.1312,
+          "pb_latest_pd": 24.1312,
+          "pcf_net": 4221.2743,
+          "pcf_net_ttm_ed": 511.4447,
+          "pcf_net_ttm_pd": 511.4447,
+          "pcf_ttm_pd": 41.1254,
+          "equ_value": null,
+          "pe_ttm_pd": 28.6483,
+          "ps_lyr": 25.589,
+          "ps_ttm_pd": 18.2383,
+          "cir_tmv_hkd": 43362535238584,
+          "cir_tmv_rmb": 37204187984000,
+          "time": 1791590400000
+        }
+      ],
+      "provider": "bitget_data",
+      "warnings": [
+        {
+          "category": "PydanticDeprecatedSince20",
+          "message": "The `__fields__` attribute is deprecated, use the `model_fields` class property instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/"
+        },
+        {
+          "category": "OpenBBWarning",
+          "message": "The returned size does not match the expected one. Expected ~2184 candles for interval '1h' over the requested range but received 78 (row limit 78 reached); results are truncated. Narrow the date range or use a coarser interval to retrieve the full series."
+        }
+      ],
+      "chart": null,
+      "extra": {
+        "metadata": {
+          "arguments": {
+            "provider_choices": {
+              "provider": "bitget_data"
+            },
+            "standard_params": {
+              "symbol": "NVDA",
+              "limit": 1
+            },
+            "extra_params": {
+              "page": 1,
+              "period": "annual"
+            }
+          },
+          "duration": 50783429,
+          "route": "/equity/fundamental/ratios",
+          "timestamp": "2026-10-11T06:21:08.422598"
+        }
+      }
+    },
+    "error": null
+  },
+  "isError": false
+}

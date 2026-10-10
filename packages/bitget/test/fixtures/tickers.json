@@ -1,0 +1,30 @@
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1791670696870,
+  "data": [
+    {
+      "category": "USDT-FUTURES",
+      "symbol": "BTCUSDT",
+      "ts": "1791670695279",
+      "lastPrice": "82985.2",
+      "openPrice24h": "82463.7",
+      "highPrice24h": "83140.5",
+      "lowPrice24h": "82458.8",
+      "ask1Price": "82985.3",
+      "bid1Price": "82985.2",
+      "bid1Size": "1.4809",
+      "ask1Size": "4.1082",
+      "price24hPcnt": "0.00632",
+      "volume24h": "8087.1941",
+      "turnover24h": "669570210.11714",
+      "indexPrice": "83021.7445",
+      "markPrice": "82985.2",
+      "fundingRate": "0.000048",
+      "openInterest": "34285.206899999998",
+      "deliveryStartTime": "",
+      "deliveryTime": "",
+      "deliveryStatus": ""
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "@holdout/engine",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc -p .",
+    "lint": "tsc -p . --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@noble/hashes": "^2.4.0",
+    "decimal.js": "^10.6.0",
+    "papaparse": "^5.7.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/papaparse": "^5.5.2"
+  }
+}

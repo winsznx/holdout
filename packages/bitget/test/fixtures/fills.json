@@ -1,0 +1,244 @@
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1791670692997,
+  "data": {
+    "list": [
+      {
+        "execId": "1492939884277772288",
+        "orderId": "1492939884270604288",
+        "clientOid": "hRomv2yddvr6",
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "orderType": "market",
+        "side": "sell",
+        "tradeSide": "open_short",
+        "posSide": "short",
+        "execPrice": "82986.1",
+        "execQty": "0.0002",
+        "execValue": "16.5972",
+        "tradeScope": "taker",
+        "feeDetail": [
+          {
+            "feeCoin": "USDT",
+            "fee": "0.00995833"
+          }
+        ],
+        "createdTime": "1791670526570",
+        "updatedTime": "1791670526571",
+        "execPnl": "0",
+        "execLinkId": "1492939884277772288",
+        "isRPI": "NO"
+      },
+      {
+        "execId": "1492939811540152320",
+        "orderId": "1492939811537178624",
+        "clientOid": "hComv2yd0i55",
+        "category": "USDT-FUTURES",
+        "symbol": "DOGEUSDT",
+        "orderType": "market",
+        "side": "buy",
+        "tradeSide": "open_long",
+        "posSide": "long",
+        "execPrice": "0.08607",
+        "execQty": "232",
+        "execValue": "19.9682",
+        "tradeScope": "taker",
+        "feeDetail": [
+          {
+            "feeCoin": "USDT",
+            "fee": "0.01198094"
+          }
+        ],
+        "createdTime": "1791670509228",
+        "updatedTime": "1791670509230",
+        "execPnl": "0",
+        "execLinkId": "1492939811540152320",
+        "isRPI": "NO"
+      },
+      {
+        "execId": "1492939799531859968",
+        "orderId": "1492939799528886272",
+        "clientOid": "hRcmv2ycy1q4",
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "orderType": "market",
+        "side": "sell",
+        "tradeSide": "close_long",
+        "posSide": "long",
+        "execPrice": "82986.1",
+        "execQty": "0.0002",
+        "execValue": "16.5972",
+        "tradeScope": "taker",
+        "feeDetail": [
+          {
+            "feeCoin": "USDT",
+            "fee": "0.00995833"
+          }
+        ],
+        "createdTime": "1791670506365",
+        "updatedTime": "1791670506367",
+        "execPnl": "-0.00582",
+        "execLinkId": "1492939799531859968",
+        "isRPI": "NO"
+      },
+      {
+        "execId": "1492938027874627584",
+        "orderId": "1492938027867459584",
+        "clientOid": "hAomv2y3wd33",
+        "category": "USDT-FUTURES",
+        "symbol": "ETHUSDT",
+        "orderType": "market",
+        "side": "buy",
+        "tradeSide": "open_long",
+        "posSide": "long",
+        "execPrice": "2511.8",
+        "execQty": "0.01",
+        "execValue": "25.118",
+        "tradeScope": "taker",
+        "feeDetail": [
+          {
+            "feeCoin": "USDT",
+            "fee": "0.0150708"
+          }
+        ],
+        "createdTime": "1791670083969",
+        "updatedTime": "1791670083970",
+        "execPnl": "0",
+        "execLinkId": "1492938027874627584",
+        "isRPI": "NO"
+      },
+      {
+        "execId": "1492937814879481856",
+        "orderId": "1492937814872313856",
+        "clientOid": "hVomv2y2t6t2",
+        "category": "USDT-FUTURES",
+        "symbol": "SOLUSDT",
+        "orderType": "market",
+        "side": "buy",
+        "tradeSide": "open_long",
+        "posSide": "long",
+        "execPrice": "110.941",
+        "execQty": "0.2",
+        "execValue": "22.1882",
+        "tradeScope": "taker",
+        "feeDetail": [
+          {
+            "feeCoin": "USDT",
+            "fee": "0.01331292"
+          }
+        ],
+        "createdTime": "1791670033187",
+        "updatedTime": "1791670033188",
+        "execPnl": "0",
+        "execLinkId": "1492937814879481856",
+        "isRPI": "NO"
+      },
+      {
+        "execId": "1492937804423081984",
+        "orderId": "1492937804420108288",
+        "clientOid": "hRomv2y2r9j1",
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "orderType": "market",
+        "side": "buy",
+        "tradeSide": "open_long",
+        "posSide": "long",
+        "execPrice": "83015.2",
+        "execQty": "0.0002",
+        "execValue": "16.603",
+        "tradeScope": "taker",
+        "feeDetail": [
+          {
+            "feeCoin": "USDT",
+            "fee": "0.00996182"
+          }
+        ],
+        "createdTime": "1791670030694",
+        "updatedTime": "1791670030695",
+        "execPnl": "0",
+        "execLinkId": "1492937804423081984",
+        "isRPI": "NO"
+      },
+      {
+        "execId": "1492937584528306176",
+        "orderId": "1492937584521138176",
+        "clientOid": "hSomv2y1msl0",
+        "category": "USDT-FUTURES",
+        "symbol": "NVDAUSDT",
+        "orderType": "market",
+        "side": "sell",
+        "tradeSide": "open_short",
+        "posSide": "short",
+        "execPrice": "229.51",
+        "execQty": "0.09",
+        "execValue": "20.6559",
+        "tradeScope": "taker",
+        "feeDetail": [
+          {
+            "feeCoin": "USDT",
+            "fee": "0.01239354"
+          }
+        ],
+        "createdTime": "1791669978267",
+        "updatedTime": "1791669978269",
+        "execPnl": "0",
+        "execLinkId": "1492937584528306176",
+        "isRPI": "NO"
+      },
+      {
+        "execId": "1492937024278343680",
+        "orderId": "1492937024275369984",
+        "clientOid": "d1-sell1791669844467",
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "orderType": "market",
+        "side": "sell",
+        "tradeSide": "close_long",
+        "posSide": "long",
+        "execPrice": "82986.6",
+        "execQty": "0.0002",
+        "execValue": "16.5973",
+        "tradeScope": "taker",
+        "feeDetail": [
+          {
+            "feeCoin": "USDT",
+            "fee": "0.00995839"
+          }
+        ],
+        "createdTime": "1791669844693",
+        "updatedTime": "1791669844695",
+        "execPnl": "-0.00106",
+        "execLinkId": "1492937024278343680",
+        "isRPI": "NO"
+      },
+      {
+        "execId": "1492937016216891392",
+        "orderId": "1492937016209723393",
+        "clientOid": "d1-buy1791669842168",
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "orderType": "market",
+        "side": "buy",
+        "tradeSide": "open_long",
+        "posSide": "long",
+        "execPrice": "82991.9",
+        "execQty": "0.0002",
+        "execValue": "16.5983",
+        "tradeScope": "taker",
+        "feeDetail": [
+          {
+            "feeCoin": "USDT",
+            "fee": "0.00995902"
+          }
+        ],
+        "createdTime": "1791669842771",
+        "updatedTime": "1791669842772",
+        "execPnl": "0",
+        "execLinkId": "1492937016216891392",
+        "isRPI": "NO"
+      }
+    ],
+    "cursor": "1492937016216891392"
+  }
+}
