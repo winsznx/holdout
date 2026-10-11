@@ -1,0 +1,70 @@
+{
+  "provider": "api.openai.com",
+  "model": "gpt-5.5",
+  "ranAt": "2026-10-11T11:09:20.378Z",
+  "total": 7,
+  "correct": 7,
+  "accuracy": 1,
+  "refusalsExpected": 7,
+  "refusalsCorrect": 7,
+  "rulesExpected": 0,
+  "rulesCorrect": 0,
+  "results": [
+    {
+      "id": "1",
+      "text": "Trade only 1 to 3 percent risk per trade.",
+      "author": "builder (Tim), not an independent volunteer",
+      "expected": "refuse",
+      "actual": "refuse",
+      "correct": true
+    },
+    {
+      "id": "2",
+      "text": "Max 2 losses a day.",
+      "author": "builder (Tim), not an independent volunteer",
+      "expected": "refuse",
+      "actual": "refuse",
+      "correct": true
+    },
+    {
+      "id": "3",
+      "text": "Don't increase TP or SL while a trade is running.",
+      "author": "builder (Tim), not an independent volunteer",
+      "expected": "refuse",
+      "actual": "refuse",
+      "correct": true
+    },
+    {
+      "id": "4",
+      "text": "Don't over leverage because you think the stop loss is tight and price won't get there.",
+      "author": "builder (Tim), not an independent volunteer",
+      "expected": "refuse",
+      "actual": "refuse",
+      "correct": true
+    },
+    {
+      "id": "5",
+      "text": "Don't go all in and hope it goes well.",
+      "author": "builder (Tim), not an independent volunteer",
+      "expected": "refuse",
+      "actual": "refuse",
+      "correct": true
+    },
+    {
+      "id": "6",
+      "text": "After a good trade, follow the same risk if you want to enter another trade and analyze with the same rules.",
+      "author": "builder (Tim), not an independent volunteer",
+      "expected": "refuse",
+      "actual": "refuse",
+      "correct": true
+    },
+    {
+      "id": "7",
+      "text": "Don't double down on risk after a win or a loss, follow a risk discipline.",
+      "author": "builder (Tim), not an independent volunteer",
+      "expected": "refuse",
+      "actual": "refuse",
+      "correct": true
+    }
+  ]
+}

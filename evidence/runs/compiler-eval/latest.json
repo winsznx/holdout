@@ -1,0 +1,18 @@
+{
+  "status": "reported",
+  "n": 7,
+  "correct": 7,
+  "accuracy": 1,
+  "refusalsExpected": 7,
+  "refusalsCorrect": 7,
+  "rulesExpected": 0,
+  "rulesCorrect": 0,
+  "independentAuthors": 0,
+  "models": {
+    "provider": "api.openai.com",
+    "model": "gpt-5.5"
+  },
+  "ranAt": "2026-10-11T11:09:20.378Z",
+  "caveat": "All 7 rules were written by the builder, not independent volunteers, and every expected answer is a refusal, so this shows refusals are recognized but says nothing yet about correct compilation of testable rules. The 8 templates compiled correctly in a separate live check (8 of 8) that is not part of this evaluation.",
+  "source": "evidence/runs/compiler-eval-2026-10-11T11-09-20-377Z.json"
+}
