@@ -54,13 +54,28 @@ const facts = {
     'Bitget fill history has no leverage. Leverage for the bots is read from the bot client order id.',
     'Demo has no rToken pairs, so the product-switch rule is untestable on Demo data.',
     'Chainbase AgentKey (S8) is not connected.',
+    'No candidate rule qualified for any trader under the pre-registered grid, so the holdout and sham steps ran only in unit and property tests, not on real trader data.',
+    'Bot A logged 2 adds to a position it judged losing, but both filled at or above its average entry, so the audit found none. Bot V never showed its leverage habit.',
+    'The compiler eval has no independent volunteers.',
   ],
 };
 writeFileSync('submission-facts.json', JSON.stringify(facts, null, 2) + '\n');
 
+const ce = r.campaign.p9 as unknown as { status: string; reason?: string; n?: number; correct?: number; rulesExpected?: number; rulesCorrect?: number; refusalsExpected?: number; refusalsCorrect?: number; independentAuthors?: number };
+const compilerLine = ce.status === 'not_run' ? ce.reason ?? 'not run' : `${ce.correct} of ${ce.n} correct (${ce.rulesCorrect} of ${ce.rulesExpected} testable rules, ${ce.refusalsCorrect} of ${ce.refusalsExpected} refusals), ${ce.independentAuthors ?? 0} independent authors, rules written by the builder and by Claude, labels committed before the run`;
 const pct = (x: number | null) => (x === null ? 'n/a' : `${Math.round(x * 100)}%`);
+const planted = r.campaign.p1b.matrix.filter((m) => m.plantedLeak).length;
+const never = (r.campaign.p1b as unknown as { habitNeverOccurred?: string[] }).habitNeverOccurred ?? [];
+const occurred = planted - never.length;
+const detail = r.campaign.p1b.matrix
+  .filter((m) => m.plantedLeak && !never.includes(m.bot))
+  .map((m) => {
+    const row = (r.campaign as unknown as { p1: { bot: string; groundTruthOrders: number; matched: number; missed: number; extra: number }[] }).p1.find((x) => x.bot === m.bot);
+    return `${m.bot} ${row?.matched ?? 0} of ${row?.groundTruthOrders ?? 0} orders`;
+  })
+  .join(', ');
 const headline = a.tp + a.fn > 0
-  ? `On ${bots.length} Bitget Demo bots with one planted habit each (or none, for the control), the audit flagged ${a.tp} of ${a.tp + a.fn} planted habits and ${a.fp} habits that were not planted. The disciplined control returned "${control?.outcome.verdict ?? 'n/a'}".`
+  ? `${bots.length} Bitget Demo bots, ${planted} with a planted habit and one disciplined control. The habit occurred in ${occurred} of the ${planted} (${never.length ? `${never.join(', ')} never showed it` : 'all showed it'}). Audit matched against the bots' own logs: ${detail}. False flags: ${a.fp}. The control returned "${control?.outcome.verdict ?? 'n/a'}", but no candidate rule qualified for any bot, so that is not a discriminating test.`
   : 'The bot cohort did not produce enough trades to price the planted habits yet.';
 const holdoutLine = !botCohort
   ? 'No cohort result.'
@@ -120,7 +135,7 @@ Bitget retail to VIP3 traders in stock perps, rTokens and crypto futures, accoun
 - Observed, planted-leak test (P4): ${r.campaign.p4.status === 'not_run' ? 'not run' : `recall ${pct(r.campaign.p4.recall ?? null)}, cost error ${pct(r.campaign.p4.costError ?? null)}`}.
 - Observed, too little data (P3): ${r.campaign.p3.status}. Duplicates (P6): ${r.campaign.p6.status}. Gaps (P5): ${r.campaign.p5.status}.
 - Observed, sponsor ablation (P7): ${r.campaign.p7.totalBecameUntestable} rule probes became untestable, ${r.campaign.p7.totalCostVanished.toFixed(4)} USDT of audited cost vanished.
-- Rule compiler (P9): ${r.campaign.p9.status === 'not_run' ? r.campaign.p9.reason ?? 'not run' : 'see /evidence'}.
+- Rule compiler (P9): ${compilerLine}.
 - Human histories: ${facts.humanHistories}.
 
 ## 4. Progress

@@ -66,7 +66,7 @@ if (victim) {
   } catch {
     detected = true;
   }
-  console.log(`${detected ? 'FAIL' : 'PASS'}  tamper test: flipped one digit of the fee in one fill of ${victim.meta.id}, ${detected ? 'verification fails as designed' : 'NOT DETECTED'}`);
+  console.log(`${detected ? 'PASS' : 'FAIL'}  tamper test: changed one digit of the fee in one fill of ${victim.meta.id}, ${detected ? 'verification fails on the changed data, as it should' : 'change NOT DETECTED'}`);
   if (!detected) failures += 1;
 }
 

@@ -1,0 +1,210 @@
+{
+  "generatedFrom": "evidence/runs/run-2026-10-11T12-48-28-548Z/results.json",
+  "runId": "run-2026-10-11T12-48-28-548Z",
+  "commit": "cbbc08b6042aac348b452fe22e2acf133aae105d",
+  "preregSha256": "a0efdbe1591fdf5186aa43fd3a9f454cf7b7ff447c8aec8c317e4eec3c10766f",
+  "urls": {
+    "app": "https://holdout.timjosh507.workers.dev",
+    "evidence": "https://holdout.timjosh507.workers.dev/evidence",
+    "repo": "https://github.com/winsznx/holdout"
+  },
+  "botRoundTrips": {
+    "bot-A": 117,
+    "bot-C": 97,
+    "bot-R": 171,
+    "bot-S": 94,
+    "bot-V": 114
+  },
+  "planted": {
+    "habitsPlanted": 4,
+    "habitsFlagged": 2,
+    "missed": 1,
+    "falseFlags": 0,
+    "precision": 1,
+    "recall": 0.6666666666666666
+  },
+  "proposalsTargetingOwnLeak": {
+    "targetedOwnLeak": 0,
+    "targetedOtherRule": 0
+  },
+  "healthyControl": {
+    "verdict": "NO_RULE_NEEDED",
+    "reason": "no candidate passed the train filters with a positive train gain"
+  },
+  "holdoutCohort": {
+    "cohort": "bitget-demo-bots",
+    "traders": 5,
+    "tested": 0,
+    "medianDeltaTest": null,
+    "medianShamMedian": null,
+    "adoptWorthy": 0,
+    "headline": "audit",
+    "killRuleApplied": true
+  },
+  "plantedLeakTest": {
+    "status": "pass",
+    "label": "planted-C: labeled copy of Bitget Demo bot C with injected post-loss re-entries, never real data",
+    "injected": 25,
+    "caught": 25,
+    "recall": 1,
+    "injectedNetPnl": -0.92273927,
+    "auditedNetPnlOnInjected": -0.92273927,
+    "costError": 0,
+    "realTripsAlsoFlagged": 22
+  },
+  "tooLittleData": {
+    "status": "pass",
+    "source": "bot-C",
+    "trimmedTo": 20,
+    "verdict": "INSUFFICIENT",
+    "reason": "not enough trades: 20 closed, needs 30",
+    "auditStatus": "no_breaks",
+    "auditBreaks": 0
+  },
+  "gaps": {
+    "status": "pass",
+    "rows": [
+      {
+        "id": "bot-A",
+        "tripsCrossingSettlement": 1,
+        "flaggedWhenFundingRemoved": true,
+        "flaggedWhenPresent": false
+      },
+      {
+        "id": "bot-C",
+        "tripsCrossingSettlement": 1,
+        "flaggedWhenFundingRemoved": true,
+        "flaggedWhenPresent": false
+      },
+      {
+        "id": "bot-R",
+        "tripsCrossingSettlement": 1,
+        "flaggedWhenFundingRemoved": true,
+        "flaggedWhenPresent": false
+      },
+      {
+        "id": "bot-S",
+        "tripsCrossingSettlement": 0,
+        "flaggedWhenFundingRemoved": false,
+        "flaggedWhenPresent": false
+      },
+      {
+        "id": "bot-V",
+        "tripsCrossingSettlement": 0,
+        "flaggedWhenFundingRemoved": false,
+        "flaggedWhenPresent": false
+      }
+    ]
+  },
+  "duplicates": {
+    "status": "pass",
+    "source": "bot-R",
+    "note": "The CSV was rendered from API fills in the documented Bitget export columns. It is not a live Bitget export, so this checks the merge path only.",
+    "apiFills": 344,
+    "csvFills": 344,
+    "mergedFills": 344,
+    "duplicatesDropped": 344,
+    "ledgerByteIdentical": true
+  },
+  "ablation": {
+    "sourcesDisabled": [
+      "S3 mark candles",
+      "S4 rToken candles",
+      "S5 earnings calendar",
+      "S7 NYSE session calendar"
+    ],
+    "rows": [
+      {
+        "id": "bot-A",
+        "probes": 8,
+        "untestableFull": 3,
+        "untestableAblated": 5,
+        "becameUntestable": 2,
+        "auditedCostVanished": 0
+      },
+      {
+        "id": "bot-C",
+        "probes": 8,
+        "untestableFull": 3,
+        "untestableAblated": 5,
+        "becameUntestable": 2,
+        "auditedCostVanished": 0
+      },
+      {
+        "id": "bot-R",
+        "probes": 8,
+        "untestableFull": 3,
+        "untestableAblated": 5,
+        "becameUntestable": 2,
+        "auditedCostVanished": 0
+      },
+      {
+        "id": "bot-S",
+        "probes": 8,
+        "untestableFull": 2,
+        "untestableAblated": 5,
+        "becameUntestable": 3,
+        "auditedCostVanished": 3.0071916
+      },
+      {
+        "id": "bot-V",
+        "probes": 8,
+        "untestableFull": 3,
+        "untestableAblated": 5,
+        "becameUntestable": 2,
+        "auditedCostVanished": 0
+      },
+      {
+        "id": "strategy-backtest",
+        "probes": 8,
+        "untestableFull": 6,
+        "untestableAblated": 6,
+        "becameUntestable": 0,
+        "auditedCostVanished": 0
+      },
+      {
+        "id": "strategy-paper",
+        "probes": 8,
+        "untestableFull": 6,
+        "untestableAblated": 6,
+        "becameUntestable": 0,
+        "auditedCostVanished": 0
+      }
+    ],
+    "totalBecameUntestable": 11,
+    "totalCostVanished": 3.0071916
+  },
+  "compilerEval": {
+    "status": "reported",
+    "n": 37,
+    "correct": 37,
+    "accuracy": 1,
+    "refusalsExpected": 13,
+    "refusalsCorrect": 13,
+    "rulesExpected": 24,
+    "rulesCorrect": 24,
+    "independentAuthors": 0,
+    "authors": {
+      "builder (Tim), not an independent volunteer": 7,
+      "Claude, at the builder's request (not an independent volunteer)": 30
+    },
+    "models": {
+      "provider": "api.openai.com",
+      "model": "gpt-5.5"
+    },
+    "ranAt": "2026-10-11T11:19:00.069Z",
+    "caveat": "No independent volunteers. 7 rules by builder (Tim), not an independent volunteer; 30 rules by Claude, at the builder's request (not an independent volunteer). Labels were committed before the run. This checks the compiler on the labelers own wording, so read the accuracy as a floor check, not as how people actually write.",
+    "source": "evidence/runs/compiler-eval-2026-10-11T11-19-00-069Z.json"
+  },
+  "humanHistories": 0,
+  "limitations": [
+    "Bitget Demo bots test detection power and false positives. They are not evidence about human traders.",
+    "The Bitget CSV adapter is untested against a live export. The money_boys files are strategy samples, not live fills.",
+    "Bitget fill history has no leverage. Leverage for the bots is read from the bot client order id.",
+    "Demo has no rToken pairs, so the product-switch rule is untestable on Demo data.",
+    "Chainbase AgentKey (S8) is not connected.",
+    "No candidate rule qualified for any trader under the pre-registered grid, so the holdout and sham steps ran only in unit and property tests, not on real trader data.",
+    "Bot A logged 2 adds to a position it judged losing, but both filled at or above its average entry, so the audit found none. Bot V never showed its leverage habit.",
+    "The compiler eval has no independent volunteers."
+  ]
+}

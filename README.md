@@ -14,7 +14,15 @@ Built solo for the Bitget AI Base Camp S2 hackathon. Track 3 (AI Trading Desk), 
 - Repository: https://github.com/winsznx/holdout
 
 <!-- evidence:start -->
-Evidence is published at https://holdout.timjosh507.workers.dev/evidence once the pre-registered evaluation has run.
+## What the evidence says
+
+5 Bitget Demo bots, 4 with a planted habit and one disciplined control. The habit occurred in 3 of the 4 (bot-V never showed it). Audit matched against the bots' own logs: bot-A 0 of 2 orders, bot-R 115 of 115 orders, bot-S 94 of 94 orders. False flags: 0. The control returned "NO_RULE_NEEDED", but no candidate rule qualified for any bot, so that is not a discriminating test.
+
+The "discovered rules help" headline is withdrawn for the bot cohort under the pre-registered kill rule (0 bots had a tested rule, 0 adopt-worthy). The audit headline ships.
+
+Bitget Demo bots test the method. They say nothing about whether Holdout helps a human trader. Every number is recomputed by `pnpm verify` from `evidence/raw` with no network and no keys. Run id: run-2026-10-11T12-48-28-548Z. Pre-registration sha256: a0efdbe1591fdf5186aa43fd3a9f454cf7b7ff447c8aec8c317e4eec3c10766f.
+
+Limits: Bitget Demo bots test detection power and false positives. They are not evidence about human traders. The Bitget CSV adapter is untested against a live export. The money_boys files are strategy samples, not live fills. Bitget fill history has no leverage. Leverage for the bots is read from the bot client order id. Demo has no rToken pairs, so the product-switch rule is untestable on Demo data. Chainbase AgentKey (S8) is not connected. No candidate rule qualified for any trader under the pre-registered grid, so the holdout and sham steps ran only in unit and property tests, not on real trader data. Bot A logged 2 adds to a position it judged losing, but both filled at or above its average entry, so the audit found none. Bot V never showed its leverage habit. The compiler eval has no independent volunteers.
 <!-- evidence:end -->
 
 ## For reviewers: the short version
@@ -129,6 +137,9 @@ Cohorts are never merged: Bitget Demo bots, strategy samples and any human histo
 - Bitget fill history has no leverage. For the bots it is read from the client order id they set. For a real export the max-leverage rule is untestable.
 - Bitget Demo allows one demo deposit per 72 hours, so the bot fleet runs on about 414 USDT with 20 USDT lots. The bots' timing was compressed to collect enough trades (see [docs/DECISIONS.md](docs/DECISIONS.md)).
 - Chainbase AgentKey (S8) is not connected.
+- Under the pre-registered grid no candidate rule qualified for any trader, because the Demo bots lose on nearly every trade and trade every few minutes, so every cooldown or loss-limit candidate removes 90% to 100% of train trades and fails the 2% to 50% filter. The holdout and sham steps therefore ran only in unit and property tests and a synthetic uniformity check, not on real trader data. The healthy-control result is correct but not discriminating for the same reason.
+- Bot A's two logged adds to a loser filled at or above its average entry, so the audit found none. Bot V's leverage habit never occurred. Details in docs/DECISIONS.md.
+- The compiler eval (37 rules) has no independent volunteers. Most real trader rules are about risk sizing (percent risk per trade, a count of losses, moving a stop), which the eight templates do not cover, so the compiler refuses them.
 - Bitget blocks requests from Cloudflare Workers, so the hosted app cannot forward a signed read-only key sync. Public candles load from the browser instead, and the hosted import path is CSV. Key sync works when the app runs locally. Details in [docs/SPONSOR_FINDINGS.md](docs/SPONSOR_FINDINGS.md).
 
 Every deviation from the original plan is dated in [docs/DECISIONS.md](docs/DECISIONS.md).
@@ -218,7 +229,7 @@ The evaluation itself is two commands with a git gate between them: `scripts/eva
 
 ## Tests
 
-Property-based tests (fast-check, 1,000 runs each) cover the lemmas: L1 ledger conservation, L2 idempotent ingest, L3 null rule identity, L4 removal decomposition, L5 sham p-value validity, L6 no look-ahead, L7 bootstrap coverage, L8 selection blindness. See [docs/MATH.md](docs/MATH.md). Current totals: engine 18, bitget 36, llm 20, skill 25, web 77.
+Property-based tests (fast-check, 1,000 runs each) cover the lemmas: L1 ledger conservation, L2 idempotent ingest, L3 null rule identity, L4 removal decomposition, L5 sham p-value validity, L6 no look-ahead, L7 bootstrap coverage, L8 selection blindness. See [docs/MATH.md](docs/MATH.md). Current totals: engine 19, bitget 37, llm 20, skill 25, web 77.
 
 ## Documents
 
