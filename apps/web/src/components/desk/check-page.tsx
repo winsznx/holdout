@@ -3,7 +3,10 @@
 import { ScanSearch, Upload, FlaskConical } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
-import { Button, ButtonLink, Icon, PageHeading, StateBlock, type Surface } from '@/components/ui';
+import { Button, ButtonLink } from '@/components/ui/button';
+import { Icon } from '@/components/ui/icon';
+import { PageHeading } from '@/components/ui/section';
+import { StateBlock, type Surface } from '@/components/ui/state-block';
 import { runLiveCheck, type LiveCheck } from '@/lib/check/live';
 import { parseIdeaRemote, parseIdeaStrict, type ParseOutcome } from '@/lib/check/parse';
 import { useDesk } from '@/lib/desk/store';

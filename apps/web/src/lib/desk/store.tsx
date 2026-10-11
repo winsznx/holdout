@@ -2,7 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { ruleId, type Rule, type Rulebook } from '@holdout/engine';
-import type { Surface } from '@/components/ui';
+import type { Surface } from '@/components/ui/state-block';
 import { loadMarkCandles } from './market';
 import { kvClearAll, kvGet, kvSet, persistenceFailure, randomDeviceId } from './persist';
 import { buildDraftRulebook, diffRulebooks } from './rulebook-build';

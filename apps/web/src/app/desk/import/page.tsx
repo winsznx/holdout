@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { ImportView } from '@/components/desk/views/import-view';
-import { PageHeading } from '@/components/ui';
+import { PageHeading } from '@/components/ui/section';
 
 export const metadata: Metadata = { title: 'Import' };
 

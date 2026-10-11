@@ -1,5 +1,7 @@
 import { Check, CircleDot, Minus, X, type LucideIcon } from 'lucide-react';
-import { Icon, Tag, VerdictChip, tagPropsForKind, STRATEGY_SAMPLE_NOTICE } from '@/components/ui';
+import { Icon } from '@/components/ui/icon';
+import { Tag, tagPropsForKind, STRATEGY_SAMPLE_NOTICE } from '@/components/ui/tag';
+import { VerdictChip } from '@/components/ui/verdict-chip';
 import { cn } from '@/lib/cn';
 import type { CampaignRowStatus, TraderResult } from '@/lib/evidence-data';
 

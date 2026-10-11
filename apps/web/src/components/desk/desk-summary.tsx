@@ -1,5 +1,5 @@
 import { num, str, sum } from '@holdout/engine';
-import { Stat } from '@/components/ui';
+import { Stat } from '@/components/ui/stat';
 import type { ReadyDesk } from '@/components/desk/gate';
 import { money, signedMoney } from '@/lib/desk/display';
 import { formatCount } from '@/lib/format';

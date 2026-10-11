@@ -17,7 +17,14 @@ import {
   type Candidate,
   type HoldoutOutcome,
 } from '@holdout/engine';
-import { Button, ButtonLink, DataTable, Icon, ProvenanceBadge, Stat, StateBlock, Timeline, VerdictChip, type TimelineSegment } from '@/components/ui';
+import { Button, ButtonLink } from '@/components/ui/button';
+import { DataTable } from '@/components/ui/data-table';
+import { Icon } from '@/components/ui/icon';
+import { ProvenanceBadge } from '@/components/ui/provenance';
+import { Stat } from '@/components/ui/stat';
+import { StateBlock } from '@/components/ui/state-block';
+import { Timeline, type TimelineSegment } from '@/components/ui/charts';
+import { VerdictChip } from '@/components/ui/verdict-chip';
 import { DeskGate, type ReadyDesk } from '@/components/desk/gate';
 import { DeskSummary } from '@/components/desk/desk-summary';
 import { SectionCard } from '@/components/desk/section-card';

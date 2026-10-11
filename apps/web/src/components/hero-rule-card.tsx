@@ -1,4 +1,6 @@
-import { RuleCard, STRATEGY_SAMPLE_NOTICE, StateBlock, tagPropsForKind } from '@/components/ui';
+import { RuleCard } from '@/components/ui/rule-card';
+import { STRATEGY_SAMPLE_NOTICE, tagPropsForKind } from '@/components/ui/tag';
+import { StateBlock } from '@/components/ui/state-block';
 import type { HeroRule, SampleFile } from '@/lib/samples';
 import type { DataResult } from '@/lib/data-result';
 

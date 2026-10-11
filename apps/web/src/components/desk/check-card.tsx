@@ -1,5 +1,7 @@
 import { CircleCheck, CircleSlash, OctagonX, ScanSearch, type LucideIcon } from 'lucide-react';
-import { Card, CardHeader, Icon, Tag } from '@/components/ui';
+import { Card, CardHeader } from '@/components/ui/card';
+import { Icon } from '@/components/ui/icon';
+import { Tag } from '@/components/ui/tag';
 import { cn } from '@/lib/cn';
 import { formatPercent, formatSignedUsdt } from '@/lib/format';
 import type { LiveCheck } from '@/lib/check/live';

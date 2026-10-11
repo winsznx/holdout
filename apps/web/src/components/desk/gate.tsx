@@ -2,7 +2,11 @@
 
 import { FlaskConical, Info, Upload } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { ButtonLink, Icon, STRATEGY_SAMPLE_NOTICE, Skeleton, StateBlock, Tag, TagRow, tagPropsForKind } from '@/components/ui';
+import { ButtonLink } from '@/components/ui/button';
+import { Icon } from '@/components/ui/icon';
+import { STRATEGY_SAMPLE_NOTICE, Tag, TagRow, tagPropsForKind } from '@/components/ui/tag';
+import { Skeleton } from '@/components/ui/skeleton';
+import { StateBlock } from '@/components/ui/state-block';
 import { useDesk, type DeskApi } from '@/lib/desk/store';
 import type { Analysis, DeskHistory, DeskSource } from '@/lib/desk/types';
 

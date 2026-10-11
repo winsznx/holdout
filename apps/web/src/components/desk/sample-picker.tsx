@@ -3,7 +3,12 @@
 import { ArrowRight, Star } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { Button, Card, ButtonLink, Icon, STRATEGY_SAMPLE_NOTICE, Skeleton, StateBlock, Tag, TagRow, tagPropsForKind } from '@/components/ui';
+import { Button, ButtonLink } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Icon } from '@/components/ui/icon';
+import { STRATEGY_SAMPLE_NOTICE, Tag, TagRow, tagPropsForKind } from '@/components/ui/tag';
+import { Skeleton } from '@/components/ui/skeleton';
+import { StateBlock } from '@/components/ui/state-block';
 import { loadCatalog, type CatalogEntry, type SampleCatalog } from '@/lib/desk/samples-client';
 import { useDesk } from '@/lib/desk/store';
 import { formatCount } from '@/lib/format';

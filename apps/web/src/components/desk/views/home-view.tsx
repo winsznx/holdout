@@ -2,7 +2,10 @@
 
 import { ArrowRight, Compass, ListChecks, Plus } from 'lucide-react';
 import { num, str, sum } from '@holdout/engine';
-import { ButtonLink, Icon, Stat, StateBlock } from '@/components/ui';
+import { ButtonLink } from '@/components/ui/button';
+import { Icon } from '@/components/ui/icon';
+import { Stat } from '@/components/ui/stat';
+import { StateBlock } from '@/components/ui/state-block';
 import { DeskGate, type ReadyDesk } from '@/components/desk/gate';
 import { SectionCard } from '@/components/desk/section-card';
 import { costOfBreaking, STATUS_LABEL } from '@/lib/desk/rule-view';

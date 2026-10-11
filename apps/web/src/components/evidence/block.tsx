@@ -1,6 +1,6 @@
 import type { LucideIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { Icon } from '@/components/ui';
+import { Icon } from '@/components/ui/icon';
 
 export function Block({ label, title, intro, icon, children }: { label: string; title: string; intro?: ReactNode; icon?: LucideIcon; children: ReactNode }) {
   return (

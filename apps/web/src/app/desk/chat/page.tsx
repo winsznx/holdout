@@ -1,5 +1,5 @@
 import { DeskChat } from '@/components/desk/desk-chat';
-import { PageHeading } from '@/components/ui';
+import { PageHeading } from '@/components/ui/section';
 
 export default function Page() {
   return (

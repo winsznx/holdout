@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
-import { Footer, Header } from '@/components/ui';
+import { Footer } from '@/components/ui/footer';
+import { Header } from '@/components/ui/header';
 
 export function SiteShell({ children }: { children: ReactNode }) {
   return (

@@ -8,7 +8,7 @@ import {
   fetchHistoryPositionsRange,
   type KeyPermissionReport,
 } from '@holdout/bitget/src/private.ts';
-import type { Surface } from '@/components/ui';
+import type { Surface } from '@/components/ui/state-block';
 import { fetchStockSymbols } from './market';
 import type { RawSyncPayload } from './sync-normalize';
 

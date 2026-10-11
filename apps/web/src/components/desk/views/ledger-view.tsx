@@ -2,7 +2,11 @@
 
 import { Package, Scale, TableProperties, TriangleAlert, Upload } from 'lucide-react';
 import { D, num, str, sum, type RoundTrip } from '@holdout/engine';
-import { ButtonLink, DataTable, Icon, StateBlock, Stat } from '@/components/ui';
+import { ButtonLink } from '@/components/ui/button';
+import { DataTable } from '@/components/ui/data-table';
+import { Icon } from '@/components/ui/icon';
+import { StateBlock } from '@/components/ui/state-block';
+import { Stat } from '@/components/ui/stat';
 import { DeskGate, type ReadyDesk } from '@/components/desk/gate';
 import { SectionCard } from '@/components/desk/section-card';
 import { SortableTable, type SortColumn } from '@/components/desk/sortable-table';

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Markdown } from '@/components/markdown';
-import { Container, PageHeading, StateBlock } from '@/components/ui';
+import { Container, PageHeading } from '@/components/ui/section';
+import { StateBlock } from '@/components/ui/state-block';
 import { readRepoDoc } from '@/lib/data';
 import { LEMMAS } from '@/lib/lemmas';
 

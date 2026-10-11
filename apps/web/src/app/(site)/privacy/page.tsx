@@ -1,6 +1,7 @@
 import { Ban, Cpu, Database, HardDrive, KeyRound, Laptop, Server, type LucideIcon } from 'lucide-react';
 import type { Metadata } from 'next';
-import { Container, Icon, PageHeading } from '@/components/ui';
+import { Container, PageHeading } from '@/components/ui/section';
+import { Icon } from '@/components/ui/icon';
 
 export const metadata: Metadata = { title: 'Privacy' };
 

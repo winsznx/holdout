@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { ProposalsView } from '@/components/desk/views/proposals-view';
-import { PageHeading } from '@/components/ui';
+import { PageHeading } from '@/components/ui/section';
 
 export const metadata: Metadata = { title: 'Proposals' };
 

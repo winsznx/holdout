@@ -2,7 +2,7 @@
 
 import { useMemo, useState, type ReactNode } from 'react';
 import { cn } from '@/lib/cn';
-import { Button } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 
 export interface SortColumn<Row> {
   key: string;

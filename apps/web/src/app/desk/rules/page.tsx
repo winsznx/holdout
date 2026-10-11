@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { RulesView } from '@/components/desk/views/rules-view';
-import { PageHeading } from '@/components/ui';
+import { PageHeading } from '@/components/ui/section';
 
 export const metadata: Metadata = { title: 'Rules' };
 

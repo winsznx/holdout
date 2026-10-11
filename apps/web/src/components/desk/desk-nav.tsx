@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Icon } from '@/components/ui';
+import { Icon } from '@/components/ui/icon';
 import { cn } from '@/lib/cn';
 import { DESK_NAV } from './nav';
 

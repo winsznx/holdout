@@ -2,7 +2,15 @@
 
 import { BadgeCheck, Braces, CircleSlash, Download, Filter, Gavel, Grid3x3, ListChecks, Lock, ChartNoAxesColumn, SlidersHorizontal, Users } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { ButtonLink, Card, CodeBlock, CardBody, CardHeader, Container, Icon, PageHeading, Skeleton, StateBlock, Stat, Tag } from '@/components/ui';
+import { ButtonLink } from '@/components/ui/button';
+import { Card, CardBody, CardHeader } from '@/components/ui/card';
+import { CodeBlock } from '@/components/ui/code-block';
+import { Container, PageHeading } from '@/components/ui/section';
+import { Icon } from '@/components/ui/icon';
+import { Skeleton } from '@/components/ui/skeleton';
+import { StateBlock } from '@/components/ui/state-block';
+import { Stat } from '@/components/ui/stat';
+import { Tag } from '@/components/ui/tag';
 import { Block } from './block';
 import { AblationTable, CampaignTable, CompilerEval, FirewallStats, SpecificityMatrix } from './campaign-sections';
 import { HashLine } from './hash-line';
@@ -21,7 +29,7 @@ import {
   type EvidenceData,
 } from '@/lib/evidence-data';
 import { useLoaded } from '@/lib/use-loaded';
-import { STRATEGY_SAMPLE_NOTICE } from '@/components/ui';
+import { STRATEGY_SAMPLE_NOTICE } from '@/components/ui/tag';
 
 const SUMMARY_FILE = `${EVIDENCE_BASE}/summary.json`;
 

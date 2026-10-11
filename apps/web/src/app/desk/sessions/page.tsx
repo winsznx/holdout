@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { SessionsView } from '@/components/desk/views/sessions-view';
-import { PageHeading } from '@/components/ui';
+import { PageHeading } from '@/components/ui/section';
 
 export const metadata: Metadata = { title: 'Sessions' };
 

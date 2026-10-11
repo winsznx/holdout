@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { SamplePicker } from '@/components/desk/sample-picker';
-import { Container, PageHeading } from '@/components/ui';
+import { Container, PageHeading } from '@/components/ui/section';
 
 export const metadata: Metadata = { title: 'Sample' };
 

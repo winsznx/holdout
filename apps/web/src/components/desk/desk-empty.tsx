@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
-import { PageHeading, StateBlock } from '@/components/ui';
+import { PageHeading } from '@/components/ui/section';
+import { StateBlock } from '@/components/ui/state-block';
 
 export function DeskEmpty({ label, heading, intro, title, body, action }: { label: string; heading: string; intro?: string; title: string; body?: ReactNode; action?: ReactNode }) {
   return (

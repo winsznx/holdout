@@ -1,4 +1,5 @@
-import { DataTable, StateBlock, type Column } from '@/components/ui';
+import { DataTable, type Column } from '@/components/ui/data-table';
+import { StateBlock } from '@/components/ui/state-block';
 import { cn } from '@/lib/cn';
 import { formatSignedUsdt } from '@/lib/format';
 import { NO_VOLUNTEER_RULES, numberField, type Campaign, type CampaignRow, type FirewallFile } from '@/lib/evidence-data';

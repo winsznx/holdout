@@ -4,7 +4,10 @@ import { BookMarked, Copy, Check, Download, FileJson, History, Plug, Save, Shiel
 import Link from 'next/link';
 import { useId, useState } from 'react';
 import { verifyRulebook, type Rulebook } from '@holdout/engine';
-import { Button, ButtonLink, Card, CardBody, Icon, StateBlock } from '@/components/ui';
+import { Button, ButtonLink } from '@/components/ui/button';
+import { Card, CardBody } from '@/components/ui/card';
+import { Icon } from '@/components/ui/icon';
+import { StateBlock } from '@/components/ui/state-block';
 import { DeskGate, type ReadyDesk } from '@/components/desk/gate';
 import { DeskSummary } from '@/components/desk/desk-summary';
 import { SectionCard } from '@/components/desk/section-card';

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { RulebookView } from '@/components/desk/views/rulebook-view';
-import { PageHeading } from '@/components/ui';
+import { PageHeading } from '@/components/ui/section';
 
 export const metadata: Metadata = { title: 'Rulebook' };
 

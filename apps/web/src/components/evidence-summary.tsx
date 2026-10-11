@@ -1,5 +1,8 @@
 import Link from 'next/link';
-import { ButtonLink, Card, CardBody, CardHeader, StateBlock, Stat } from '@/components/ui';
+import { ButtonLink } from '@/components/ui/button';
+import { Card, CardBody, CardHeader } from '@/components/ui/card';
+import { StateBlock } from '@/components/ui/state-block';
+import { Stat } from '@/components/ui/stat';
 import { EVIDENCE_SUMMARY_PATH, humanizeKey, scalarEntries, structuredEntries, type EvidenceSummary } from '@/lib/evidence';
 import type { DataResult } from '@/lib/data-result';
 

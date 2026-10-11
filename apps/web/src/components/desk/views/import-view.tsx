@@ -3,7 +3,10 @@
 import { useId, useRef, useState, type DragEvent } from 'react';
 import Link from 'next/link';
 import { ArrowRight, FlaskConical, KeyRound, ListChecks, RefreshCw, Table2, Trash2, Upload, UploadCloud } from 'lucide-react';
-import { Button, ButtonLink, DataTable, Icon, StateBlock } from '@/components/ui';
+import { Button, ButtonLink } from '@/components/ui/button';
+import { DataTable } from '@/components/ui/data-table';
+import { Icon } from '@/components/ui/icon';
+import { StateBlock } from '@/components/ui/state-block';
 import { SectionCard } from '@/components/desk/section-card';
 import { SourceBanner } from '@/components/desk/gate';
 import { productLabel } from '@/lib/desk/display';

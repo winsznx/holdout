@@ -1,4 +1,4 @@
-import { StateBlock } from '@/components/ui';
+import { StateBlock } from '@/components/ui/state-block';
 
 export function NotInData({ reason, title = 'Not in this data' }: { reason: string; title?: string }) {
   const body = reason.replace(/^not in this data:\s*/i, '');

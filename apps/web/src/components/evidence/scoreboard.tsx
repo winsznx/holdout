@@ -1,5 +1,6 @@
 import { BadgeCheck, ClipboardCheck, FlaskConical, Users, XCircle, type LucideIcon } from 'lucide-react';
-import { Icon, Stat } from '@/components/ui';
+import { Icon } from '@/components/ui/icon';
+import { Stat } from '@/components/ui/stat';
 import { campaignRows, type EvidenceData } from '@/lib/evidence-data';
 import { formatCount } from '@/lib/format';
 

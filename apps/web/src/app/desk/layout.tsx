@@ -6,7 +6,9 @@ import { ChatProvider } from '@/components/desk/chat-state';
 import { DeskChat } from '@/components/desk/desk-chat';
 import { DeskNav } from '@/components/desk/desk-nav';
 import { BookOpenCheck, Ban } from 'lucide-react';
-import { Icon, Mark, ThemeToggle } from '@/components/ui';
+import { Icon } from '@/components/ui/icon';
+import { Mark } from '@/components/ui/logo';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { DeskProvider } from '@/lib/desk/store';
 
 export const metadata: Metadata = { title: 'Desk' };

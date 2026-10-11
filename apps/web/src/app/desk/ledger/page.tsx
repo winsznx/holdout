@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { LedgerView } from '@/components/desk/views/ledger-view';
-import { PageHeading } from '@/components/ui';
+import { PageHeading } from '@/components/ui/section';
 
 export const metadata: Metadata = { title: 'Ledger' };
 

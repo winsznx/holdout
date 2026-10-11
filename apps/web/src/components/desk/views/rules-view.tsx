@@ -3,7 +3,13 @@
 import { Calculator, CircleAlert, Database, ListChecks, Plus, Sparkles, Trash2, X } from 'lucide-react';
 import { useId, useState } from 'react';
 import type { Rule, RoundTrip, RuleAudit } from '@holdout/engine';
-import { Button, ButtonLink, Card, CardBody, CardHeader, Icon, RuleCard, Skeleton, StateBlock, tagPropsForKind } from '@/components/ui';
+import { Button, ButtonLink } from '@/components/ui/button';
+import { Card, CardBody, CardHeader } from '@/components/ui/card';
+import { Icon } from '@/components/ui/icon';
+import { RuleCard } from '@/components/ui/rule-card';
+import { Skeleton } from '@/components/ui/skeleton';
+import { StateBlock } from '@/components/ui/state-block';
+import { tagPropsForKind } from '@/components/ui/tag';
 import { DeskGate, type ReadyDesk } from '@/components/desk/gate';
 import { DeskSummary } from '@/components/desk/desk-summary';
 import { SectionCard } from '@/components/desk/section-card';

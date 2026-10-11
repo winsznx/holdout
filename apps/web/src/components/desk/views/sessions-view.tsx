@@ -2,7 +2,10 @@
 
 import { Banknote, CalendarClock, Clock, Layers } from 'lucide-react';
 import { num } from '@holdout/engine';
-import { Bar, DataTable, Stat, StateBlock, type BarItem } from '@/components/ui';
+import { Bar, type BarItem } from '@/components/ui/charts';
+import { DataTable } from '@/components/ui/data-table';
+import { Stat } from '@/components/ui/stat';
+import { StateBlock } from '@/components/ui/state-block';
 import { DeskGate, type ReadyDesk } from '@/components/desk/gate';
 import { DeskSummary } from '@/components/desk/desk-summary';
 import { NotInData } from '@/components/desk/not-in-data';

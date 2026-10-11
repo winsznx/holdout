@@ -1,6 +1,9 @@
 import Link from 'next/link';
 import { renderRule } from '@holdout/engine';
-import { DataTable, RuleCard, StateBlock, tagPropsForKind, type Column } from '@/components/ui';
+import { DataTable, type Column } from '@/components/ui/data-table';
+import { RuleCard } from '@/components/ui/rule-card';
+import { StateBlock } from '@/components/ui/state-block';
+import { tagPropsForKind } from '@/components/ui/tag';
 import { formatCount, formatPercent, formatSignedUsdt, shortHash } from '@/lib/format';
 import type { TraderResult } from '@/lib/evidence-data';
 import { KindTag, SampleNotice, VerdictLabel } from './common';

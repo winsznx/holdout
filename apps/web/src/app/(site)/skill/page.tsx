@@ -1,6 +1,8 @@
 import { Ban, BookOpenText, FileJson, FileSearch, FileText, Hammer, Plug, ScanSearch, TriangleAlert, Wrench, type LucideIcon } from 'lucide-react';
 import type { Metadata } from 'next';
-import { CodeBlock, Container, Icon, IconBox, PageHeading } from '@/components/ui';
+import { CodeBlock } from '@/components/ui/code-block';
+import { Container, PageHeading } from '@/components/ui/section';
+import { Icon, IconBox } from '@/components/ui/icon';
 
 export const metadata: Metadata = { title: 'Skill' };
 
