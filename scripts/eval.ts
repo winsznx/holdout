@@ -62,6 +62,7 @@ function testStageRun(): void {
   mkdirSync(dir, { recursive: true });
   const dataHashes: Record<string, string> = {};
   for (const f of readdirSync('evidence/raw/histories').filter((n) => n.endsWith('.json'))) dataHashes[`histories/${f}`] = sha256File(`evidence/raw/histories/${f}`);
+  for (const f of readdirSync('evidence/raw/harness').filter((n) => n.endsWith('.jsonl'))) dataHashes[`harness/${f}`] = sha256File(`evidence/raw/harness/${f}`);
   if (existsSync('evidence/raw/market')) for (const f of readdirSync('evidence/raw/market')) dataHashes[`market/${f}`] = sha256File(`evidence/raw/market/${f}`);
   const manifest = {
     runId,

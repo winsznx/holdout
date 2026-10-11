@@ -8,6 +8,7 @@ import {
   parseBitgetExport,
   rngFromSeed,
   runHoldout,
+  stableStringify,
   sum,
   type Candle,
   type Fill,
@@ -18,6 +19,86 @@ import {
 } from '../../packages/engine/src/index.ts';
 import type { History } from './history.ts';
 import { LEAK_RULE, STATED_RULES, flagged, prepare } from './pipeline.ts';
+import { tagSession } from '../../packages/engine/src/index.ts';
+
+interface BotEvent {
+  ts: number;
+  event: string;
+  reason?: string;
+  net?: number;
+  leverage?: number;
+  orderId?: string;
+  symbol?: string;
+}
+
+function readLog(bot: string): BotEvent[] {
+  const path = `evidence/raw/harness/${bot}.jsonl`;
+  if (!existsSync(path)) return [];
+  return readFileSync(path, 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l) as BotEvent);
+}
+
+function groundTruthOrders(botId: string): Set<string> {
+  const letter = botId.replace('bot-', '');
+  const events = readLog(letter);
+  const out = new Set<string>();
+  const cooldownMs = (STATED_RULES[0] as { minutes: number }).minutes * 60_000;
+  let lastClose: BotEvent | null = null;
+  for (const e of events) {
+    if (e.event === 'close') lastClose = e;
+    if (e.event !== 'open' || !e.orderId) continue;
+    if (letter === 'R' && lastClose && (lastClose.net ?? 0) < 0 && e.ts - lastClose.ts < cooldownMs) out.add(e.orderId);
+    if (letter === 'A' && e.reason === 'leak:add_to_loser') out.add(e.orderId);
+    if (letter === 'V' && (e.leverage ?? 0) > 10) out.add(e.orderId);
+    if (letter === 'S') {
+      const session = tagSession(e.ts);
+      if (session === 'overnight' || session === 'weekend') out.add(e.orderId);
+    }
+  }
+  return out;
+}
+
+function auditedOrders(history: History, base: ReturnType<typeof prepare>, audit: RuleAudit): Set<string> {
+  const orderOf = new Map(history.fills.map((f) => [f.execId, f.orderId]));
+  const broken = new Set(audit.brokenTripIds);
+  const out = new Set<string>();
+  for (const t of base.ledger.roundTrips) {
+    if (!broken.has(t.id)) continue;
+    const lots = audit.rule.t === 'no_add_to_loser' ? t.entries.filter((l) => l.addedWhileLosing) : t.entries.slice(0, 1);
+    for (const lot of lots) {
+      const o = orderOf.get(lot.execId);
+      if (o) out.add(o);
+    }
+  }
+  return out;
+}
+
+function p1(histories: History[], market: Record<string, Candle[]>) {
+  return histories
+    .filter((h) => h.meta.kind === 'bot')
+    .map((h) => {
+      const id = h.meta.id;
+      const planted = LEAK_RULE[id] ?? null;
+      const base = prepare(h, market);
+      const truth = groundTruthOrders(id);
+      const plantedRule = STATED_RULES.find((r) => r.t === planted);
+      const audit = plantedRule ? auditRule(id, base.ledger.roundTrips, plantedRule, base.ctx) : null;
+      const found = audit ? auditedOrders(h, base, audit) : new Set<string>();
+      const matched = [...found].filter((o) => truth.has(o)).length;
+      return {
+        bot: id,
+        plantedRule: planted,
+        habitOccurred: truth.size > 0,
+        groundTruthOrders: truth.size,
+        auditFlaggedOrders: found.size,
+        matched,
+        missed: truth.size - matched,
+        extra: found.size - matched,
+        auditStatus: audit?.status ?? null,
+        auditCost: audit?.costDelta ?? null,
+        auditInterval: audit?.interval ? { lo: audit.interval.lo, hi: audit.interval.hi } : null,
+      };
+    });
+}
 
 interface ResultRef {
   id: string;
@@ -25,7 +106,7 @@ interface ResultRef {
   audits: RuleAudit[];
 }
 
-function p1b(results: ResultRef[]) {
+function p1b(results: ResultRef[], occurred: Set<string>) {
   const bots = results.filter((r) => r.id.startsWith('bot-'));
   const matrix = bots.map((r) => ({
     bot: r.id,
@@ -46,7 +127,7 @@ function p1b(results: ResultRef[]) {
   let fn = 0;
   for (const row of matrix) {
     for (const cell of row.cells) {
-      const expected = row.plantedLeak === cell.rule;
+      const expected = row.plantedLeak === cell.rule && occurred.has(row.bot);
       if (cell.flagged && expected) tp += 1;
       if (cell.flagged && !expected) fp += 1;
       if (!cell.flagged && expected) fn += 1;
@@ -55,6 +136,7 @@ function p1b(results: ResultRef[]) {
   return {
     rules: STATED_RULES.map((r) => r.t),
     matrix,
+    habitNeverOccurred: matrix.filter((m) => m.plantedLeak && !occurred.has(m.bot)).map((m) => m.bot),
     audit: { tp, fp, fn, precision: tp + fp === 0 ? null : tp / (tp + fp), recall: tp + fn === 0 ? null : tp / (tp + fn) },
     proposals: {
       targetedOwnLeak: matrix.filter((m) => m.plantedLeak && m.topProposal === m.plantedLeak).length,
@@ -155,7 +237,7 @@ function p6(histories: History[]) {
   const merged = ingest(source.fills, csvFills);
   const api = ledgerFromFills(source.meta.id, source.fills, source.funding);
   const both = ledgerFromFills(source.meta.id, merged.fills, source.funding);
-  const identical = JSON.stringify(api) === JSON.stringify(both);
+  const identical = stableStringify(api) === stableStringify(both);
   return {
     status: identical ? 'pass' : 'fail',
     source: source.meta.id,
@@ -207,9 +289,11 @@ function p9() {
 
 export function campaignExtras(histories: History[], market: Record<string, Candle[]>, results: ResultRef[]) {
   const compilerEval = p9();
+  const p1Rows = p1(histories, market);
   const control = results.find((r) => r.id === 'bot-C');
   return {
-    p1b: p1b(results),
+    p1: p1Rows,
+    p1b: p1b(results, new Set(p1Rows.filter((r) => r.habitOccurred).map((r) => r.bot))),
     p2: control
       ? { traderId: control.id, verdict: control.outcome.verdict, reason: control.outcome.reason, pass: control.outcome.verdict !== 'ADOPT_WORTHY' }
       : { status: 'not_run' },
