@@ -62,7 +62,7 @@ export async function loadDefaultSample(): Promise<DataResult<SampleFile>> {
 }
 
 const EXAMPLE_RULES: Rule[] = [
-  { t: 'cooldown_after_loss', minutes: 5 },
+  { t: 'cooldown_after_loss', minutes: 3 },
   { t: 'no_add_to_loser' },
   { t: 'max_leverage', x: 10 },
   { t: 'daily_loss_limit', usdt: 50 },
