@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "traderId": "bot-V",
+  "label": "Bitget Demo bot V",
+  "createdAt": "2026-10-11T12:48:28.561Z",
+  "rules": [
+    {
+      "rule": {
+        "t": "cooldown_after_loss",
+        "minutes": 3
+      },
+      "status": "stated",
+      "evidence": {
+        "breaks": 0,
+        "costDelta": "0",
+        "intervalLo": null,
+        "intervalHi": null
+      },
+      "id": "r_143a9189d0",
+      "rendered": "After a losing trade, wait 3 minutes before opening another."
+    },
+    {
+      "rule": {
+        "t": "no_add_to_loser"
+      },
+      "status": "stated",
+      "evidence": {
+        "breaks": 0,
+        "costDelta": "0",
+        "intervalLo": null,
+        "intervalHi": null
+      },
+      "id": "r_6773060672",
+      "rendered": "Never add to a position that is losing."
+    },
+    {
+      "rule": {
+        "t": "max_leverage",
+        "x": 10
+      },
+      "status": "stated",
+      "evidence": {
+        "breaks": 0,
+        "costDelta": "0",
+        "intervalLo": null,
+        "intervalHi": null
+      },
+      "id": "r_9601b9e544",
+      "rendered": "Never use more than 10x leverage."
+    },
+    {
+      "rule": {
+        "t": "session_filter",
+        "block": [
+          "overnight",
+          "weekend"
+        ],
+        "products": [
+          "stock_perp"
+        ]
+      },
+      "status": "stated",
+      "evidence": {
+        "breaks": 0,
+        "costDelta": "0",
+        "intervalLo": null,
+        "intervalHi": null
+      },
+      "id": "r_b27417e67d",
+      "rendered": "Do not open stock_perp positions during: overnight, weekend."
+    }
+  ],
+  "buckets": [
+    {
+      "symbol": "SOLUSDT",
+      "product": "perp",
+      "side": "long",
+      "session": "weekend",
+      "leverage": "3-5",
+      "holdsAcrossOpen": false,
+      "n": 60,
+      "winRate": 0,
+      "medianNet": -0.02927598,
+      "totalNet": -1.8473409600000001
+    },
+    {
+      "symbol": "SOLUSDT",
+      "product": "perp",
+      "side": "long",
+      "session": "weekend",
+      "leverage": "unknown",
+      "holdsAcrossOpen": false,
+      "n": 1,
+      "winRate": 0,
+      "medianNet": -0.04641396,
+      "totalNet": -0.04641396
+    },
+    {
+      "symbol": "SOLUSDT",
+      "product": "perp",
+      "side": "short",
+      "session": "weekend",
+      "leverage": "3-5",
+      "holdsAcrossOpen": false,
+      "n": 53,
+      "winRate": 0,
+      "medianNet": -0.0297728,
+      "totalNet": -1.5686729599999993
+    }
+  ],
+  "ledger": {
+    "roundTrips": 114,
+    "reconciled": true,
+    "incomplete": false
+  },
+  "schema": "holdout.rulebook.v1",
+  "sha256": "b636f372c0ae332c17d232377a01eb1c2ef198b8e0801f65e17ad97923b98224"
+}

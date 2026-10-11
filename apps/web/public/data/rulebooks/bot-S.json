@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "traderId": "bot-S",
+  "label": "Bitget Demo bot S",
+  "createdAt": "2026-10-11T12:48:28.561Z",
+  "rules": [
+    {
+      "rule": {
+        "t": "cooldown_after_loss",
+        "minutes": 3
+      },
+      "status": "stated",
+      "evidence": {
+        "breaks": 0,
+        "costDelta": "0",
+        "intervalLo": null,
+        "intervalHi": null
+      },
+      "id": "r_143a9189d0",
+      "rendered": "After a losing trade, wait 3 minutes before opening another."
+    },
+    {
+      "rule": {
+        "t": "no_add_to_loser"
+      },
+      "status": "stated",
+      "evidence": {
+        "breaks": 0,
+        "costDelta": "0",
+        "intervalLo": null,
+        "intervalHi": null
+      },
+      "id": "r_6773060672",
+      "rendered": "Never add to a position that is losing."
+    },
+    {
+      "rule": {
+        "t": "max_leverage",
+        "x": 10
+      },
+      "status": "stated",
+      "evidence": {
+        "breaks": 0,
+        "costDelta": "0",
+        "intervalLo": null,
+        "intervalHi": null
+      },
+      "id": "r_9601b9e544",
+      "rendered": "Never use more than 10x leverage."
+    },
+    {
+      "rule": {
+        "t": "session_filter",
+        "block": [
+          "overnight",
+          "weekend"
+        ],
+        "products": [
+          "stock_perp"
+        ]
+      },
+      "status": "stated",
+      "evidence": {
+        "breaks": 94,
+        "costDelta": "3.0071916",
+        "intervalLo": 3.0071915999999934,
+        "intervalHi": 3.0071915999999934
+      },
+      "id": "r_b27417e67d",
+      "rendered": "Do not open stock_perp positions during: overnight, weekend."
+    }
+  ],
+  "buckets": [
+    {
+      "symbol": "NVDAUSDT",
+      "product": "stock_perp",
+      "side": "long",
+      "session": "weekend",
+      "leverage": "3-5",
+      "holdsAcrossOpen": false,
+      "n": 47,
+      "winRate": 0,
+      "medianNet": -0.0319914,
+      "totalNet": -1.5035957999999985
+    },
+    {
+      "symbol": "NVDAUSDT",
+      "product": "stock_perp",
+      "side": "short",
+      "session": "weekend",
+      "leverage": "3-5",
+      "holdsAcrossOpen": false,
+      "n": 46,
+      "winRate": 0,
+      "medianNet": -0.0319914,
+      "totalNet": -1.4716043999999986
+    },
+    {
+      "symbol": "NVDAUSDT",
+      "product": "stock_perp",
+      "side": "short",
+      "session": "weekend",
+      "leverage": "unknown",
+      "holdsAcrossOpen": false,
+      "n": 1,
+      "winRate": 0,
+      "medianNet": -0.0319914,
+      "totalNet": -0.0319914
+    }
+  ],
+  "ledger": {
+    "roundTrips": 94,
+    "reconciled": true,
+    "incomplete": false
+  },
+  "schema": "holdout.rulebook.v1",
+  "sha256": "02071e45ab6cc97fa81cf2d12eafd3aa2ad3bf7bb95d1b068f4476e30dcc1bd4"
+}

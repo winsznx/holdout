@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "traderId": "strategy-paper",
+  "label": "Strategy sample: a friend's agent, paper ledger",
+  "createdAt": "2026-10-11T12:48:28.561Z",
+  "rules": [
+    {
+      "rule": {
+        "t": "cooldown_after_loss",
+        "minutes": 3
+      },
+      "status": "stated",
+      "evidence": {
+        "breaks": 0,
+        "costDelta": "0",
+        "intervalLo": null,
+        "intervalHi": null
+      },
+      "id": "r_143a9189d0",
+      "rendered": "After a losing trade, wait 3 minutes before opening another."
+    },
+    {
+      "rule": {
+        "t": "no_add_to_loser"
+      },
+      "status": "stated",
+      "evidence": {
+        "breaks": 0,
+        "costDelta": "0",
+        "intervalLo": null,
+        "intervalHi": null
+      },
+      "id": "r_6773060672",
+      "rendered": "Never add to a position that is losing."
+    },
+    {
+      "rule": {
+        "t": "max_leverage",
+        "x": 10
+      },
+      "status": "stated",
+      "evidence": {
+        "breaks": 0,
+        "costDelta": "0",
+        "intervalLo": null,
+        "intervalHi": null
+      },
+      "id": "r_9601b9e544",
+      "rendered": "Never use more than 10x leverage."
+    },
+    {
+      "rule": {
+        "t": "session_filter",
+        "block": [
+          "overnight",
+          "weekend"
+        ],
+        "products": [
+          "stock_perp"
+        ]
+      },
+      "status": "stated",
+      "evidence": {
+        "breaks": 0,
+        "costDelta": "0",
+        "intervalLo": null,
+        "intervalHi": null
+      },
+      "id": "r_b27417e67d",
+      "rendered": "Do not open stock_perp positions during: overnight, weekend."
+    }
+  ],
+  "buckets": [
+    {
+      "symbol": "rAAPLUSDT",
+      "product": "rtoken",
+      "side": "long",
+      "session": "after_hours",
+      "leverage": "unknown",
+      "holdsAcrossOpen": false,
+      "n": 2,
+      "winRate": 1,
+      "medianNet": 85.82,
+      "totalNet": 171.64
+    },
+    {
+      "symbol": "rAAPLUSDT",
+      "product": "rtoken",
+      "side": "long",
+      "session": "holiday",
+      "leverage": "unknown",
+      "holdsAcrossOpen": false,
+      "n": 1,
+      "winRate": 1,
+      "medianNet": 94.75,
+      "totalNet": 94.75
+    },
+    {
+      "symbol": "rAAPLUSDT",
+      "product": "rtoken",
+      "side": "long",
+      "session": "pre_market",
+      "leverage": "unknown",
+      "holdsAcrossOpen": false,
+      "n": 4,
+      "winRate": 1,
+      "medianNet": 62.879999999999995,
+      "totalNet": 244.72000000000003
+    },
+    {
+      "symbol": "rAAPLUSDT",
+      "product": "rtoken",
+      "side": "long",
+      "session": "weekend",
+      "leverage": "unknown",
+      "holdsAcrossOpen": false,
+      "n": 2,
+      "winRate": 1,
+      "medianNet": 99.98,
+      "totalNet": 199.96
+    },
+    {
+      "symbol": "rNVDAUSDT",
+      "product": "rtoken",
+      "side": "long",
+      "session": "after_hours",
+      "leverage": "unknown",
+      "holdsAcrossOpen": false,
+      "n": 2,
+      "winRate": 1,
+      "medianNet": 18.93,
+      "totalNet": 37.86
+    },
+    {
+      "symbol": "rNVDAUSDT",
+      "product": "rtoken",
+      "side": "long",
+      "session": "holiday",
+      "leverage": "unknown",
+      "holdsAcrossOpen": false,
+      "n": 1,
+      "winRate": 1,
+      "medianNet": 80.55,
+      "totalNet": 80.55
+    },
+    {
+      "symbol": "rNVDAUSDT",
+      "product": "rtoken",
+      "side": "long",
+      "session": "pre_market",
+      "leverage": "unknown",
+      "holdsAcrossOpen": false,
+      "n": 5,
+      "winRate": 1,
+      "medianNet": 54.47,
+      "totalNet": 360.28
+    },
+    {
+      "symbol": "rNVDAUSDT",
+      "product": "rtoken",
+      "side": "long",
+      "session": "weekend",
+      "leverage": "unknown",
+      "holdsAcrossOpen": false,
+      "n": 2,
+      "winRate": 1,
+      "medianNet": 26.63,
+      "totalNet": 53.26
+    },
+    {
+      "symbol": "rTSLAUSDT",
+      "product": "rtoken",
+      "side": "long",
+      "session": "after_hours",
+      "leverage": "unknown",
+      "holdsAcrossOpen": false,
+      "n": 5,
+      "winRate": 1,
+      "medianNet": 57.85,
+      "totalNet": 274.40000000000003
+    },
+    {
+      "symbol": "rTSLAUSDT",
+      "product": "rtoken",
+      "side": "long",
+      "session": "pre_market",
+      "leverage": "unknown",
+      "holdsAcrossOpen": false,
+      "n": 3,
+      "winRate": 1,
+      "medianNet": 89.05,
+      "totalNet": 230.95000000000002
+    },
+    {
+      "symbol": "rTSLAUSDT",
+      "product": "rtoken",
+      "side": "long",
+      "session": "weekend",
+      "leverage": "unknown",
+      "holdsAcrossOpen": false,
+      "n": 2,
+      "winRate": 1,
+      "medianNet": 23.405,
+      "totalNet": 46.81
+    }
+  ],
+  "ledger": {
+    "roundTrips": 29,
+    "reconciled": true,
+    "incomplete": false
+  },
+  "schema": "holdout.rulebook.v1",
+  "sha256": "f188799c8e5b34e1fc317800c1d195a725ddd6fe3f212e7f45029171c79df24f"
+}

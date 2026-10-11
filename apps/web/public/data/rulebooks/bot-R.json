@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "traderId": "bot-R",
+  "label": "Bitget Demo bot R",
+  "createdAt": "2026-10-11T12:48:28.561Z",
+  "rules": [
+    {
+      "rule": {
+        "t": "cooldown_after_loss",
+        "minutes": 3
+      },
+      "status": "stated",
+      "evidence": {
+        "breaks": 115,
+        "costDelta": "3.78924593325",
+        "intervalLo": 3.513382715499999,
+        "intervalHi": 4.0711934936625
+      },
+      "id": "r_143a9189d0",
+      "rendered": "After a losing trade, wait 3 minutes before opening another."
+    },
+    {
+      "rule": {
+        "t": "no_add_to_loser"
+      },
+      "status": "stated",
+      "evidence": {
+        "breaks": 0,
+        "costDelta": "0",
+        "intervalLo": null,
+        "intervalHi": null
+      },
+      "id": "r_6773060672",
+      "rendered": "Never add to a position that is losing."
+    },
+    {
+      "rule": {
+        "t": "max_leverage",
+        "x": 10
+      },
+      "status": "stated",
+      "evidence": {
+        "breaks": 0,
+        "costDelta": "0",
+        "intervalLo": null,
+        "intervalHi": null
+      },
+      "id": "r_9601b9e544",
+      "rendered": "Never use more than 10x leverage."
+    },
+    {
+      "rule": {
+        "t": "session_filter",
+        "block": [
+          "overnight",
+          "weekend"
+        ],
+        "products": [
+          "stock_perp"
+        ]
+      },
+      "status": "stated",
+      "evidence": {
+        "breaks": 0,
+        "costDelta": "0",
+        "intervalLo": null,
+        "intervalHi": null
+      },
+      "id": "r_b27417e67d",
+      "rendered": "Do not open stock_perp positions during: overnight, weekend."
+    }
+  ],
+  "buckets": [
+    {
+      "symbol": "BTCUSDT",
+      "product": "perp",
+      "side": "long",
+      "session": "weekend",
+      "leverage": "3-5",
+      "holdsAcrossOpen": false,
+      "n": 84,
+      "winRate": 0,
+      "medianNet": -0.020964245,
+      "totalNet": -2.3112390799999996
+    },
+    {
+      "symbol": "BTCUSDT",
+      "product": "perp",
+      "side": "long",
+      "session": "weekend",
+      "leverage": "unknown",
+      "holdsAcrossOpen": false,
+      "n": 1,
+      "winRate": 0,
+      "medianNet": -0.02574015,
+      "totalNet": -0.02574015
+    },
+    {
+      "symbol": "BTCUSDT",
+      "product": "perp",
+      "side": "short",
+      "session": "weekend",
+      "leverage": "3-5",
+      "holdsAcrossOpen": false,
+      "n": 85,
+      "winRate": 0,
+      "medianNet": -0.02207694,
+      "totalNet": -2.5835472432500004
+    },
+    {
+      "symbol": "BTCUSDT",
+      "product": "perp",
+      "side": "short",
+      "session": "weekend",
+      "leverage": "unknown",
+      "holdsAcrossOpen": false,
+      "n": 1,
+      "winRate": 0,
+      "medianNet": -0.02389905,
+      "totalNet": -0.02389905
+    }
+  ],
+  "ledger": {
+    "roundTrips": 171,
+    "reconciled": true,
+    "incomplete": false
+  },
+  "schema": "holdout.rulebook.v1",
+  "sha256": "14b93beb808c9f74b3b1404f033bf10a33c7698a2a58250c37edeebd441c4c27"
+}
