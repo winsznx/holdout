@@ -1,4 +1,6 @@
+import { Code, ExternalLink, FileText, Lock } from 'lucide-react';
 import Link from 'next/link';
+import { Icon } from './icon';
 import { Container } from './section';
 import { Wordmark } from './logo';
 import { GITHUB_URL, X_URL } from './header';
@@ -12,16 +14,20 @@ export function Footer() {
           <p className="max-w-[34ch] text-[13px] text-muted">Holdout never places orders. You make every trade decision.</p>
         </div>
         <nav aria-label="Footer" className="grid grid-cols-2 gap-x-10 gap-y-2 text-[14px]">
-          <a href={GITHUB_URL} className="hover:underline underline-offset-4">
+          <a href={GITHUB_URL} className="inline-flex items-center gap-2 text-muted hover:text-ink">
+            <Icon icon={Code} />
             GitHub
           </a>
-          <Link href="/methodology" className="hover:underline underline-offset-4">
+          <Link href="/methodology" className="inline-flex items-center gap-2 text-muted hover:text-ink">
+            <Icon icon={FileText} />
             Methodology
           </Link>
-          <Link href="/privacy" className="hover:underline underline-offset-4">
+          <Link href="/privacy" className="inline-flex items-center gap-2 text-muted hover:text-ink">
+            <Icon icon={Lock} />
             Privacy
           </Link>
-          <a href={X_URL} className="hover:underline underline-offset-4">
+          <a href={X_URL} className="inline-flex items-center gap-2 text-muted hover:text-ink">
+            <Icon icon={ExternalLink} />
             X
           </a>
         </nav>

@@ -1,7 +1,9 @@
+import { Ban, ChevronRight, CircleCheck, Gauge, Minus, type LucideIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { cn } from '@/lib/cn';
 import { formatCount, formatSignedUsdt, pnlTone } from '@/lib/format';
 import { Card } from './card';
+import { Icon } from './icon';
 import { Tag, type TagProps } from './tag';
 
 export type RuleCardStatus = 'priced' | 'not_enough_breaks' | 'no_breaks' | 'untestable';
@@ -11,6 +13,13 @@ const statusText: Record<RuleCardStatus, string> = {
   not_enough_breaks: 'Not enough breaks to price',
   no_breaks: 'Never broken',
   untestable: 'Untestable',
+};
+
+const statusGlyph: Record<RuleCardStatus, LucideIcon> = {
+  priced: Gauge,
+  not_enough_breaks: Minus,
+  no_breaks: CircleCheck,
+  untestable: Ban,
 };
 
 export interface RuleCardProps {
@@ -35,7 +44,10 @@ export function RuleCard(props: RuleCardProps) {
   return (
     <Card className={cn('overflow-hidden', className)}>
       <div className="flex items-center justify-between gap-2 border-b border-line px-4 py-2.5">
-        <span className="label">{ruleType}</span>
+        <span className="label inline-flex items-center gap-1.5">
+          <Icon icon={statusGlyph[status]} className={status === 'no_breaks' ? 'text-gain' : undefined} />
+          {ruleType}
+        </span>
         <Tag {...source} />
       </div>
       <div className="px-4 pt-4 pb-3">
@@ -65,13 +77,17 @@ export function RuleCard(props: RuleCardProps) {
               </dd>
             </>
           ) : (
-            <dd className="mt-1 text-[14px] text-muted">{status === 'untestable' ? (untestableReason ?? statusText[status]) : statusText[status]}</dd>
+            <dd className="mt-1 flex items-start gap-1.5 text-[14px] text-muted">
+              <Icon icon={statusGlyph[status]} className="mt-0.5" />
+              {status === 'untestable' ? (untestableReason ?? statusText[status]) : statusText[status]}
+            </dd>
           )}
         </div>
       </dl>
       {drilldown ? (
         <details className="group px-4 py-3">
-          <summary className="label cursor-pointer list-none select-none hover:text-ink">
+          <summary className="label flex cursor-pointer list-none items-center gap-1.5 select-none hover:text-ink">
+            <Icon icon={ChevronRight} className="transition-transform duration-150 group-open:rotate-90" />
             <span className="group-open:hidden">Show broken trades</span>
             <span className="hidden group-open:inline">Hide broken trades</span>
           </summary>

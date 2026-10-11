@@ -1,5 +1,7 @@
+import { Bot, Crosshair, Eye, FlaskConical, Sigma, User, type LucideIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { cn } from '@/lib/cn';
+import { Icon } from './icon';
 
 export const STRATEGY_SAMPLE_NOTICE = "Strategy sample: a friend's trading agent (backtest and paper ledger), not live fills.";
 
@@ -22,6 +24,23 @@ function textFor(props: TagProps): string {
   return labels[props.kind];
 }
 
+function iconFor(props: TagProps): LucideIcon {
+  switch (props.kind) {
+    case 'observed':
+      return Eye;
+    case 'target':
+      return Crosshair;
+    case 'estimated':
+      return Sigma;
+    case 'bot':
+      return Bot;
+    case 'human':
+      return User;
+    case 'strategy-sample':
+      return FlaskConical;
+  }
+}
+
 function styleFor(kind: TagProps['kind']): string {
   switch (kind) {
     case 'observed':
@@ -40,11 +59,12 @@ export function Tag(props: TagProps) {
     <span
       title={props.kind === 'strategy-sample' ? STRATEGY_SAMPLE_NOTICE : undefined}
       className={cn(
-        'inline-flex items-center rounded-tag border px-1.5 py-0.5 font-mono text-[11px] leading-none whitespace-nowrap',
+        'inline-flex items-center gap-1 rounded-tag border px-1.5 py-0.5 font-mono text-[11px] leading-none whitespace-nowrap',
         styleFor(props.kind),
         props.className,
       )}
     >
+      <Icon icon={iconFor(props)} size={12} />
       {textFor(props)}
     </span>
   );

@@ -14,3 +14,6 @@ export { Header, GITHUB_URL, X_URL } from './header';
 export { Footer } from './footer';
 export { ThemeToggle } from './theme-toggle';
 export { CodeBlock } from './code-block';
+export { Icon, IconBox, ICON_STROKE } from './icon';
+export { CopyButton } from './copy-button';
+export { VerdictChip, verdictText, type Verdict } from './verdict-chip';

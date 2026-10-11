@@ -24,7 +24,7 @@ export function DataTable<Row>({
 }) {
   if (rows.length === 0) return <>{emptyState}</>;
   return (
-    <div className="overflow-x-auto rounded-card border border-line bg-surface">
+    <div className="sticky-table max-h-[34rem] overflow-auto rounded-card border border-line bg-surface">
       <table className="w-full min-w-max border-collapse text-[13px]">
         <caption className="sr-only">{caption}</caption>
         <thead>
@@ -38,7 +38,7 @@ export function DataTable<Row>({
         </thead>
         <tbody>
           {rows.map((row) => (
-            <tr key={rowKey(row)} className="border-b border-line last:border-b-0 hover:bg-paper">
+            <tr key={rowKey(row)} className="border-b border-line last:border-b-0 hover:bg-paper/70">
               {columns.map((c) => (
                 <td key={c.key} className={cn('px-3 py-2', c.align === 'right' && 'text-right', c.mono && 'num')}>
                   {c.cell(row)}

@@ -1,5 +1,7 @@
+import { CircleAlert, CircleCheck, CircleDashed, Inbox, LoaderCircle, type LucideIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { cn } from '@/lib/cn';
+import { Icon } from './icon';
 import { Skeleton } from './skeleton';
 
 export const BITGET_SURFACES = [
@@ -45,6 +47,22 @@ const kicker: Record<StateBlockProps['variant'], string> = {
   error: 'Error',
 };
 
+const glyph: Record<StateBlockProps['variant'], LucideIcon> = {
+  empty: Inbox,
+  loading: LoaderCircle,
+  partial: CircleDashed,
+  success: CircleCheck,
+  error: CircleAlert,
+};
+
+const glyphTone: Record<StateBlockProps['variant'], string> = {
+  empty: 'text-muted',
+  loading: 'text-muted',
+  partial: 'text-signal',
+  success: 'text-gain',
+  error: 'text-loss',
+};
+
 export function StateBlock(props: StateBlockProps) {
   const { variant, title, body, action, className } = props;
   return (
@@ -53,20 +71,26 @@ export function StateBlock(props: StateBlockProps) {
       aria-busy={variant === 'loading' || undefined}
       className={cn('rounded-card border border-dashed bg-surface px-4 py-6 sm:px-6', marker[variant], className)}
     >
-      <div className="label flex items-center gap-2">
-        <span className={cn('inline-block h-2 w-2 rounded-[2px]', variant === 'error' ? 'bg-loss' : variant === 'success' ? 'bg-gain' : variant === 'partial' ? 'bg-signal' : 'bg-line')} />
-        {kicker[variant]}
-        {props.variant === 'error' ? <span className="text-ink normal-case tracking-normal">{props.surface}</span> : null}
-      </div>
-      <p className="mt-2 text-[17px] leading-snug font-medium">{title}</p>
-      {body ? <div className="mt-1.5 max-w-[62ch] text-[14px] text-muted">{body}</div> : null}
-      {variant === 'loading' ? (
-        <div className="mt-4 space-y-2">
-          <Skeleton className="w-2/3" />
-          <Skeleton className="w-1/2" />
+      <div className="flex items-start gap-3">
+        <span className={cn('mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-control border border-line bg-paper', glyphTone[variant])}>
+          <Icon icon={glyph[variant]} size={18} className={variant === 'loading' ? 'motion-safe:animate-spin' : undefined} />
+        </span>
+        <div className="min-w-0 flex-1">
+          <div className="label flex flex-wrap items-center gap-x-2">
+            {kicker[variant]}
+            {props.variant === 'error' ? <span className="text-ink normal-case tracking-normal">{props.surface}</span> : null}
+          </div>
+          <p className="mt-1 text-[17px] leading-snug font-medium">{title}</p>
+          {body ? <div className="mt-1.5 max-w-[62ch] text-[14px] text-muted">{body}</div> : null}
+          {variant === 'loading' ? (
+            <div className="mt-4 space-y-2">
+              <Skeleton className="w-2/3" />
+              <Skeleton className="w-1/2" />
+            </div>
+          ) : null}
+          {action ? <div className="mt-4 flex flex-wrap gap-2">{action}</div> : null}
         </div>
-      ) : null}
-      {action ? <div className="mt-4 flex flex-wrap gap-2">{action}</div> : null}
+      </div>
     </div>
   );
 }
