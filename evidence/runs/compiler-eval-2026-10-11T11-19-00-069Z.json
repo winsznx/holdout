@@ -1,0 +1,508 @@
+{
+  "provider": "api.openai.com",
+  "model": "gpt-5.5",
+  "ranAt": "2026-10-11T11:19:00.069Z",
+  "total": 37,
+  "correct": 37,
+  "accuracy": 1,
+  "refusalsExpected": 13,
+  "refusalsCorrect": 13,
+  "rulesExpected": 24,
+  "rulesCorrect": 24,
+  "results": [
+    {
+      "id": "1",
+      "text": "Trade only 1 to 3 percent risk per trade.",
+      "author": "builder (Tim), not an independent volunteer",
+      "expected": "refuse",
+      "actual": "refuse",
+      "correct": true
+    },
+    {
+      "id": "2",
+      "text": "Max 2 losses a day.",
+      "author": "builder (Tim), not an independent volunteer",
+      "expected": "refuse",
+      "actual": "refuse",
+      "correct": true
+    },
+    {
+      "id": "3",
+      "text": "Don't increase TP or SL while a trade is running.",
+      "author": "builder (Tim), not an independent volunteer",
+      "expected": "refuse",
+      "actual": "refuse",
+      "correct": true
+    },
+    {
+      "id": "4",
+      "text": "Don't over leverage because you think the stop loss is tight and price won't get there.",
+      "author": "builder (Tim), not an independent volunteer",
+      "expected": "refuse",
+      "actual": "refuse",
+      "correct": true
+    },
+    {
+      "id": "5",
+      "text": "Don't go all in and hope it goes well.",
+      "author": "builder (Tim), not an independent volunteer",
+      "expected": "refuse",
+      "actual": "refuse",
+      "correct": true
+    },
+    {
+      "id": "6",
+      "text": "After a good trade, follow the same risk if you want to enter another trade and analyze with the same rules.",
+      "author": "builder (Tim), not an independent volunteer",
+      "expected": "refuse",
+      "actual": "refuse",
+      "correct": true
+    },
+    {
+      "id": "7",
+      "text": "Don't double down on risk after a win or a loss, follow a risk discipline.",
+      "author": "builder (Tim), not an independent volunteer",
+      "expected": "refuse",
+      "actual": "refuse",
+      "correct": true
+    },
+    {
+      "id": "8",
+      "text": "Wait 30 minutes after a losing trade before opening another.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "cooldown_after_loss",
+        "minutes": 30
+      },
+      "actual": {
+        "t": "cooldown_after_loss",
+        "minutes": 30
+      },
+      "correct": true
+    },
+    {
+      "id": "9",
+      "text": "After a loss I take an hour off.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "cooldown_after_loss",
+        "minutes": 60
+      },
+      "actual": {
+        "t": "cooldown_after_loss",
+        "minutes": 60
+      },
+      "correct": true
+    },
+    {
+      "id": "10",
+      "text": "Give it 15 minutes after any loss.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "cooldown_after_loss",
+        "minutes": 15
+      },
+      "actual": {
+        "t": "cooldown_after_loss",
+        "minutes": 15
+      },
+      "correct": true
+    },
+    {
+      "id": "11",
+      "text": "Never use more than 5x leverage.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "max_leverage",
+        "x": 5
+      },
+      "actual": {
+        "t": "max_leverage",
+        "x": 5
+      },
+      "correct": true
+    },
+    {
+      "id": "12",
+      "text": "Keep my leverage at 10x or lower.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "max_leverage",
+        "x": 10
+      },
+      "actual": {
+        "t": "max_leverage",
+        "x": 10
+      },
+      "correct": true
+    },
+    {
+      "id": "13",
+      "text": "No leverage above 3x on anything.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "max_leverage",
+        "x": 3
+      },
+      "actual": {
+        "t": "max_leverage",
+        "x": 3
+      },
+      "correct": true
+    },
+    {
+      "id": "14",
+      "text": "Don't add to a position that's already losing.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "no_add_to_loser"
+      },
+      "actual": {
+        "t": "no_add_to_loser"
+      },
+      "correct": true
+    },
+    {
+      "id": "15",
+      "text": "Never average down.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "no_add_to_loser"
+      },
+      "actual": {
+        "t": "no_add_to_loser"
+      },
+      "correct": true
+    },
+    {
+      "id": "16",
+      "text": "Cut the trade if it goes 2 percent against me.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "hard_stop",
+        "pct": 2
+      },
+      "actual": {
+        "t": "hard_stop",
+        "pct": 2
+      },
+      "correct": true
+    },
+    {
+      "id": "17",
+      "text": "Always use a 1% stop.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "hard_stop",
+        "pct": 1
+      },
+      "actual": {
+        "t": "hard_stop",
+        "pct": 1
+      },
+      "correct": true
+    },
+    {
+      "id": "18",
+      "text": "Exit when price moves 3% against my entry.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "hard_stop",
+        "pct": 3
+      },
+      "actual": {
+        "t": "hard_stop",
+        "pct": 3
+      },
+      "correct": true
+    },
+    {
+      "id": "19",
+      "text": "Stop trading for the day once I'm down 50 USDT.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "daily_loss_limit",
+        "usdt": 50
+      },
+      "actual": {
+        "t": "daily_loss_limit",
+        "usdt": 50
+      },
+      "correct": true
+    },
+    {
+      "id": "20",
+      "text": "If I lose 100 dollars in a day I'm done.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "daily_loss_limit",
+        "usdt": 100
+      },
+      "actual": {
+        "t": "daily_loss_limit",
+        "usdt": 100
+      },
+      "correct": true
+    },
+    {
+      "id": "21",
+      "text": "Daily loss cap of 25 USDT.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "daily_loss_limit",
+        "usdt": 25
+      },
+      "actual": {
+        "t": "daily_loss_limit",
+        "usdt": 25
+      },
+      "correct": true
+    },
+    {
+      "id": "22",
+      "text": "No stock perp trades overnight.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "session_filter",
+        "block": [
+          "overnight"
+        ],
+        "products": [
+          "stock_perp"
+        ]
+      },
+      "actual": {
+        "t": "session_filter",
+        "block": [
+          "overnight"
+        ],
+        "products": [
+          "stock_perp"
+        ]
+      },
+      "correct": true
+    },
+    {
+      "id": "23",
+      "text": "Don't open any stock perp over the weekend.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "session_filter",
+        "block": [
+          "weekend"
+        ],
+        "products": [
+          "stock_perp"
+        ]
+      },
+      "actual": {
+        "t": "session_filter",
+        "block": [
+          "weekend"
+        ],
+        "products": [
+          "stock_perp"
+        ]
+      },
+      "correct": true
+    },
+    {
+      "id": "24",
+      "text": "Stay out of rTokens in pre-market and after hours.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "session_filter",
+        "block": [
+          "pre_market",
+          "after_hours"
+        ],
+        "products": [
+          "rtoken"
+        ]
+      },
+      "actual": {
+        "t": "session_filter",
+        "block": [
+          "pre_market",
+          "after_hours"
+        ],
+        "products": [
+          "rtoken"
+        ]
+      },
+      "correct": true
+    },
+    {
+      "id": "25",
+      "text": "No stock perps on Friday near the close.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "session_filter",
+        "block": [
+          "friday_close"
+        ],
+        "products": [
+          "stock_perp"
+        ]
+      },
+      "actual": {
+        "t": "session_filter",
+        "block": [
+          "friday_close"
+        ],
+        "products": [
+          "stock_perp"
+        ]
+      },
+      "correct": true
+    },
+    {
+      "id": "26",
+      "text": "Don't open stock perps overnight or on weekends.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "session_filter",
+        "block": [
+          "overnight",
+          "weekend"
+        ],
+        "products": [
+          "stock_perp"
+        ]
+      },
+      "actual": {
+        "t": "session_filter",
+        "block": [
+          "overnight",
+          "weekend"
+        ],
+        "products": [
+          "stock_perp"
+        ]
+      },
+      "correct": true
+    },
+    {
+      "id": "27",
+      "text": "Don't open a position within 24 hours before earnings.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "earnings_blackout",
+        "hoursBefore": 24
+      },
+      "actual": {
+        "t": "earnings_blackout",
+        "hoursBefore": 24
+      },
+      "correct": true
+    },
+    {
+      "id": "28",
+      "text": "Stay out of a stock 2 days before it reports.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "earnings_blackout",
+        "hoursBefore": 48
+      },
+      "actual": {
+        "t": "earnings_blackout",
+        "hoursBefore": 48
+      },
+      "correct": true
+    },
+    {
+      "id": "29",
+      "text": "Nothing within 12 hours of an earnings release.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "earnings_blackout",
+        "hoursBefore": 12
+      },
+      "actual": {
+        "t": "earnings_blackout",
+        "hoursBefore": 12
+      },
+      "correct": true
+    },
+    {
+      "id": "30",
+      "text": "Hold weekend stock exposure as the rToken spot instead of the stock perp.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "product_switch_weekend",
+        "from": "stock_perp",
+        "to": "rtoken"
+      },
+      "actual": {
+        "t": "product_switch_weekend",
+        "from": "stock_perp",
+        "to": "rtoken"
+      },
+      "correct": true
+    },
+    {
+      "id": "31",
+      "text": "Over the weekend I want the rToken, not the perp.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": {
+        "t": "product_switch_weekend",
+        "from": "stock_perp",
+        "to": "rtoken"
+      },
+      "actual": {
+        "t": "product_switch_weekend",
+        "from": "stock_perp",
+        "to": "rtoken"
+      },
+      "correct": true
+    },
+    {
+      "id": "32",
+      "text": "Only trade when I feel confident.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": "refuse",
+      "actual": "refuse",
+      "correct": true
+    },
+    {
+      "id": "33",
+      "text": "Risk 1 to 3 percent per trade.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": "refuse",
+      "actual": "refuse",
+      "correct": true
+    },
+    {
+      "id": "34",
+      "text": "No more than 2 losing trades a day.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": "refuse",
+      "actual": "refuse",
+      "correct": true
+    },
+    {
+      "id": "35",
+      "text": "Don't move my stop loss once the trade is live.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": "refuse",
+      "actual": "refuse",
+      "correct": true
+    },
+    {
+      "id": "36",
+      "text": "Be patient and wait for the best setups.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": "refuse",
+      "actual": "refuse",
+      "correct": true
+    },
+    {
+      "id": "37",
+      "text": "Don't revenge trade.",
+      "author": "Claude, at the builder's request (not an independent volunteer)",
+      "expected": "refuse",
+      "actual": "refuse",
+      "correct": true
+    }
+  ]
+}

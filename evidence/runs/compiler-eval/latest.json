@@ -1,18 +1,22 @@
 {
   "status": "reported",
-  "n": 7,
-  "correct": 7,
+  "n": 37,
+  "correct": 37,
   "accuracy": 1,
-  "refusalsExpected": 7,
-  "refusalsCorrect": 7,
-  "rulesExpected": 0,
-  "rulesCorrect": 0,
+  "refusalsExpected": 13,
+  "refusalsCorrect": 13,
+  "rulesExpected": 24,
+  "rulesCorrect": 24,
   "independentAuthors": 0,
+  "authors": {
+    "builder (Tim), not an independent volunteer": 7,
+    "Claude, at the builder's request (not an independent volunteer)": 30
+  },
   "models": {
     "provider": "api.openai.com",
     "model": "gpt-5.5"
   },
-  "ranAt": "2026-10-11T11:09:20.378Z",
-  "caveat": "All 7 rules were written by the builder, not independent volunteers, and every expected answer is a refusal, so this shows refusals are recognized but says nothing yet about correct compilation of testable rules. The 8 templates compiled correctly in a separate live check (8 of 8) that is not part of this evaluation.",
-  "source": "evidence/runs/compiler-eval-2026-10-11T11-09-20-377Z.json"
+  "ranAt": "2026-10-11T11:19:00.069Z",
+  "caveat": "No independent volunteers. 7 rules by builder (Tim), not an independent volunteer; 30 rules by Claude, at the builder's request (not an independent volunteer). Labels were committed before the run. This checks the compiler on the labelers own wording, so read the accuracy as a floor check, not as how people actually write.",
+  "source": "evidence/runs/compiler-eval-2026-10-11T11-19-00-069Z.json"
 }

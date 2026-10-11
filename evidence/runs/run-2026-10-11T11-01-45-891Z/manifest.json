@@ -1,0 +1,29 @@
+{
+  "runId": "run-2026-10-11T11-01-45-891Z",
+  "commit": "3a362fb3d1abf3e4ab1e13126733dc56dc1f7812",
+  "node": "v24.19.0",
+  "pnpm": "unknown",
+  "preregSha256": "a0efdbe1591fdf5186aa43fd3a9f454cf7b7ff447c8aec8c317e4eec3c10766f",
+  "dataHashes": {
+    "histories/bot-A.json": "29f8ff60f0b4813027ee7b1f04b48df70984e4d86c344e19e2c65744a7158974",
+    "histories/bot-C.json": "4489700afa0c9cfd9d1304bdd30ff6ba2c4c4c226bfb21611966b35f6ebcfa73",
+    "histories/bot-R.json": "6b67c293685510cb42eb540b1378f03dc9b5d9b533fcf9f26913553bedaf68b6",
+    "histories/bot-S.json": "02ce162bbebcb8a6052af4643fc2dfa30a5d5596247668301675eafcee6a6b65",
+    "histories/bot-V.json": "6ff19dffd538483b1adcf716e6f9560908ac5779a598852c22ba415f246da43c",
+    "histories/strategy-backtest.json": "532a8296ff02e96404fd0c057730f2c5f3f99fa97057277703a98e3ab8ac0560",
+    "histories/strategy-paper.json": "e0074c50257d7f2db32b7a15fba0ac65cd152249afec9f6664cc4f5e1ed7cc83",
+    "harness/A.jsonl": "00412fc1e46d4d334420d2d394bbb9a03a1bc221b60368976d94c41ecc7dfd87",
+    "harness/C.jsonl": "9e3e8fcf5b623161fa33aff200caed3fef15bb602adce8079bf90701f57f6a63",
+    "harness/R.jsonl": "5d2d2eed318b3e8a6934bc69ee3e66184679032af03b3613ad55862c1170a6d4",
+    "harness/S.jsonl": "3fa23715c86002ff9a20025a63bfcde328a2565b4c9692fb8eecc7ee4594c15c",
+    "harness/V.jsonl": "a0007bf1c0fcceef44854eb80e3f42184df328bbd97d88486b31a89705f196d3",
+    "market/mark-BTCUSDT-1m.json": "bc1fc97158d9e7bd30c1a928bef0e243a436dadf4feb37ff67392f9932efe9d6",
+    "market/mark-DOGEUSDT-1m.json": "6d2ee31eb82554bba74d4297d2688c1128043cfe50b8708ed1f067db87801af8",
+    "market/mark-ETHUSDT-1m.json": "eebb0eb626d1961a86c22be0e5f4f810bb351d619a2baca737aa99b38e6ca107",
+    "market/mark-NVDAUSDT-1m.json": "b4dd0d7b5b36e8749924b238a41fbdc42bbc789f2aede3ee8d5dcfefccd95099",
+    "market/mark-SOLUSDT-1m.json": "d53e1b4cc8eccb89feb7e123f21b026ced1c1d9432b8dacf38c980d1cd39c0d6"
+  },
+  "seeds": "audit: sha256(holdout-audit-v1|trader|rule); sham: first 8 bytes of freeze sha256",
+  "llm": null,
+  "createdAt": "2026-10-11T11:01:45.904Z"
+}
