@@ -5,7 +5,8 @@ import { ChatDrawer } from '@/components/desk/chat-drawer';
 import { ChatProvider } from '@/components/desk/chat-state';
 import { DeskChat } from '@/components/desk/desk-chat';
 import { DeskNav } from '@/components/desk/desk-nav';
-import { Mark, ThemeToggle } from '@/components/ui';
+import { BookOpenCheck, Ban } from 'lucide-react';
+import { Icon, Mark, ThemeToggle } from '@/components/ui';
 import { DeskProvider } from '@/lib/desk/store';
 
 export const metadata: Metadata = { title: 'Desk' };
@@ -25,9 +26,13 @@ export default function DeskLayout({ children }: { children: ReactNode }) {
           <DeskNav orientation="vertical" />
         </div>
         <div className="space-y-3 px-3">
-          <p className="text-[12px] leading-snug text-muted">Holdout never places orders.</p>
+          <p className="flex items-start gap-2 border-t border-line pt-3 text-[12px] leading-snug text-muted">
+            <Icon icon={Ban} className="mt-px" />
+            Holdout never places orders.
+          </p>
           <div className="flex items-center justify-between">
-            <Link href="/evidence" className="text-[13px] hover:underline underline-offset-4">
+            <Link href="/evidence" className="inline-flex items-center gap-2 text-[13px] hover:underline underline-offset-4">
+              <Icon icon={BookOpenCheck} />
               Evidence
             </Link>
             <ThemeToggle />

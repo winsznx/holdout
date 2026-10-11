@@ -1,5 +1,6 @@
 'use client';
 
+import { ArrowRight, BookOpenCheck, Check, Gavel, Info, ListFilter, Scissors, Split, TestTube2, X } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import {
@@ -16,8 +17,9 @@ import {
   type Candidate,
   type HoldoutOutcome,
 } from '@holdout/engine';
-import { Button, ButtonLink, DataTable, ProvenanceBadge, Stat, StateBlock, Timeline, type TimelineSegment } from '@/components/ui';
+import { Button, ButtonLink, DataTable, Icon, ProvenanceBadge, Stat, StateBlock, Timeline, VerdictChip, type TimelineSegment } from '@/components/ui';
 import { DeskGate, type ReadyDesk } from '@/components/desk/gate';
+import { DeskSummary } from '@/components/desk/desk-summary';
 import { SectionCard } from '@/components/desk/section-card';
 import { ShamHistogram } from '@/components/desk/sham-histogram';
 import { formatTs, signedMoney } from '@/lib/desk/display';
@@ -31,7 +33,7 @@ const VERDICT_LABEL: Record<HoldoutOutcome['verdict'], string> = {
 
 function Thresholds() {
   return (
-    <SectionCard label="Thresholds" title="What a proposal needs before it is shown">
+    <SectionCard label="Thresholds" title="What a proposal needs before it is shown" icon={ListFilter}>
       <ul className="list-disc space-y-1 pl-5 text-[14px]">
         <li>At least {MIN_TRIPS} closed round trips in total.</li>
         <li>
@@ -68,7 +70,7 @@ function Selection({ outcome }: { outcome: HoldoutOutcome }) {
   if (!sel) return null;
   const skipped = sel.candidates.filter((c) => !c.eligible);
   return (
-    <SectionCard label="Train only" title="Top 3 train candidates">
+    <SectionCard label="Train only" title="Top 3 train candidates" icon={Scissors}>
       <div className="space-y-4">
         <p className="text-[13px] text-muted">
           Selection saw the train trades only. Filters: changes at least {MIN_AFFECTED_TRAIN} train trades, between {formatPercent(MIN_RATE, 0)} and {formatPercent(MAX_RATE, 0)} of them, positive train gain.{' '}
@@ -105,7 +107,7 @@ function Decision({ desk, outcome }: { desk: ReadyDesk; outcome: HoldoutOutcome 
     setBusy(false);
   };
   return (
-    <SectionCard label="Your call" title="Adopt or reject this rule">
+    <SectionCard label="Your call" title="Adopt or reject this rule" icon={Gavel}>
       <div className="space-y-3">
         <p className="text-[16px] font-medium">{renderRule(freeze.rule)}</p>
         {decided ? (
@@ -118,9 +120,11 @@ function Decision({ desk, outcome }: { desk: ReadyDesk; outcome: HoldoutOutcome 
         ) : null}
         <div className="flex flex-wrap gap-2">
           <Button onClick={() => void act('adopted')} disabled={busy || !canAdopt || decided === 'adopted'}>
+            <Icon icon={Check} />
             Adopt
           </Button>
           <Button variant="secondary" onClick={() => void act('rejected')} disabled={busy || decided === 'rejected'}>
+            <Icon icon={X} />
             Reject
           </Button>
         </div>
@@ -149,7 +153,7 @@ function Result({ desk, outcome }: { desk: ReadyDesk; outcome: HoldoutOutcome })
   return (
     <>
       {segments.length > 0 ? (
-        <SectionCard label="Split" title="Train and held-out test">
+        <SectionCard label="Split" title="Train and held-out test" icon={Split}>
           <Timeline segments={segments} label={`Timeline: ${outcome.nTrain} train trades then ${outcome.nTest} held-out test trades`} />
         </SectionCard>
       ) : null}
@@ -157,7 +161,7 @@ function Result({ desk, outcome }: { desk: ReadyDesk; outcome: HoldoutOutcome })
       <Selection outcome={outcome} />
 
       {t ? (
-        <SectionCard label="Test" title="Did it help on trades it never saw">
+        <SectionCard label="Test" title="Did it help on trades it never saw" icon={TestTube2}>
           <div className="space-y-6">
             <p className="text-[16px] font-medium">{renderRule(t.rule)}</p>
             <div className="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -207,7 +211,9 @@ function ProposalsBody({ desk }: { desk: ReadyDesk }) {
 
   return (
     <div className="space-y-8">
-      <div className="rounded-card border border-signal bg-surface px-4 py-3 text-[14px]">
+      <DeskSummary desk={desk} />
+      <div className="flex items-start gap-3 rounded-card border border-signal bg-surface px-4 py-3 text-[14px]">
+        <Icon icon={Info} size={18} className="mt-0.5 text-signal" />
         <p>
           This is an in-browser run on your loaded history. It is not the pre-registered run. The pre-registered cohort result, with frozen rules and published seeds, is on the{' '}
           <Link href="/evidence" className="underline underline-offset-4">
@@ -237,7 +243,7 @@ function ProposalsBody({ desk }: { desk: ReadyDesk }) {
         <>
           <div className="flex flex-wrap items-center gap-3">
             <span className="label">Verdict</span>
-            <span className="rounded-tag border border-ink px-2 py-1 font-mono text-[12px]">{VERDICT_LABEL[outcome.verdict]}</span>
+            <VerdictChip verdict={outcome.verdict} />
             <ProvenanceBadge kind="observed" source={`${outcome.nTrips} closed round trips`} />
           </div>
           {outcome.verdict === 'INSUFFICIENT' ? (
@@ -259,7 +265,9 @@ function ProposalsBody({ desk }: { desk: ReadyDesk }) {
       ) : null}
 
       <ButtonLink href="/evidence" variant="secondary" size="sm">
+        <Icon icon={BookOpenCheck} />
         See the pre-registered cohort result
+        <Icon icon={ArrowRight} />
       </ButtonLink>
     </div>
   );

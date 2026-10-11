@@ -1,7 +1,8 @@
 'use client';
 
+import { ArrowRight, Compass, ListChecks, Plus } from 'lucide-react';
 import { num, str, sum } from '@holdout/engine';
-import { ButtonLink, Stat, StateBlock } from '@/components/ui';
+import { ButtonLink, Icon, Stat, StateBlock } from '@/components/ui';
 import { DeskGate, type ReadyDesk } from '@/components/desk/gate';
 import { SectionCard } from '@/components/desk/section-card';
 import { costOfBreaking, STATUS_LABEL } from '@/lib/desk/rule-view';
@@ -46,10 +47,13 @@ function HomeBody({ desk }: { desk: ReadyDesk }) {
 
   return (
     <div className="space-y-8">
-      <SectionCard label="Next action" title={next.label}>
+      <SectionCard label="Next action" title={next.label} icon={Compass}>
         <div className="flex flex-wrap items-center justify-between gap-4">
           <p className="max-w-[60ch] text-[15px]">{next.reason}</p>
-          <ButtonLink href={next.href}>{next.label}</ButtonLink>
+          <ButtonLink href={next.href}>
+            {next.label}
+            <Icon icon={ArrowRight} />
+          </ButtonLink>
         </div>
       </SectionCard>
 
@@ -65,9 +69,14 @@ function HomeBody({ desk }: { desk: ReadyDesk }) {
         <Stat label="Holdout verdict" value={analysis.holdout ? analysis.holdout.verdict.replace('_', ' ').toLowerCase() : 'paused'} provenance={{ kind: 'observed', source: 'in-browser run', n: trips.length }} />
       </div>
 
-      <SectionCard label="Latest audit" title="Your rules on trial">
+      <SectionCard label="Latest audit" title="Your rules on trial" icon={ListChecks}>
         {rules.length === 0 ? (
-          <StateBlock variant="empty" title="No rules on trial" body="Add a rule in plain language and Holdout prices every time you broke it." action={<ButtonLink href="/desk/rules" size="sm">Add rules</ButtonLink>} />
+          <StateBlock variant="empty" title="No rules on trial" body="Add a rule in plain language and Holdout prices every time you broke it." action={
+              <ButtonLink href="/desk/rules" size="sm">
+                <Icon icon={Plus} />
+                Add rules
+              </ButtonLink>
+            } />
         ) : audits.length === 0 ? (
           <StateBlock variant="loading" title="Auditing your rules" />
         ) : (

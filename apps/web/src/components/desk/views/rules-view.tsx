@@ -1,9 +1,11 @@
 'use client';
 
+import { Calculator, CircleAlert, Database, ListChecks, Plus, Sparkles, Trash2, X } from 'lucide-react';
 import { useId, useState } from 'react';
 import type { Rule, RoundTrip, RuleAudit } from '@holdout/engine';
-import { Button, Card, CardBody, CardHeader, RuleCard, Skeleton, StateBlock, tagPropsForKind } from '@/components/ui';
+import { Button, ButtonLink, Card, CardBody, CardHeader, Icon, RuleCard, Skeleton, StateBlock, tagPropsForKind } from '@/components/ui';
 import { DeskGate, type ReadyDesk } from '@/components/desk/gate';
+import { DeskSummary } from '@/components/desk/desk-summary';
 import { SectionCard } from '@/components/desk/section-card';
 import { SortableTable, type SortColumn } from '@/components/desk/sortable-table';
 import { formatTs, productLabel, signedMoney, toneClass } from '@/lib/desk/display';
@@ -36,7 +38,7 @@ function Intake({ desk }: { desk: ReadyDesk }) {
   const outcome = state.phase === 'done' ? state.outcome : null;
 
   return (
-    <SectionCard label="Say a rule" title="Add a rule in plain language">
+    <SectionCard label="Say a rule" title="Add a rule in plain language" icon={Sparkles}>
       <div className="space-y-3">
         <label htmlFor={inputId} className="block text-[14px] text-muted">
           Write one rule you try to follow. Holdout turns it into one of eight testable templates and shows you the result before anything is added.
@@ -64,6 +66,7 @@ function Intake({ desk }: { desk: ReadyDesk }) {
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <Button onClick={compile} disabled={state.phase === 'compiling' || text.trim().length === 0}>
+            <Icon icon={Calculator} />
             {state.phase === 'compiling' ? 'Compiling' : 'Compile rule'}
           </Button>
           <span className="text-[12px] text-muted">The text goes to our compiler route. Your fills do not.</span>
@@ -93,9 +96,11 @@ function Intake({ desk }: { desk: ReadyDesk }) {
                   setState({ phase: 'idle' });
                 }}
               >
+                <Icon icon={Plus} />
                 Add to my rules
               </Button>
               <Button variant="secondary" onClick={() => setState({ phase: 'idle' })}>
+                <Icon icon={X} />
                 Discard
               </Button>
             </div>
@@ -103,7 +108,8 @@ function Intake({ desk }: { desk: ReadyDesk }) {
         ) : null}
         {outcome?.kind === 'refused' ? <StateBlock variant="empty" title="This rule cannot be tested against past trades" body={outcome.reason} /> : null}
         {outcome?.kind === 'error' ? (
-          <p role="alert" className="text-[14px] text-loss">
+          <p role="alert" className="flex items-start gap-2 text-[14px] text-loss">
+            <Icon icon={CircleAlert} className="mt-0.5" />
             {outcome.message}
           </p>
         ) : null}
@@ -172,6 +178,7 @@ function RuleItem({ desk, item }: { desk: ReadyDesk; item: DeskRule }) {
       ) : null}
       <div className="flex justify-end">
         <Button variant="ghost" size="sm" onClick={() => desk.removeRule(item.id)}>
+          <Icon icon={Trash2} />
           Remove rule
         </Button>
       </div>
@@ -188,7 +195,7 @@ function MarketData({ desk }: { desk: ReadyDesk }) {
   const c = analysis.candles;
   const wantsIt = needsCandles(desk.rules.map((r) => r.rule));
   return (
-    <SectionCard label="Market data" title="Mark candles for the hard stop replay">
+    <SectionCard label="Market data" title="Mark candles for the hard stop replay" icon={Database}>
       <div className="space-y-3 text-[14px]">
         <p className="text-muted">
           A hard stop is tested by replaying Bitget mark candles (S3) from each entry. Without them the hard stop rule is untestable and the holdout skips hard stop candidates.
@@ -216,8 +223,12 @@ function RulesBody({ desk }: { desk: ReadyDesk }) {
   const { rules, unmappedRules } = desk;
   return (
     <div className="space-y-8">
+      <DeskSummary desk={desk} />
       <section aria-labelledby="trial-h" className="space-y-4">
-        <div className="label">Your rules on trial</div>
+        <div className="label flex items-center gap-2">
+          <Icon icon={ListChecks} />
+          Your rules on trial
+        </div>
         <h2 id="trial-h" className="text-[22px]">
           What breaking each rule cost
         </h2>
@@ -226,6 +237,12 @@ function RulesBody({ desk }: { desk: ReadyDesk }) {
             variant="empty"
             title="No rules on trial yet"
             body={desk.source.statedRules ? 'None of the stated rules in this file match a template. Add one below.' : 'This history carries no stated rules. Add the rules you try to follow below and Holdout prices every time you broke them.'}
+            action={
+              <ButtonLink href="#add-rule" size="sm">
+                <Icon icon={Plus} />
+                Add a rule
+              </ButtonLink>
+            }
           />
         ) : (
           <>
@@ -241,7 +258,7 @@ function RulesBody({ desk }: { desk: ReadyDesk }) {
         )}
         {unmappedRules.length > 0 ? (
           <Card>
-            <CardHeader label="Not mapped" title="Stated in the file, no template matches" />
+            <CardHeader label="Not mapped" title="Stated in the file, no template matches" icon={CircleAlert} />
             <CardBody>
               <ul className="space-y-1.5 text-[14px]">
                 {unmappedRules.map((u) => (
@@ -254,7 +271,9 @@ function RulesBody({ desk }: { desk: ReadyDesk }) {
           </Card>
         ) : null}
       </section>
-      <Intake desk={desk} />
+      <div id="add-rule" className="scroll-mt-20">
+        <Intake desk={desk} />
+      </div>
       <MarketData desk={desk} />
     </div>
   );

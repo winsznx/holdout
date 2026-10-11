@@ -1,8 +1,9 @@
 'use client';
 
+import { ArrowRight, Star } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { Button, Card, ButtonLink, STRATEGY_SAMPLE_NOTICE, StateBlock, Tag, TagRow, tagPropsForKind } from '@/components/ui';
+import { Button, Card, ButtonLink, Icon, STRATEGY_SAMPLE_NOTICE, Skeleton, StateBlock, Tag, TagRow, tagPropsForKind } from '@/components/ui';
 import { loadCatalog, type CatalogEntry, type SampleCatalog } from '@/lib/desk/samples-client';
 import { useDesk } from '@/lib/desk/store';
 import { formatCount } from '@/lib/format';
@@ -38,7 +39,25 @@ export function SamplePicker() {
     if (ok) router.push('/desk/rules');
   };
 
-  if (!catalog) return <StateBlock variant="loading" title="Reading the sample list" />;
+  if (!catalog) {
+    return (
+      <div className="space-y-6">
+        <StateBlock variant="loading" title="Reading the sample list" />
+        <ul className="grid gap-4 md:grid-cols-2" aria-hidden="true">
+          {[0, 1].map((i) => (
+            <li key={i}>
+              <Card className="space-y-3 p-4">
+                <Skeleton className="h-4 w-1/4" />
+                <Skeleton className="h-5 w-3/4" />
+                <Skeleton className="w-full" />
+                <Skeleton className="h-11 w-1/2" />
+              </Card>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
   if (catalog.status === 'error') {
     return <StateBlock variant="error" surface="Holdout data file" title="The sample list could not be read" body={catalog.message} />;
   }
@@ -62,6 +81,7 @@ export function SamplePicker() {
           action={
             <ButtonLink href="/desk/rules" size="sm">
               Open the audit
+              <Icon icon={ArrowRight} />
             </ButtonLink>
           }
         />
@@ -74,7 +94,12 @@ export function SamplePicker() {
               <Card className="flex h-full flex-col gap-3 p-4">
                 <TagRow>
                   {e.kind ? <Tag {...tagPropsForKind(e.kind)} /> : null}
-                  {isDefault ? <span className="label">Start here</span> : null}
+                  {isDefault ? (
+                    <span className="label inline-flex items-center gap-1">
+                      <Icon icon={Star} size={12} />
+                      Start here
+                    </span>
+                  ) : null}
                 </TagRow>
                 <p className="text-[17px] leading-snug font-medium">{e.label ?? e.id}</p>
                 {e.kind ? <p className="text-[13px] text-muted">{KIND_NOTE[e.kind]}</p> : null}
@@ -86,6 +111,7 @@ export function SamplePicker() {
                 <div className="mt-auto pt-1">
                   <Button variant={isDefault ? 'primary' : 'secondary'} onClick={() => void choose(e.id)} disabled={loadingId !== null}>
                     {loadingId === e.id ? 'Loading' : currentId === e.id ? 'Reload and open the audit' : 'Load and open the audit'}
+                    {loadingId === e.id ? null : <Icon icon={ArrowRight} />}
                   </Button>
                 </div>
               </Card>

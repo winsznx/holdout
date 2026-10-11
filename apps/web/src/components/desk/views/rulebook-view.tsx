@@ -1,10 +1,12 @@
 'use client';
 
+import { BookMarked, Copy, Check, Download, FileJson, History, Plug, Save, ShieldCheck, TriangleAlert, Cloud } from 'lucide-react';
 import Link from 'next/link';
 import { useId, useState } from 'react';
 import { verifyRulebook, type Rulebook } from '@holdout/engine';
-import { Button, Card, CardBody, StateBlock } from '@/components/ui';
+import { Button, ButtonLink, Card, CardBody, Icon, StateBlock } from '@/components/ui';
 import { DeskGate, type ReadyDesk } from '@/components/desk/gate';
+import { DeskSummary } from '@/components/desk/desk-summary';
 import { SectionCard } from '@/components/desk/section-card';
 import { diffRulebooks } from '@/lib/desk/rulebook-build';
 import { rulebookFileName, rulebookJson, saveRequest } from '@/lib/desk/rulebook-export';
@@ -81,7 +83,7 @@ function CloudSave({ desk, book }: { desk: ReadyDesk; book: Rulebook }) {
   };
 
   return (
-    <SectionCard label="Optional" title="Save a copy to Holdout">
+    <SectionCard label="Optional" title="Save a copy to Holdout" icon={Cloud}>
       <div className="space-y-3">
         <div className="flex items-start gap-3">
           <input id={id} type="checkbox" checked={optIn} onChange={(e) => setOptIn(e.target.checked)} className="mt-1 h-4 w-4 accent-[var(--signal)]" />
@@ -93,6 +95,7 @@ function CloudSave({ desk, book }: { desk: ReadyDesk; book: Rulebook }) {
           What is stored: the rule definitions and their status, the aggregate numbers behind each rule, the similar-trade aggregates (symbol, side, session and leverage bucket with counts, win rate and totals), the ledger counts, and a random device id made in this browser. No fills, no order ids, no API keys. The device id is the only key to the saved copy.
         </p>
         <Button variant="secondary" onClick={() => void save()} disabled={!optIn || state.phase === 'saving'}>
+          <Icon icon={Cloud} />
           {state.phase === 'saving' ? 'Saving' : 'Save version'}
         </Button>
         {state.phase === 'saved' ? <p className="text-[14px] text-gain">Saved version {book.version}.</p> : null}
@@ -148,11 +151,14 @@ function RulebookBody({ desk }: { desk: ReadyDesk }) {
 
   return (
     <div className="space-y-8">
+      <DeskSummary desk={desk} />
       <SectionCard
         label="01 / Draft"
         title={`Current rulebook, would be version ${versions.length + 1}`}
+        icon={BookMarked}
         aside={
           <Button size="sm" onClick={() => void desk.saveRulebookVersion()}>
+            <Icon icon={Save} />
             Save as version {versions.length + 1}
           </Button>
         }
@@ -166,9 +172,24 @@ function RulebookBody({ desk }: { desk: ReadyDesk }) {
         </div>
       </SectionCard>
 
-      <SectionCard label="02 / Versions" title="Saved versions and what changed">
+      <SectionCard label="02 / Versions" title="Saved versions and what changed" icon={History}>
         {versions.length === 0 ? (
-          <StateBlock variant="empty" title="No saved versions" body="Save the draft, or adopt or reject a proposal, to write version 1." />
+          <StateBlock
+            variant="empty"
+            title="No saved versions"
+            body="Save the draft, or adopt or reject a proposal, to write version 1."
+            action={
+              <>
+                <Button size="sm" onClick={() => void desk.saveRulebookVersion()}>
+                  <Icon icon={Save} />
+                  Save version 1
+                </Button>
+                <ButtonLink href="/desk/proposals" variant="secondary" size="sm">
+                  Review proposals
+                </ButtonLink>
+              </>
+            }
+          />
         ) : (
           <div className="space-y-4">
             <ul className="divide-y divide-line rounded-card border border-line text-[14px]">
@@ -203,7 +224,7 @@ function RulebookBody({ desk }: { desk: ReadyDesk }) {
         )}
       </SectionCard>
 
-      <SectionCard label="03 / Export" title="Export JSON with its hash">
+      <SectionCard label="03 / Export" title="Export JSON with its hash" icon={FileJson}>
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-2 text-[14px]">
             <label htmlFor={pickId} className="text-muted">
@@ -218,18 +239,25 @@ function RulebookBody({ desk }: { desk: ReadyDesk }) {
             </select>
           </div>
           <p className="num break-all text-[12px]">sha256 {chosen.book.sha256}</p>
-          <p className={verified ? 'text-[13px] text-gain' : 'text-[13px] text-loss'}>{verified ? 'The hash matches the file contents.' : 'The hash does not match the contents.'}</p>
+          <p className={verified ? 'flex items-center gap-2 text-[13px] text-gain' : 'flex items-center gap-2 text-[13px] text-loss'}>
+            <Icon icon={verified ? ShieldCheck : TriangleAlert} />
+            {verified ? 'The hash matches the file contents.' : 'The hash does not match the contents.'}
+          </p>
           <p className="num break-all text-[12px] text-muted">{rulebookFileName(chosen.book)}</p>
           <div className="flex flex-wrap gap-2">
-            <Button onClick={download}>Download JSON</Button>
+            <Button onClick={download}>
+              <Icon icon={Download} />
+              Download JSON
+            </Button>
             <Button variant="secondary" onClick={() => void copy()}>
+              <Icon icon={copied ? Check : Copy} />
               {copied ? 'Copied' : 'Copy JSON'}
             </Button>
           </div>
         </div>
       </SectionCard>
 
-      <SectionCard label="04 / Skill" title="Install the Skill with this rulebook">
+      <SectionCard label="04 / Skill" title="Install the Skill with this rulebook" icon={Plug}>
         <div className="space-y-3 text-[14px]">
           <p>
             Install the Holdout Skill for your agent from the{' '}

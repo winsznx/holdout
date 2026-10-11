@@ -1,7 +1,9 @@
 'use client';
 
+import { MessageSquare, X } from 'lucide-react';
 import { useEffect, useState, type ReactNode } from 'react';
 import { Button } from '@/components/ui/button';
+import { Icon } from '@/components/ui/icon';
 import { StateBlock } from '@/components/ui/state-block';
 
 export function ChatDrawer({ children }: { children?: ReactNode }) {
@@ -19,6 +21,7 @@ export function ChatDrawer({ children }: { children?: ReactNode }) {
   return (
     <>
       <Button variant="secondary" size="sm" onClick={() => setOpen(true)} aria-expanded={open} aria-controls="desk-chat-drawer" className="fixed right-4 bottom-4 z-40 bg-paper">
+        <Icon icon={MessageSquare} />
         Ask the desk
       </Button>
       {open ? (
@@ -33,6 +36,7 @@ export function ChatDrawer({ children }: { children?: ReactNode }) {
             <div className="flex items-center justify-between border-b border-line px-4 py-3">
               <span className="label">Desk chat</span>
               <Button variant="ghost" size="sm" onClick={() => setOpen(false)}>
+                <Icon icon={X} />
                 Close
               </Button>
             </div>

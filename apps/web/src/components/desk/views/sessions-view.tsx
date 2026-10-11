@@ -1,8 +1,10 @@
 'use client';
 
+import { Banknote, CalendarClock, Clock, Layers } from 'lucide-react';
 import { num } from '@holdout/engine';
 import { Bar, DataTable, Stat, StateBlock, type BarItem } from '@/components/ui';
 import { DeskGate, type ReadyDesk } from '@/components/desk/gate';
+import { DeskSummary } from '@/components/desk/desk-summary';
 import { NotInData } from '@/components/desk/not-in-data';
 import { SectionCard } from '@/components/desk/section-card';
 import { formatRate, money, signedMoney, toneClass } from '@/lib/desk/display';
@@ -57,7 +59,8 @@ function SessionsBody({ desk }: { desk: ReadyDesk }) {
 
   return (
     <div className="space-y-8">
-      <SectionCard label="01 / Sessions" title="P&L by US session at entry">
+      <DeskSummary desk={desk} />
+      <SectionCard label="01 / Sessions" title="P&L by US session at entry" icon={Clock}>
         {lens.unavailableReason ? (
           <NotInData reason={lens.unavailableReason} />
         ) : (
@@ -73,11 +76,11 @@ function SessionsBody({ desk }: { desk: ReadyDesk }) {
         )}
       </SectionCard>
 
-      <SectionCard label="02 / Holds" title="Holds across the open and the weekend">
+      <SectionCard label="02 / Holds" title="Holds across the open and the weekend" icon={CalendarClock}>
         {lens.unavailableReason ? <NotInData reason={lens.unavailableReason} /> : <GroupTable rows={lens.holds} caption="Round trips grouped by what they were held across" />}
       </SectionCard>
 
-      <SectionCard label="03 / Products" title="Stock perp against rToken">
+      <SectionCard label="03 / Products" title="Stock perp against rToken" icon={Layers}>
         <div className="grid gap-6 md:grid-cols-2">
           <Compare label="Stock perp" g={pc.stockPerp} missing={stockMissing} />
           <Compare label="rToken" g={pc.rtoken} missing={rtokenMissing} />
@@ -87,7 +90,7 @@ function SessionsBody({ desk }: { desk: ReadyDesk }) {
         )}
       </SectionCard>
 
-      <SectionCard label="04 / Costs" title="Funding and premium">
+      <SectionCard label="04 / Costs" title="Funding and premium" icon={Banknote}>
         <div className="grid gap-6 md:grid-cols-2">
           {funding.total === null ? (
             <NotInData title="Funding" reason={funding.unavailableReason ?? 'not in this data'} />

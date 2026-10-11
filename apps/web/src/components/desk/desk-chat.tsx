@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { Button, Card, StateBlock, type Surface } from '@/components/ui';
+import { Eraser, SendHorizontal } from 'lucide-react';
+import { Button, Card, Icon, StateBlock, type Surface } from '@/components/ui';
 import { cn } from '@/lib/cn';
 import { useDesk } from '@/lib/desk/store';
 import type { ChatCardView } from '@/lib/chat/client';
@@ -91,6 +92,7 @@ export function DeskChat({ variant }: { variant: 'page' | 'drawer' }) {
         </p>
         {chat.turns.length > 0 ? (
           <Button variant="ghost" size="sm" onClick={chat.clear}>
+            <Icon icon={Eraser} />
             Clear
           </Button>
         ) : null}
@@ -146,6 +148,7 @@ export function DeskChat({ variant }: { variant: 'page' | 'drawer' }) {
           className="h-11 min-w-0 flex-1 rounded-control border border-ink bg-surface px-3 text-[15px]"
         />
         <Button type="submit" disabled={chat.busy || draft.trim() === ''}>
+          <Icon icon={SendHorizontal} />
           Send
         </Button>
       </form>

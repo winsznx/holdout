@@ -1,4 +1,5 @@
-import { Card, CardHeader, Tag } from '@/components/ui';
+import { CircleCheck, CircleSlash, OctagonX, ScanSearch, type LucideIcon } from 'lucide-react';
+import { Card, CardHeader, Icon, Tag } from '@/components/ui';
 import { cn } from '@/lib/cn';
 import { formatPercent, formatSignedUsdt } from '@/lib/format';
 import type { LiveCheck } from '@/lib/check/live';
@@ -6,6 +7,7 @@ import { productLabel } from '@/lib/desk/display';
 
 export const DECISION_LINE = 'Holdout never places orders. You decide.';
 
+const STATE_GLYPH: Record<'broken' | 'ok' | 'not_checkable', LucideIcon> = { broken: OctagonX, ok: CircleCheck, not_checkable: CircleSlash };
 const STATE_TEXT = { broken: 'Broken', ok: 'Held', not_checkable: 'Not checkable' } as const;
 
 function humanize(value: string): string {
@@ -28,6 +30,7 @@ export function CheckCard({ live, compact = false }: { live: LiveCheck; compact?
     <Card>
       <CardHeader
         label="Check a trade"
+        icon={ScanSearch}
         title={`${idea.side} ${idea.symbol} ${idea.leverage}x, ${productLabel(idea.product)}, ${idea.time === 'now' ? 'now' : idea.time}`}
         aside={<Tag kind="observed" />}
       />
@@ -45,10 +48,11 @@ export function CheckCard({ live, compact = false }: { live: LiveCheck; compact?
                   <li key={r.ruleId} className="flex gap-3">
                     <span
                       className={cn(
-                        'mt-0.5 inline-flex h-5 shrink-0 items-center rounded-tag border px-1.5 font-mono text-[11px] leading-none',
+                        'mt-0.5 inline-flex h-5 shrink-0 items-center gap-1 rounded-tag border px-1.5 font-mono text-[11px] leading-none',
                         r.state === 'broken' ? 'border-loss text-loss' : r.state === 'ok' ? 'border-line text-ink' : 'border-line border-dashed text-muted',
                       )}
                     >
+                      <Icon icon={STATE_GLYPH[r.state]} size={12} />
                       {STATE_TEXT[r.state]}
                     </span>
                     <span className="min-w-0">

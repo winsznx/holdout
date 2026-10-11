@@ -1,8 +1,9 @@
 'use client';
 
+import { ScanSearch, Upload, FlaskConical } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
-import { Button, ButtonLink, PageHeading, StateBlock, type Surface } from '@/components/ui';
+import { Button, ButtonLink, Icon, PageHeading, StateBlock, type Surface } from '@/components/ui';
 import { runLiveCheck, type LiveCheck } from '@/lib/check/live';
 import { parseIdeaRemote, parseIdeaStrict, type ParseOutcome } from '@/lib/check/parse';
 import { useDesk } from '@/lib/desk/store';
@@ -73,9 +74,11 @@ export function CheckPage() {
           action={
             <>
               <ButtonLink href="/desk/import" size="sm">
+                <Icon icon={Upload} />
                 Import a history
               </ButtonLink>
               <ButtonLink href="/sample" variant="secondary" size="sm">
+                <Icon icon={FlaskConical} />
                 Try the sample
               </ButtonLink>
             </>
@@ -103,6 +106,7 @@ export function CheckPage() {
               className="h-11 min-w-0 flex-1 rounded-control border border-ink bg-surface px-3 text-[15px]"
             />
             <Button type="submit" disabled={busy || text.trim() === ''}>
+              <Icon icon={ScanSearch} />
               Check
             </Button>
           </div>

@@ -2,7 +2,8 @@
 
 import { useId, useRef, useState, type DragEvent } from 'react';
 import Link from 'next/link';
-import { Button, ButtonLink, DataTable, StateBlock } from '@/components/ui';
+import { ArrowRight, FlaskConical, KeyRound, ListChecks, RefreshCw, Table2, Trash2, Upload, UploadCloud } from 'lucide-react';
+import { Button, ButtonLink, DataTable, Icon, StateBlock } from '@/components/ui';
 import { SectionCard } from '@/components/desk/section-card';
 import { SourceBanner } from '@/components/desk/gate';
 import { productLabel } from '@/lib/desk/display';
@@ -41,7 +42,7 @@ function CsvDrop() {
   };
 
   return (
-    <SectionCard label="A / CSV" title="Drop a CSV">
+    <SectionCard label="A / CSV" title="Drop a CSV" icon={Upload}>
       <div className="space-y-3">
         <label
           htmlFor={inputId}
@@ -51,8 +52,9 @@ function CsvDrop() {
           }}
           onDragLeave={() => setOver(false)}
           onDrop={onDrop}
-          className={`flex min-h-32 cursor-pointer flex-col items-center justify-center gap-1 rounded-card border border-dashed px-4 py-6 text-center ${over ? 'border-signal bg-paper' : 'border-line bg-paper'}`}
+          className={`flex min-h-32 cursor-pointer flex-col items-center justify-center gap-1 rounded-card border border-dashed px-4 py-6 text-center hover:border-ink ${over ? 'border-signal bg-paper' : 'border-line bg-paper'}`}
         >
+          <Icon icon={UploadCloud} size={18} className="mb-1 text-muted" />
           <span className="text-[15px] font-medium">{busy ? 'Reading the file' : 'Drop a CSV here or choose a file'}</span>
           <span className="text-[12px] text-muted">The file is parsed in a worker in this browser. It is never uploaded.</span>
           <input
@@ -106,7 +108,7 @@ function ApiSync() {
   const field = 'block w-full rounded-control border border-line bg-paper px-3 py-2 font-mono text-[13px] focus-visible:outline-2 focus-visible:outline-signal';
 
   return (
-    <SectionCard label="B / API" title="Sync with a read-only key">
+    <SectionCard label="B / API" title="Sync with a read-only key" icon={KeyRound}>
       <div className="space-y-4">
         <div className="rounded-card border border-line bg-paper p-4 text-[13px] leading-relaxed">
           <p className="label mb-1.5">What moves where</p>
@@ -140,6 +142,7 @@ function ApiSync() {
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <Button onClick={() => void run()} disabled={!ready || busy}>
+            <Icon icon={RefreshCw} className={busy ? 'motion-safe:animate-spin' : undefined} />
             {busy ? (step ? STEP_TEXT[step] : 'Starting') : 'Sync the last 90 days'}
           </Button>
           <span className="text-[12px] text-muted">Reads USDT futures fills, positions history and funding records. Bitget keeps 90 days of fills.</span>
@@ -239,7 +242,7 @@ export function ImportView() {
       </div>
       <OtherExchanges />
 
-      <SectionCard label="Import state" title="What is loaded now">
+      <SectionCard label="Import state" title="What is loaded now" icon={Table2}>
         {!source || !history || !analysis ? (
           <StateBlock
             variant="empty"
@@ -247,6 +250,7 @@ export function ImportView() {
             body="Drop a CSV, sync a key, or load a labeled sample that needs no account."
             action={
               <ButtonLink href="/sample" size="sm">
+                <Icon icon={FlaskConical} />
                 Try the sample
               </ButtonLink>
             }
@@ -267,8 +271,10 @@ export function ImportView() {
             <div className="flex flex-wrap gap-2">
               <ButtonLink href="/desk/ledger" size="sm">
                 Open the ledger
+                <Icon icon={ArrowRight} />
               </ButtonLink>
               <ButtonLink href="/desk/rules" variant="secondary" size="sm">
+                <Icon icon={ListChecks} />
                 Put your rules on trial
               </ButtonLink>
             </div>
@@ -276,12 +282,13 @@ export function ImportView() {
         )}
       </SectionCard>
 
-      <SectionCard label="Your data" title="Delete my data">
+      <SectionCard label="Your data" title="Delete my data" icon={Trash2}>
         <div className="space-y-3 text-[14px]">
           <p className="text-muted">
             Your history, rules, rulebook versions, cached candles and device id live in this browser only. {status.persistenceNote ?? 'They are saved in IndexedDB.'}
           </p>
           <Button variant="secondary" onClick={() => void desk.clearAll()}>
+            <Icon icon={Trash2} />
             Delete my data
           </Button>
           <p className="text-[12px] text-muted">

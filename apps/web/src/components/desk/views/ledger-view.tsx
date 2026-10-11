@@ -1,7 +1,8 @@
 'use client';
 
+import { Package, Scale, TableProperties, TriangleAlert, Upload } from 'lucide-react';
 import { D, num, str, sum, type RoundTrip } from '@holdout/engine';
-import { DataTable, StateBlock, Stat } from '@/components/ui';
+import { ButtonLink, DataTable, Icon, StateBlock, Stat } from '@/components/ui';
 import { DeskGate, type ReadyDesk } from '@/components/desk/gate';
 import { SectionCard } from '@/components/desk/section-card';
 import { SortableTable, type SortColumn } from '@/components/desk/sortable-table';
@@ -120,6 +121,12 @@ function LedgerBody({ desk }: { desk: ReadyDesk }) {
         variant="empty"
         title="This account has no fills in the window"
         body="The source answered, and it holds no fills for the last 90 days. That is a real empty history, not an error. Trade on Bitget and sync again, or load a sample."
+        action={
+          <ButtonLink href="/desk/import" size="sm">
+            <Icon icon={Upload} />
+            Import another history
+          </ButtonLink>
+        }
       />
     );
   }
@@ -132,7 +139,7 @@ function LedgerBody({ desk }: { desk: ReadyDesk }) {
 
   return (
     <div className="space-y-8">
-      <div className="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="grid grid-cols-2 gap-px overflow-hidden rounded-card border border-line bg-line lg:grid-cols-5 [&>*]:bg-surface [&>*]:p-4 [&>*:last-child:nth-child(odd)]:col-span-2 lg:[&>*:last-child:nth-child(odd)]:col-span-1">
         <Stat label="Round trips" value={formatCount(trips.length)} provenance={provenance} />
         <Stat label="Net P&L" value={signedMoney(net)} unit="USDT" tone={num(net) > 0 ? 'gain' : num(net) < 0 ? 'loss' : 'neutral'} provenance={provenance} />
         <Stat label="Fees" value={money(fees)} unit="USDT" provenance={provenance} />
@@ -140,17 +147,18 @@ function LedgerBody({ desk }: { desk: ReadyDesk }) {
         <Stat label="Win rate" value={trips.length === 0 ? 'n/a' : formatPercent(wins / trips.length, 0)} provenance={provenance} />
       </div>
 
-      <SectionCard label="01 / Reconciliation" title="Ledger against Bitget">
+      <SectionCard label="01 / Reconciliation" title="Ledger against Bitget" icon={Scale}>
         <Reconciliation desk={desk} />
       </SectionCard>
 
-      <SectionCard label="02 / Flags" title="Incomplete-data flags">
+      <SectionCard label="02 / Flags" title="Incomplete-data flags" icon={TriangleAlert}>
         <Flags desk={desk} />
       </SectionCard>
 
       <section aria-labelledby="trips-h" className="space-y-3">
         <div className="label">03 / Round trips</div>
-        <h2 id="trips-h" className="text-[22px]">
+        <h2 id="trips-h" className="flex items-center gap-2 text-[22px]">
+          <Icon icon={TableProperties} size={18} className="text-muted" />
           Round trips
         </h2>
         <SortableTable
@@ -163,7 +171,7 @@ function LedgerBody({ desk }: { desk: ReadyDesk }) {
         />
       </section>
 
-      <SectionCard label="04 / Open" title="Open positions">
+      <SectionCard label="04 / Open" title="Open positions" icon={Package}>
         {ledger.flags.openPositions.length === 0 ? (
           <p className="text-[14px] text-muted">No position is open at the end of this history.</p>
         ) : (
