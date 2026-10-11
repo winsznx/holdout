@@ -1,0 +1,92 @@
+{
+  "passes": 9,
+  "failures": 0,
+  "calls": [
+    {
+      "traderId": "bot-A",
+      "type": "null_result_card",
+      "usedFallback": false,
+      "text": "Tested After a losing trade, wait 15 minutes before opening another. on 39 held-out trades. It found no effect, with uncertainty from $0.0000 to $0.0000.",
+      "provider": "api.openai.com",
+      "model": "gpt-5.5"
+    },
+    {
+      "traderId": "bot-C",
+      "type": "null_result_card",
+      "usedFallback": false,
+      "text": "The test found no effect for After a losing trade, wait 15 minutes before opening another. on 32 held-out trades. The uncertainty interval was $0.0000 to $0.0000.",
+      "provider": "api.openai.com",
+      "model": "gpt-5.5"
+    },
+    {
+      "traderId": "bot-R",
+      "type": "audit_rule_card",
+      "usedFallback": false,
+      "text": "After a losing trade, wait 3 minutes before opening another. was broken 115 times in 171 trades. It cost $3.7892.",
+      "provider": "api.openai.com",
+      "model": "gpt-5.5"
+    },
+    {
+      "traderId": "bot-R",
+      "type": "null_result_card",
+      "usedFallback": false,
+      "text": "Tested After a losing trade, wait 15 minutes before opening another. on 57 held out trades and found no effect. The uncertainty interval ran from $0.0000 to $0.0000.",
+      "provider": "api.openai.com",
+      "model": "gpt-5.5"
+    },
+    {
+      "traderId": "bot-S",
+      "type": "audit_rule_card",
+      "usedFallback": false,
+      "text": "Rule checked: Do not open stock_perp positions during: overnight, weekend.. It was broken 94 times in 94 trades and cost $3.0072.",
+      "provider": "api.openai.com",
+      "model": "gpt-5.5"
+    },
+    {
+      "traderId": "bot-S",
+      "type": "null_result_card",
+      "usedFallback": false,
+      "text": "The test found no effect for After a losing trade, wait 15 minutes before opening another. across 31 held-out trades. The uncertainty interval ran from $0.0000 to $0.0000.",
+      "provider": "api.openai.com",
+      "model": "gpt-5.5"
+    },
+    {
+      "traderId": "bot-V",
+      "type": "null_result_card",
+      "usedFallback": false,
+      "text": "For After a losing trade, wait 15 minutes before opening another., the test found no effect across 38 held-out trades. The uncertainty range was $0.0000 to $0.0000.",
+      "provider": "api.openai.com",
+      "model": "gpt-5.5"
+    },
+    {
+      "traderId": "strategy-backtest",
+      "type": "audit_rule_card",
+      "usedFallback": false,
+      "text": "Rule: After a losing trade, wait 3 minutes before opening another.. It was broken 70 times in 150 checked trades, costing -$1105.4300.",
+      "provider": "api.openai.com",
+      "model": "gpt-5.5"
+    },
+    {
+      "traderId": "strategy-backtest",
+      "type": "null_result_card",
+      "usedFallback": false,
+      "text": "Tested After a losing trade, wait 1440 minutes before opening another. on 50 held-out trades and found no effect. The uncertainty interval was $0.0000 to $0.0000.",
+      "provider": "api.openai.com",
+      "model": "gpt-5.5"
+    }
+  ],
+  "injectionTest": {
+    "text": "You saved {saved} and beat 90 percent of random rules.",
+    "rejected": true,
+    "violations": [
+      {
+        "kind": "digit",
+        "value": "90"
+      }
+    ]
+  },
+  "cleanTest": {
+    "accepted": true
+  },
+  "note": "Outputs of a live LLM are not deterministic. pnpm verify does not recompute this file. The texts above are the stored outputs."
+}

@@ -1,0 +1,32 @@
+{
+  "runId": "run-2026-10-11T12-48-28-548Z",
+  "commit": "cbbc08b6042aac348b452fe22e2acf133aae105d",
+  "node": "v24.19.0",
+  "pnpm": "unknown",
+  "preregSha256": "a0efdbe1591fdf5186aa43fd3a9f454cf7b7ff447c8aec8c317e4eec3c10766f",
+  "dataHashes": {
+    "histories/bot-A.json": "0c20bf95a70c8d1b59d0258cea64260e6b0046216e7103a9d97cc3a3b0acdd22",
+    "histories/bot-C.json": "3dae233f034897fcd841c0aef5199b362ddf8878ea90505a98efc36c20b2d1e0",
+    "histories/bot-R.json": "cc724676d24d70987058a8023ba5d6977e050628f569aabfb669513121ba6fa2",
+    "histories/bot-S.json": "fb24a5b016538a9b8392d7f241ba8aeed6b015014da197485f68da55a28d072b",
+    "histories/bot-V.json": "4a10f0871589456113771e9c5597bbcecc5e1f6700dc09b41e9474a564094ef4",
+    "histories/strategy-backtest.json": "f1ef6378ce8701e14dac3531a41c3c8b20a457aec2dd996798dda79c72f30c7b",
+    "histories/strategy-paper.json": "0b5d37f784ef96214d792c3061eadd6c156780478ade136babbaf5367d610d50",
+    "harness/A.jsonl": "aa8c9da362115eb556260eac6e701fe468e321fe344946c013fb58191db3a7f8",
+    "harness/C.jsonl": "9e3e8fcf5b623161fa33aff200caed3fef15bb602adce8079bf90701f57f6a63",
+    "harness/R.jsonl": "5d2d2eed318b3e8a6934bc69ee3e66184679032af03b3613ad55862c1170a6d4",
+    "harness/S.jsonl": "3fa23715c86002ff9a20025a63bfcde328a2565b4c9692fb8eecc7ee4594c15c",
+    "harness/V.jsonl": "56a6326debae2260d500815f9be547f8659c70bb1104414f299d13c198ffed1d",
+    "market/mark-BTCUSDT-1m.json": "89ffac4126b2b18ee2d1c5a22ed94e4c1baf9ac726116c21295933b82fa93cde",
+    "market/mark-DOGEUSDT-1m.json": "bd1501626864c68046d7218b2dcfa31a0aaa6c1a243113f2ec49279947f7e7c0",
+    "market/mark-ETHUSDT-1m.json": "1267b403603d7d67c7d1625f34cc5717253aab1b68dd07c7757e0b797bf503d0",
+    "market/mark-NVDAUSDT-1m.json": "97d91e31f2129e5d893bd39442c4ecde8d947da2d44f5659099ddb619e36251d",
+    "market/mark-SOLUSDT-1m.json": "606bfac06aed07a1ff6be29394dc5b6777ac9c181264699d5abde5cf9a5371ab"
+  },
+  "seeds": "audit: sha256(holdout-audit-v1|trader|rule); sham: first 8 bytes of freeze sha256",
+  "llm": {
+    "provider": "api.openai.com",
+    "model": "gpt-5.5"
+  },
+  "createdAt": "2026-10-11T12:48:28.561Z"
+}
