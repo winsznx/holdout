@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { auditRule, ledgerFromFills, ledgerFromTrips, num, type Fill, type FundingRecord, type ReferencePosition, type RoundTrip, type Rule, type RuleAudit } from '@holdout/engine';
+import { auditRule, ledgerFromFills, ledgerFromTrips, num, reconcile, type Fill, type FundingRecord, type ReferencePosition, type RoundTrip, type Reconciliation, type Rule, type RuleAudit } from '@holdout/engine';
 import { readPublicJson } from './data';
 import type { DataResult } from './data-result';
 
@@ -74,10 +74,29 @@ export interface HeroRule {
   closedTrips: number;
 }
 
+function ledgerOf(sample: SampleFile) {
+  return sample.trips ? ledgerFromTrips(sample.meta.id, sample.fills, sample.trips) : ledgerFromFills(sample.meta.id, sample.fills, sample.funding);
+}
+
+export interface SampleFacts {
+  label: string;
+  fills: number;
+  closedTrips: number;
+  reconciliation: Reconciliation | null;
+}
+
+export function sampleFacts(sample: SampleFile): SampleFacts {
+  const trips = ledgerOf(sample).roundTrips;
+  return {
+    label: sample.meta.label,
+    fills: sample.fills.length,
+    closedTrips: trips.length,
+    reconciliation: sample.reference.length > 0 ? reconcile(trips, sample.reference) : null,
+  };
+}
+
 export function auditSample(sample: SampleFile): HeroRule | null {
-  const ledger = sample.trips
-    ? ledgerFromTrips(sample.meta.id, sample.fills, sample.trips)
-    : ledgerFromFills(sample.meta.id, sample.fills, sample.funding);
+  const ledger = ledgerOf(sample);
   const trips = ledger.roundTrips;
   if (trips.length === 0) return null;
   const audits = EXAMPLE_RULES.map((rule) => auditRule(sample.meta.id, trips, rule));

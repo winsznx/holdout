@@ -1,16 +1,21 @@
+import { Ban, Cpu, Database, HardDrive, KeyRound, Laptop, Server, type LucideIcon } from 'lucide-react';
 import type { Metadata } from 'next';
-import { Container, PageHeading } from '@/components/ui';
+import { Container, Icon, PageHeading } from '@/components/ui';
 
 export const metadata: Metadata = { title: 'Privacy' };
 
-const ROWS = [
-  { what: 'Bitget CSV export', where: 'Your browser only', detail: 'Parsed in a Web Worker on your device. The file is never uploaded.' },
-  { what: 'API sync, secret key', where: 'Your browser only', detail: 'The browser signs each request with WebCrypto (HMAC-SHA256). The secret never leaves the browser.' },
-  { what: 'API sync, key and passphrase', where: 'Our edge function, in memory', detail: 'The signed request goes through /api/sync, which forwards it to Bitget. The access key and passphrase headers pass through in memory. Nothing is logged or stored.' },
-  { what: 'Ledger and results', where: 'IndexedDB in your browser', detail: 'Stored locally. Delete my data clears it.' },
-  { what: 'Saved rulebooks and aggregates', where: 'Supabase, only if you opt in', detail: 'Rule text and aggregate statistics only, keyed to an anonymous device id. Fills are never stored there.' },
-  { what: 'Rule text and aggregates for the AI layer', where: 'The model provider', detail: 'The model sees rule text, the rule schema, aggregates and tool results. It never sees raw fills or keys.' },
-] as const;
+type Where = 'browser' | 'edge' | 'local' | 'cloud' | 'model';
+
+const WHERE_ICON: Record<Where, LucideIcon> = { browser: Laptop, edge: Server, local: HardDrive, cloud: Database, model: Cpu };
+
+const ROWS: readonly { what: string; where: string; zone: Where; detail: string }[] = [
+  { what: 'Bitget CSV export', zone: 'browser', where: 'Your browser only', detail: 'Parsed in a Web Worker on your device. The file is never uploaded.' },
+  { what: 'API sync, secret key', zone: 'browser', where: 'Your browser only', detail: 'The browser signs each request with WebCrypto (HMAC-SHA256). The secret never leaves the browser.' },
+  { what: 'API sync, key and passphrase', zone: 'edge', where: 'Our edge function, in memory', detail: 'The signed request goes through /api/sync, which forwards it to Bitget. The access key and passphrase headers pass through in memory. Nothing is logged or stored.' },
+  { what: 'Ledger and results', zone: 'local', where: 'IndexedDB in your browser', detail: 'Stored locally. Delete my data clears it.' },
+  { what: 'Saved rulebooks and aggregates', zone: 'cloud', where: 'Supabase, only if you opt in', detail: 'Rule text and aggregate statistics only, keyed to an anonymous device id. Fills are never stored there.' },
+  { what: 'Rule text and aggregates for the AI layer', zone: 'model', where: 'The model provider', detail: 'The model sees rule text, the rule schema, aggregates and tool results. It never sees raw fills or keys.' },
+];
 
 export default function PrivacyPage() {
   return (
@@ -19,16 +24,25 @@ export default function PrivacyPage() {
       <div className="mt-8 divide-y divide-line rounded-card border border-line bg-surface">
         {ROWS.map((r) => (
           <div key={r.what} className="grid gap-1 px-4 py-4 sm:grid-cols-[14rem_14rem_1fr] sm:gap-4">
-            <div className="font-medium">{r.what}</div>
+            <div className="flex items-start gap-3 font-medium">
+              <Icon icon={WHERE_ICON[r.zone]} size={18} className="mt-0.5 text-muted" />
+              {r.what}
+            </div>
             <div className="num text-[12px] text-signal sm:pt-1">{r.where}</div>
             <div className="text-[14px] text-muted">{r.detail}</div>
           </div>
         ))}
       </div>
       <div className="mt-10 space-y-3 text-[15px]">
-        <h2 className="text-[22px]">Read-only keys</h2>
+        <h2 className="flex items-center gap-2.5 text-[22px]">
+          <Icon icon={KeyRound} size={18} className="text-muted" />
+          Read-only keys
+        </h2>
         <p className="max-w-[62ch] text-muted">Use a read-only key. If the Bitget API exposes the key&apos;s permissions, Holdout reads them and refuses a key with trade or withdraw permission. It never attempts anything write-shaped.</p>
-        <h2 className="pt-4 text-[22px]">Orders</h2>
+        <h2 className="flex items-center gap-2.5 pt-4 text-[22px]">
+          <Icon icon={Ban} size={18} className="text-muted" />
+          Orders
+        </h2>
         <p className="max-w-[62ch] text-muted">Holdout never places orders. The product has no code path that does.</p>
       </div>
     </Container>

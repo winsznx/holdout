@@ -1,9 +1,10 @@
 'use client';
 
+import { ArrowLeft, Check, Gavel, ListChecks, Scale, X } from 'lucide-react';
 import Link from 'next/link';
 import { useCallback } from 'react';
 import { renderRule } from '@holdout/engine';
-import { Card, CardBody, CardHeader, Container, PageHeading, StateBlock, Stat } from '@/components/ui';
+import { Card, CardBody, CardHeader, Container, Icon, PageHeading, StateBlock, Stat } from '@/components/ui';
 import { formatCount, formatPercent, formatSignedUsdt } from '@/lib/format';
 import { EVIDENCE_BASE, loadTraderResult, type TraderResult } from '@/lib/evidence-data';
 import { useLoaded } from '@/lib/use-loaded';
@@ -25,21 +26,24 @@ function Detail({ result }: { result: TraderResult }) {
       </div>
       <SampleNotice kind={result.kind} />
 
-      <Block label="01 / Ledger" title="Ledger and reconciliation" intro="Our net P&L is compared with the exchange's own figure. A failing ledger stops proposals.">
+      <Block label="01 / Ledger" icon={Scale} title="Ledger and reconciliation" intro="Our net P&L is compared with the exchange's own figure. A failing ledger stops proposals.">
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           <Stat label="Round trips" value={formatCount(result.nTrips)} provenance={{ kind: 'observed', source, n: result.nTrips }} />
           <Stat label="Our net P&L" value={formatSignedUsdt(Number(recon.totalOurs))} unit="USDT" provenance={{ kind: 'observed', source, n: result.nTrips }} />
           <Stat label="Reference net P&L" value={formatSignedUsdt(Number(recon.totalReference))} unit="USDT" provenance={{ kind: 'observed', source }} />
           <Stat label="Delta" value={formatPercent(recon.totalDeltaPct, 2)} tone={recon.pass ? 'neutral' : 'loss'} provenance={{ kind: 'observed', source }} />
         </div>
-        <p className="text-[14px]">{recon.pass ? 'Reconciliation passed.' : `Reconciliation failed: ${recon.reason ?? 'no reason recorded'}.`}</p>
+        <p className={recon.pass ? 'flex items-center gap-2 text-[14px] text-gain' : 'flex items-center gap-2 text-[14px] text-loss'}>
+          <Icon icon={recon.pass ? Check : X} />
+          {recon.pass ? 'Reconciliation passed.' : `Reconciliation failed: ${recon.reason ?? 'no reason recorded'}.`}
+        </p>
       </Block>
 
-      <Block label="02 / Audit" title="Stated rules" intro="How often each rule was broken and what the broken trades cost, with a 90% interval.">
+      <Block label="02 / Audit" icon={ListChecks} title="Stated rules" intro="How often each rule was broken and what the broken trades cost, with a 90% interval.">
         <AuditCards result={result} />
       </Block>
 
-      <Block label="03 / Holdout" title="Selection on train, one test on unseen trades">
+      <Block label="03 / Holdout" icon={Gavel} title="Selection on train, one test on unseen trades">
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
           <Stat label="Train trades" value={formatCount(outcome.nTrain)} provenance={{ kind: 'observed', source, n: outcome.nTrain }} />
           <Stat label="Test trades" value={formatCount(outcome.nTest)} provenance={{ kind: 'observed', source, n: outcome.nTest }} />
@@ -102,7 +106,8 @@ export function TraderPage({ traderId }: { traderId: string }) {
   return (
     <Container className="space-y-10 py-10 sm:py-14">
       <div>
-        <Link href="/evidence" className="label hover:text-ink">
+        <Link href="/evidence" className="label inline-flex items-center gap-1.5 hover:text-ink">
+          <Icon icon={ArrowLeft} />
           Evidence / all traders
         </Link>
       </div>

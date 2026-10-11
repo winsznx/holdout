@@ -83,6 +83,39 @@ h3 {
 :focus-visible {
   outline: 2px solid var(--signal);
   outline-offset: 2px;
+  border-radius: 2px;
+}
+
+a,
+button,
+summary,
+input,
+textarea,
+select {
+  transition-property: color, background-color, border-color, opacity, transform;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+
+button:not(:disabled):active,
+a.press:active {
+  transform: translateY(1px);
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.sticky-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--surface);
+  box-shadow: inset 0 -1px 0 var(--line);
+}
+
+.sticky-table tbody tr {
+  transition: background-color 150ms ease-out;
 }
 
 .num {
@@ -113,8 +146,16 @@ h3 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .skeleton {
-    animation: none;
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  button:not(:disabled):active,
+  a.press:active {
+    transform: none;
   }
 }
 

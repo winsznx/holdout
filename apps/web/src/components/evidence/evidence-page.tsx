@@ -1,10 +1,12 @@
 'use client';
 
+import { BadgeCheck, Braces, CircleSlash, Download, Filter, Gavel, Grid3x3, ListChecks, Lock, ChartNoAxesColumn, SlidersHorizontal, Users } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { ButtonLink, Card, CardBody, CardHeader, Container, PageHeading, StateBlock, Stat, Tag } from '@/components/ui';
+import { ButtonLink, Card, CodeBlock, CardBody, CardHeader, Container, Icon, PageHeading, Skeleton, StateBlock, Stat, Tag } from '@/components/ui';
 import { Block } from './block';
 import { AblationTable, CampaignTable, CompilerEval, FirewallStats, SpecificityMatrix } from './campaign-sections';
 import { HashLine } from './hash-line';
+import { Scoreboard } from './scoreboard';
 import { FreezeTable, NullResults, ShamGrid, TraderVerdictTable } from './trader-sections';
 import { formatSignedUsdt } from '@/lib/format';
 import {
@@ -35,6 +37,7 @@ function CohortHeadline({ cohort }: { cohort: Cohort }) {
   return (
     <Card>
       <CardHeader
+        icon={Users}
         label={cohort.cohort === 'bitget-demo-bots' ? 'Cohort / Bitget Demo bot' : `Cohort / ${title}`}
         title={title}
         aside={cohort.cohort === 'bitget-demo-bots' ? <Tag kind="bot" /> : cohort.cohort === 'strategy-sample' ? <Tag kind="strategy-sample" /> : null}
@@ -83,6 +86,7 @@ function EvidenceBody({ data }: { data: EvidenceData }) {
   const dataHashes = Object.entries(manifest.dataHashes);
   return (
     <div className="space-y-14">
+      <Scoreboard data={data} />
       <section className="space-y-4" aria-label="Cohort results">
         <p className="max-w-[66ch] text-[14px] text-muted">
           Each cohort is judged on its own and never merged with another. Bitget Demo bots test detection power and false positive control. They are not evidence about human traders.
@@ -98,12 +102,12 @@ function EvidenceBody({ data }: { data: EvidenceData }) {
         )}
       </section>
 
-      <Block label="01 / Verdicts" title="Per trader verdicts" intro="One row per trader. Open a trader for the audit, every candidate considered and the full holdout record.">
+      <Block label="01 / Verdicts" icon={Gavel} title="Per trader verdicts" intro="One row per trader. Open a trader for the audit, every candidate considered and the full holdout record.">
         <TraderVerdictTable results={data.results} />
       </Block>
 
       <Block
-        label="02 / Freeze"
+        label="02 / Freeze" icon={Lock}
         title="Freeze hashes and pre-registration"
         intro="The selected rule is hashed and committed before the test step runs. The pre-registration file is hashed in the run manifest."
       >
@@ -131,38 +135,38 @@ function EvidenceBody({ data }: { data: EvidenceData }) {
       </Block>
 
       <Block
-        label="03 / Sham"
+        label="03 / Sham" icon={ChartNoAxesColumn}
         title="Sham distributions"
         intro="Each bar chart shows the gain from 1,000 random rules of the same size on the same unseen trades. The orange line is the frozen rule."
       >
         <ShamGrid results={data.results} />
       </Block>
 
-      <Block label="04 / Campaign" title="Tests P1 to P9" intro="Every test is listed with its status and reason. A test that did not run says so.">
+      <Block label="04 / Campaign" icon={ListChecks} title="Tests P1 to P9" intro="Every test is listed with its status and reason. A test that did not run says so.">
         <CampaignTable rows={campaignRows(data)} />
       </Block>
 
-      <Block label="05 / Specificity" title="Bot by rule matrix" intro="Bitget Demo bots with a planted leak. A flag outside the outlined cell is a false positive.">
+      <Block label="05 / Specificity" icon={Grid3x3} title="Bot by rule matrix" intro="Bitget Demo bots with a planted leak. A flag outside the outlined cell is a false positive.">
         <SpecificityMatrix p1b={data.campaign.p1b} />
       </Block>
 
-      <Block label="06 / Ablation" title="What the sponsor data adds (P7)" intro="The same probes rerun with market and calendar sources switched off.">
+      <Block label="06 / Ablation" icon={SlidersHorizontal} title="What the sponsor data adds (P7)" intro="The same probes rerun with market and calendar sources switched off.">
         <AblationTable p7={data.campaign.p7} />
       </Block>
 
-      <Block label="07 / Firewall" title="Numbers firewall" intro="Every digit in model written text must come from an engine slot. A failed message is replaced by a fixed template and counted here.">
+      <Block label="07 / Firewall" icon={Filter} title="Numbers firewall" intro="Every digit in model written text must come from an engine slot. A failed message is replaced by a fixed template and counted here.">
         <FirewallStats state={firewall} />
       </Block>
 
-      <Block label="08 / Nulls" title="Null results and rejected candidates" intro="Traders where no rule was adopted, and every candidate the selection step skipped, with the reason.">
+      <Block label="08 / Nulls" icon={CircleSlash} title="Null results and rejected candidates" intro="Traders where no rule was adopted, and every candidate the selection step skipped, with the reason.">
         <NullResults results={data.results} />
       </Block>
 
-      <Block label="09 / Compiler" title="Rule compiler (P9)">
+      <Block label="09 / Compiler" icon={Braces} title="Rule compiler (P9)">
         <CompilerEval p9={data.campaign.p9} />
       </Block>
 
-      <Block label="10 / Verify" title="Check it yourself" intro="The bundle holds the raw fills, market data, freeze files and outputs. The command below recomputes every number on this page offline.">
+      <Block label="10 / Verify" icon={BadgeCheck} title="Check it yourself" intro="The bundle holds the raw fills, market data, freeze files and outputs. The command below recomputes every number on this page offline.">
         <div className="space-y-4">
           {bundle === false ? (
             <StateBlock variant="empty" title="The evidence bundle is not published yet" body={`${BUNDLE_URL} does not exist yet. It is produced by a separate script after the run.`} />
@@ -170,12 +174,13 @@ function EvidenceBody({ data }: { data: EvidenceData }) {
             <StateBlock variant="loading" title="Checking for the evidence bundle" />
           ) : (
             <ButtonLink href={BUNDLE_URL} download variant="secondary">
+              <Icon icon={Download} />
               Download evidence/bundle.zip
             </ButtonLink>
           )}
-          <pre className="num overflow-x-auto rounded-card border border-line bg-surface p-4 text-[13px] leading-relaxed">{`git clone <repo> && cd holdout
+          <CodeBlock label="Recompute every number offline">{`git clone <repo> && cd holdout
 pnpm install
-pnpm verify`}</pre>
+pnpm verify`}</CodeBlock>
           <p className="max-w-[66ch] text-[14px] text-muted">
             pnpm verify needs no network and no keys. It prints PASS or FAIL for the published results hash, the PREREG hash, every raw data hash, and each trader result, cohort summary and campaign test. It ends with a tamper test that changes one digit in one fill and must fail.
           </p>
@@ -194,7 +199,19 @@ export function EvidencePage() {
         title="Proof, including what did not work"
         intro="Every number here is read from the evaluation file. Nothing is typed in by hand. Null results and failed checks are shown with the rest."
       />
-      {state.status === 'loading' ? <StateBlock variant="loading" title="Reading the evaluation file" /> : null}
+      {state.status === 'loading' ? (
+        <div className="space-y-6">
+          <StateBlock variant="loading" title="Reading the evaluation file" />
+          <div className="grid grid-cols-2 gap-px overflow-hidden rounded-card border border-line bg-line lg:grid-cols-5" aria-hidden="true">
+            {[0, 1, 2, 3, 4].map((i) => (
+              <div key={i} className="space-y-3 bg-surface p-4">
+                <Skeleton className="h-3 w-1/2" />
+                <Skeleton className="h-7 w-1/3" />
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
       {state.status === 'absent' ? (
         <StateBlock
           variant="empty"
