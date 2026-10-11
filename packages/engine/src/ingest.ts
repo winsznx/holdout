@@ -18,11 +18,22 @@ export interface IngestResult {
   weakIdCount: number;
 }
 
+export function canonicalFill(f: Fill): Fill {
+  return {
+    ...f,
+    qty: D(f.qty).toFixed(),
+    price: D(f.price).toFixed(),
+    fee: D(f.fee).toFixed(),
+    ...(f.execPnl !== undefined ? { execPnl: D(f.execPnl).toFixed() } : {}),
+  };
+}
+
 export function ingest(...sources: Fill[][]): IngestResult {
   const byId = new Map<string, Fill>();
   let total = 0;
   for (const source of sources) {
-    for (const fill of source) {
+    for (const raw of source) {
+      const fill = canonicalFill(raw);
       total += 1;
       const existing = byId.get(fill.execId);
       if (!existing || preferred(fill, existing)) byId.set(fill.execId, fill);

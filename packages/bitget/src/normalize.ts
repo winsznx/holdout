@@ -8,7 +8,7 @@ export type ProductClassifier = (input: { symbol: string; category: string }) =>
 
 const RTOKEN_SYMBOL = /^r[A-Z0-9]+USDT$/;
 const LEVERAGE_TAG = /L(\d{1,3}(?:\.\d+)?)x/;
-const FUNDING_TYPE = /FUND/i;
+const FUNDING_TYPE = /FUND|SETTLE_FEE/i;
 
 export function parseLeverageFromClientOid(clientOid: string | undefined): number | undefined {
   if (!clientOid) return undefined;

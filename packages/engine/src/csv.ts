@@ -207,7 +207,7 @@ export function parseBitgetExport(text: string): CsvParse {
       execPnl: tradeSide === 'close' && pnl !== undefined && pnl !== '' ? D(pnl).toFixed() : undefined,
       maker: (pick(r, 'role') ?? '').toLowerCase().includes('maker'),
       ts,
-      weakId: !(explicitId && explicitId.length > 0),
+      ...(explicitId && explicitId.length > 0 ? {} : { weakId: true }),
     });
   }
   return { adapter: 'bitget-export', fills, roundTrips: [], reference: [], issues, rowsRead: rows.length, untestedAgainstLiveExport: true };

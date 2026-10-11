@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import fc from 'fast-check';
 import { D, sum } from '../src/decimal.ts';
 import { ingest } from '../src/ingest.ts';
+import { parseBitgetExport } from '../src/csv.ts';
 import { ledgerFromFills } from '../src/ledger.ts';
 import {
   NYSE_2026,
@@ -61,6 +62,26 @@ describe('L2 idempotent and order independent ingest', () => {
         expect(ledgerFromFills('t', shuffled, funding)).toEqual(ledgerFromFills('t', [...a, ...b, ...a], funding));
       }),
       RUNS,
+    );
+  });
+});
+
+describe('P6 API fills merged with their CSV rendering', () => {
+  it('leaves the ledger identical', () => {
+    fc.assert(
+      fc.property(validLedgerInput, ({ fills, funding }) => {
+        // #given the same fills as an API list and as a CSV in the documented Bitget export columns
+        const header = 'Trade ID,Order ID,Symbol,Side,Price,Quantity,Fee,Realized PnL,Time';
+        const rows = fills.map((f) => [f.execId, f.orderId, f.symbol, `${f.tradeSide} ${f.posSide}`, f.price, f.qty, f.fee, f.execPnl ?? '', new Date(f.ts).toISOString()].join(','));
+        const fromCsv = parseBitgetExport([header, ...rows].join('\n')).fills;
+
+        // #when merged
+        const merged = ledgerFromFills('t', [...fills, ...fromCsv], funding);
+
+        // #then
+        expect(merged).toEqual(ledgerFromFills('t', fills, funding));
+      }),
+      { numRuns: 300 },
     );
   });
 });

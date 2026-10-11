@@ -114,6 +114,18 @@ describe('normalizeHistoryPosition on real rows', () => {
 });
 
 describe('normalizeFundingRecords on real financial records', () => {
+  it('maps the settlement row Bitget Demo writes at each funding time', () => {
+    // #given a row shaped like the real CONTRACT_MAIN_SETTLE_FEE_USER_IN rows seen at 00:00 UTC on Demo
+    const base = records[0] as RawFinancialRecord;
+    const settle: RawFinancialRecord = { ...base, type: 'CONTRACT_MAIN_SETTLE_FEE_USER_IN', amount: '0.00250739' };
+
+    // #when
+    const mapped = normalizeFundingRecords([settle]);
+
+    // #then
+    expect(mapped).toEqual([{ id: base.id, symbol: base.symbol, ts: Number(base.ts), amount: '0.00250739' }]);
+  });
+
   it('captured records contain only open and close types, so none are funding', () => {
     expect(new Set(records.map((r) => r.type))).not.toContain('FUNDING');
     expect(normalizeFundingRecords(records)).toEqual([]);

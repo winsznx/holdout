@@ -41,3 +41,6 @@ Concrete observations from building against sponsor surfaces. Dates are UTC, 202
 ## Bitget API from Cloudflare Workers (2026-10-11)
 - `api.bitget.com` answers requests that come from Cloudflare Workers with HTTP 403 and the body `{"cloudflare":"block"}`. The same request from a laptop or a VPS succeeds. S5 (`agent.bitget.com/mcp`) and the OpenAI and Supabase APIs work from Workers.
 - Public GETs work directly from a browser (CORS allows any origin), so the desk loads candles from the browser. Signed GETs with `ACCESS-*` headers fail in a browser (CORS preflight is rejected), and they fail through a Worker (the block above). A hosted review tool that sits on Cloudflare therefore cannot sync a read-only key through its own edge. It needs a relay on a non-Cloudflare host, or the trader uses the CSV path.
+
+## Funding rows in financial records (2026-10-11)
+- On Demo, funding settlements appear in `GET /api/v3/account/financial-records` with `type` `CONTRACT_MAIN_SETTLE_FEE_USER_IN`, at about 00:00:01 UTC, one row per symbol with an open position. `amount` is signed from the account's side. The type name is not in the spec's example list and `type=FUNDING` returns 40020. The normalizer now matches `FUND` or `SETTLE_FEE`.
