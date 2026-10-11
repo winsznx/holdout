@@ -1,6 +1,7 @@
 'use client';
 
 import { useSyncExternalStore } from 'react';
+import { THEME_STORAGE_KEY } from './theme-script';
 
 type Theme = 'light' | 'dark';
 
@@ -28,7 +29,7 @@ export function ThemeToggle() {
     const next: Theme = theme === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = next;
     try {
-      localStorage.setItem('holdout-theme', next);
+      localStorage.setItem(THEME_STORAGE_KEY, next);
     } catch {
       return;
     }
@@ -48,5 +49,3 @@ export function ThemeToggle() {
     </button>
   );
 }
-
-export const THEME_INIT_SCRIPT = `try{var t=localStorage.getItem('holdout-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}`;

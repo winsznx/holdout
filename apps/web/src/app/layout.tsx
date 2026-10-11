@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { JetBrains_Mono, Space_Grotesk } from 'next/font/google';
 import type { ReactNode } from 'react';
-import { THEME_INIT_SCRIPT } from '@/components/ui/theme-toggle';
+import { THEME_INIT_SCRIPT } from '@/components/ui/theme-script';
 import './globals.css';
 
 const grotesk = Space_Grotesk({ subsets: ['latin'], weight: ['400', '500', '700'], variable: '--font-grotesk', display: 'swap' });
