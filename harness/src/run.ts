@@ -49,7 +49,10 @@ const SLOW = 8;
 const HOLD_MIN_MS = 60_000;
 const HOLD_MAX_MS = 120_000;
 const COOLDOWN_MS = 3 * 60_000;
-const ADD_ADVERSE = 0.001;
+const ADD_ADVERSE = Number(process.env.HARNESS_ADD_ADVERSE ?? 0.001);
+const ONLY = process.env.HARNESS_ONLY ? process.env.HARNESS_ONLY.split(',') : null;
+const PHASE = process.env.HARNESS_PHASE ?? '1';
+const V_WIN_ON_GROSS = process.env.HARNESS_V_WIN_ON_GROSS === '1';
 const TICK_MS = 5_000;
 const STOP_AT = process.env.HARNESS_STOP_AT ? Date.parse(process.env.HARNESS_STOP_AT) : Number.POSITIVE_INFINITY;
 
@@ -59,7 +62,7 @@ mkdirSync(LOG_DIR, { recursive: true });
 mkdirSync(STATE_DIR, { recursive: true });
 
 function log(bot: BotId, event: string, detail: Record<string, unknown> = {}): void {
-  const line = JSON.stringify({ ts: Date.now(), iso: new Date().toISOString(), bot, event, ...detail });
+  const line = JSON.stringify({ ts: Date.now(), iso: new Date().toISOString(), phase: PHASE, bot, event, ...detail });
   appendFileSync(`${LOG_DIR}${bot}.jsonl`, line + '\n');
   console.log(line);
 }
@@ -151,7 +154,7 @@ async function openLot(bot: BotConfig, state: BotState, dir: Dir, leverage: numb
   log(bot.id, 'open', { reason, dir, leverage, qty, notional, entry, orderId, symbol: bot.symbol });
 }
 
-async function closePosition(bot: BotConfig, state: BotState): Promise<{ net: number } | null> {
+async function closePosition(bot: BotConfig, state: BotState): Promise<{ net: number; gross: number } | null> {
   const pos = state.position;
   if (!pos) return null;
   const spec = specs.get(bot.symbol);
@@ -169,11 +172,12 @@ async function closePosition(bot: BotConfig, state: BotState): Promise<{ net: nu
     openFees += r.fees;
   }
   const closed = netOfFills(closeFills);
-  const net = openPnl + closed.pnl - openFees - closed.fees;
+  const gross = openPnl + closed.pnl;
+  const net = gross - openFees - closed.fees;
   state.position = null;
   state.roundTrips += 1;
-  log(bot.id, 'close', { dir: pos.dir, net, closeOrderId: closeId, heldMs: Date.now() - pos.openedAt, lots: pos.lots.length, leverage: pos.leverage });
-  return { net };
+  log(bot.id, 'close', { dir: pos.dir, net, gross, closeOrderId: closeId, heldMs: Date.now() - pos.openedAt, lots: pos.lots.length, leverage: pos.leverage });
+  return { net, gross };
 }
 
 function leverageFor(bot: BotConfig, state: BotState): number {
@@ -203,7 +207,8 @@ async function tick(bot: BotConfig): Promise<void> {
       const result = await closePosition(bot, state);
       if (result) {
         const lost = result.net < 0;
-        state.winStreak = lost ? 0 : state.winStreak + 1;
+        const won = bot.id === 'V' && V_WIN_ON_GROSS ? result.gross > 0 : !lost;
+        state.winStreak = won ? state.winStreak + 1 : 0;
         if (lost) {
           if (bot.id === 'R') {
             const draw = Math.random();
@@ -251,14 +256,14 @@ async function tick(bot: BotConfig): Promise<void> {
 }
 
 async function main(): Promise<void> {
-  for (const bot of BOTS) {
+  for (const bot of BOTS.filter((b) => !ONLY || ONLY.includes(b.id))) {
     const inst = await client.instrument(bot.symbol);
     specs.set(bot.symbol, { multiplier: Number(inst.quantityMultiplier), min: Number(inst.minOrderQty), maxLeverage: Number(inst.maxLeverage) });
     states.set(bot.id, loadState(bot.id));
     log(bot.id, 'start', { symbol: bot.symbol, notionalUsd: bot.notionalUsd, resumedPosition: states.get(bot.id)?.position !== null });
   }
   for (;;) {
-    for (const bot of BOTS) {
+    for (const bot of BOTS.filter((b) => !ONLY || ONLY.includes(b.id))) {
       try {
         await tick(bot);
       } catch (err) {
@@ -266,7 +271,7 @@ async function main(): Promise<void> {
       }
       saveState(bot.id, states.get(bot.id) as BotState);
     }
-    const allFlat = BOTS.every((b) => states.get(b.id)?.position === null);
+    const allFlat = BOTS.filter((b) => !ONLY || ONLY.includes(b.id)).every((b) => states.get(b.id)?.position === null);
     if (Date.now() >= STOP_AT && allFlat) {
       console.log('stop time reached and all positions flat, exiting');
       return;
