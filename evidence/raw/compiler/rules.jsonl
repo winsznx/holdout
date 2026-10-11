@@ -5,3 +5,33 @@
 {"text": "Don't go all in and hope it goes well.", "label": {"refuse": true}, "author": "builder (Tim), not an independent volunteer"}
 {"text": "After a good trade, follow the same risk if you want to enter another trade and analyze with the same rules.", "label": {"refuse": true}, "author": "builder (Tim), not an independent volunteer"}
 {"text": "Don't double down on risk after a win or a loss, follow a risk discipline.", "label": {"refuse": true}, "author": "builder (Tim), not an independent volunteer"}
+{"text": "Wait 30 minutes after a losing trade before opening another.", "label": {"refuse": false, "rule": {"t": "cooldown_after_loss", "minutes": 30}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "After a loss I take an hour off.", "label": {"refuse": false, "rule": {"t": "cooldown_after_loss", "minutes": 60}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Give it 15 minutes after any loss.", "label": {"refuse": false, "rule": {"t": "cooldown_after_loss", "minutes": 15}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Never use more than 5x leverage.", "label": {"refuse": false, "rule": {"t": "max_leverage", "x": 5}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Keep my leverage at 10x or lower.", "label": {"refuse": false, "rule": {"t": "max_leverage", "x": 10}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "No leverage above 3x on anything.", "label": {"refuse": false, "rule": {"t": "max_leverage", "x": 3}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Don't add to a position that's already losing.", "label": {"refuse": false, "rule": {"t": "no_add_to_loser"}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Never average down.", "label": {"refuse": false, "rule": {"t": "no_add_to_loser"}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Cut the trade if it goes 2 percent against me.", "label": {"refuse": false, "rule": {"t": "hard_stop", "pct": 2}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Always use a 1% stop.", "label": {"refuse": false, "rule": {"t": "hard_stop", "pct": 1}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Exit when price moves 3% against my entry.", "label": {"refuse": false, "rule": {"t": "hard_stop", "pct": 3}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Stop trading for the day once I'm down 50 USDT.", "label": {"refuse": false, "rule": {"t": "daily_loss_limit", "usdt": 50}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "If I lose 100 dollars in a day I'm done.", "label": {"refuse": false, "rule": {"t": "daily_loss_limit", "usdt": 100}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Daily loss cap of 25 USDT.", "label": {"refuse": false, "rule": {"t": "daily_loss_limit", "usdt": 25}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "No stock perp trades overnight.", "label": {"refuse": false, "rule": {"t": "session_filter", "block": ["overnight"], "products": ["stock_perp"]}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Don't open any stock perp over the weekend.", "label": {"refuse": false, "rule": {"t": "session_filter", "block": ["weekend"], "products": ["stock_perp"]}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Stay out of rTokens in pre-market and after hours.", "label": {"refuse": false, "rule": {"t": "session_filter", "block": ["pre_market", "after_hours"], "products": ["rtoken"]}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "No stock perps on Friday near the close.", "label": {"refuse": false, "rule": {"t": "session_filter", "block": ["friday_close"], "products": ["stock_perp"]}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Don't open stock perps overnight or on weekends.", "label": {"refuse": false, "rule": {"t": "session_filter", "block": ["overnight", "weekend"], "products": ["stock_perp"]}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Don't open a position within 24 hours before earnings.", "label": {"refuse": false, "rule": {"t": "earnings_blackout", "hoursBefore": 24}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Stay out of a stock 2 days before it reports.", "label": {"refuse": false, "rule": {"t": "earnings_blackout", "hoursBefore": 48}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Nothing within 12 hours of an earnings release.", "label": {"refuse": false, "rule": {"t": "earnings_blackout", "hoursBefore": 12}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Hold weekend stock exposure as the rToken spot instead of the stock perp.", "label": {"refuse": false, "rule": {"t": "product_switch_weekend", "from": "stock_perp", "to": "rtoken"}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Over the weekend I want the rToken, not the perp.", "label": {"refuse": false, "rule": {"t": "product_switch_weekend", "from": "stock_perp", "to": "rtoken"}}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Only trade when I feel confident.", "label": {"refuse": true}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Risk 1 to 3 percent per trade.", "label": {"refuse": true}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "No more than 2 losing trades a day.", "label": {"refuse": true}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Don't move my stop loss once the trade is live.", "label": {"refuse": true}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Be patient and wait for the best setups.", "label": {"refuse": true}, "author": "Claude, at the builder's request (not an independent volunteer)"}
+{"text": "Don't revenge trade.", "label": {"refuse": true}, "author": "Claude, at the builder's request (not an independent volunteer)"}
